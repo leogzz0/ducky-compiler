@@ -1,0 +1,5 @@
+set number 5
+set string 10
+get number
+remove number
+size
