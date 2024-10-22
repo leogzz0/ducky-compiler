@@ -1,4 +1,4 @@
-grammar ducky;
+grammar duckyParser;
 
 /* parser rules */
 

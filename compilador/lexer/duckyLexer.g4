@@ -1,4 +1,4 @@
-lexer grammar ducky;
+lexer grammar duckyLexer;
 
 /* lexer rules */
 

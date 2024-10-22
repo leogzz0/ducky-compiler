@@ -1,0 +1,17 @@
+program myProgram;
+vars {
+  x, y : int;
+  z : float;
+}
+function myFunc(a : int, b : float) {
+  x = a + b;
+  print("The result is", x);
+}
+main {
+  x = 5;
+  y = 10;
+  while (x < y) do {
+    x = x + 1;
+  }
+}
+end
