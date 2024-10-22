@@ -1,5 +1,9 @@
 grammar duckyParser;
 
+options {
+    tokenVocab = duckyLexer;
+}
+
 /* parser rules */
 
 program

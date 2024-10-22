@@ -1,5 +1,5 @@
 
-// Generated from duckyLexer.g4 by ANTLR 4.13.2
+// Generated from lexer/duckyLexer.g4 by ANTLR 4.13.2
 
 
 #include "duckyLexer.h"

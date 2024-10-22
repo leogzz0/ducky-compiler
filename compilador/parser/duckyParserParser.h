@@ -1,5 +1,5 @@
 
-// Generated from duckyParser.g4 by ANTLR 4.13.2
+// Generated from parser/duckyParser.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -12,12 +12,13 @@
 class  duckyParserParser : public antlr4::Parser {
 public:
   enum {
-    MAIN_FUNC = 1, ID = 2, SEMI = 3, MAIN_BLOCK = 4, END_BLOCK = 5, VARS = 6, 
-    LBRACE = 7, RBRACE = 8, COLON = 9, COMMA = 10, INTEGER_TYPE = 11, FLOAT_TYPE = 12, 
-    FUNCTION = 13, LPAREN = 14, RPAREN = 15, ASSIGN = 16, PRINT = 17, STRING_LITERAL = 18, 
-    WHILE = 19, DO = 20, IF = 21, ELSE = 22, GREATER_THAN = 23, LESS_THAN = 24, 
-    NOT_EQUAL = 25, EQUAL = 26, PLUS = 27, MINUS = 28, FLOAT_CONSTANT = 29, 
-    INTEGER_CONSTANT = 30
+    MAIN_FUNC = 1, VARS = 2, MAIN_BLOCK = 3, END_BLOCK = 4, INTEGER_TYPE = 5, 
+    FLOAT_TYPE = 6, PRINT = 7, WHILE = 8, DO = 9, IF = 10, ELSE = 11, FUNCTION = 12, 
+    ASSIGN = 13, SEMI = 14, COLON = 15, COMMA = 16, LPAREN = 17, RPAREN = 18, 
+    LBRACE = 19, RBRACE = 20, PLUS = 21, MINUS = 22, MULT = 23, DIV = 24, 
+    GREATER_THAN = 25, LESS_THAN = 26, NOT_EQUAL = 27, EQUAL = 28, ID = 29, 
+    INTEGER_CONSTANT = 30, FLOAT_CONSTANT = 31, STRING_LITERAL = 32, WS = 33, 
+    COMMENT = 34
   };
 
   enum {
