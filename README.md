@@ -1,1 +1,1 @@
-# compi
+# ducky compiler
