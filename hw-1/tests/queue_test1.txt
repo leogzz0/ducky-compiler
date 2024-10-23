@@ -1,5 +1,0 @@
-enqueue 3
-enqueue 6
-dequeue
-front
-size
