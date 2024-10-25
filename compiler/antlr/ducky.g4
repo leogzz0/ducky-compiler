@@ -158,7 +158,7 @@ arg_list
     ;
 
 expression
-    : term (comparison_operator term)?
+    : exp (comparison_operator exp)?
     ;
 
 comparison_operator
@@ -168,14 +168,17 @@ comparison_operator
     | EQUAL
     ;
 
+exp
+    : term ((PLUS | MINUS) term)*
+    ;
+
 term
-    : factor ((PLUS | MINUS) factor)*
+    : factor ((MULT | DIV) factor)*
     ;
 
 factor
-    : (PLUS | MINUS?) constant
+    : (PLUS | MINUS)? (constant | ID)
     | LPAREN expression RPAREN
-    | ID
     ;
 
 constant

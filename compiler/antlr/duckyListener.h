@@ -86,6 +86,9 @@ public:
   virtual void enterComparison_operator(duckyParser::Comparison_operatorContext *ctx) = 0;
   virtual void exitComparison_operator(duckyParser::Comparison_operatorContext *ctx) = 0;
 
+  virtual void enterExp(duckyParser::ExpContext *ctx) = 0;
+  virtual void exitExp(duckyParser::ExpContext *ctx) = 0;
+
   virtual void enterTerm(duckyParser::TermContext *ctx) = 0;
   virtual void exitTerm(duckyParser::TermContext *ctx) = 0;
 

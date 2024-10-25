@@ -88,6 +88,9 @@ public:
   virtual void enterComparison_operator(duckyParser::Comparison_operatorContext * /*ctx*/) override { }
   virtual void exitComparison_operator(duckyParser::Comparison_operatorContext * /*ctx*/) override { }
 
+  virtual void enterExp(duckyParser::ExpContext * /*ctx*/) override { }
+  virtual void exitExp(duckyParser::ExpContext * /*ctx*/) override { }
+
   virtual void enterTerm(duckyParser::TermContext * /*ctx*/) override { }
   virtual void exitTerm(duckyParser::TermContext * /*ctx*/) override { }
 
