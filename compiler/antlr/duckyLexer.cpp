@@ -1,5 +1,5 @@
 
-// Generated from lexer/duckyLexer.g4 by ANTLR 4.13.2
+// Generated from ducky.g4 by ANTLR 4.13.2
 
 
 #include "duckyLexer.h"
@@ -183,7 +183,7 @@ duckyLexer::~duckyLexer() {
 }
 
 std::string duckyLexer::getGrammarFileName() const {
-  return "duckyLexer.g4";
+  return "ducky.g4";
 }
 
 const std::vector<std::string>& duckyLexer::getRuleNames() const {

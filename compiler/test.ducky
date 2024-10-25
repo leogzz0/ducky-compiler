@@ -11,10 +11,10 @@ function myFunc(a : int, b : float) {
 }
 
 main {
-  x = 5;
+  x = -5;
   y = 10;
   while (x < y) do {
-    x = x + 1;
+    x = x + -1;
   }
 }
 
