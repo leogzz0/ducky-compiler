@@ -5,8 +5,10 @@ function myFunc(x : int, y : float) {
 }
 
 main {
-  myFunc(10);  // Llamada con parámetros insuficientes
-  unknownFunc(5, 2);  // Llamada a función no declarada
+  // error: expecting 2 parameters, got 1
+  myFunc(10);
+  // error: funciton not declared
+  unknownFunc(5, 2);
 }
 
 end

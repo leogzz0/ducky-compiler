@@ -6,10 +6,12 @@ vars {
 }
 
 main {
-  x = y;  // Asignación de tipo incorrecto (float -> int)
   y = 5.0;
+  // error: expected int not float
+  x = y;
 
-  while (x) do {  // Condición no booleana ni explícitamente entera
+  // error: expecting int or boolean
+  while (y) do {
     print("In loop");
     x = x - 1;
   }

@@ -97,15 +97,18 @@ void DuckyCustomListener::exitAssignment(duckyParser::AssignmentContext *ctx) {
         std::string exprType = getType(ctx->expression());
         std::string varType = variableTable.getType(varName);
 
-        variableTable.setInitialized(varName);
-
         std::string resultType = semanticCube.getResultType(varType, exprType, "=");
-        if (resultType == "error") {
+
+        if (varType == "int" && exprType == "float") {
+            errorHandler.reportError("Warning: Implicit conversion from 'float' to 'int' may lose precision.");
+            variableTable.setInitialized(varName);
+        } else if (resultType == "error") {
             errorHandler.reportError("Type mismatch in assignment to variable '" + varName + "'. Expected: " + varType + ", Found: " + exprType);
+        } else {
+            variableTable.setInitialized(varName);
         }
     }
 }
-
 
 //************************************** PRINT **************************************//
 // print statement entry and exit
@@ -211,6 +214,7 @@ std::string DuckyCustomListener::getType(duckyParser::FactorContext *ctx) {
         std::string varName = ctx->ID()->getText();
         if (!variableTable.isInitialized(varName)) {
             errorHandler.reportError("Variable '" + varName + "' is used without being initialized.");
+            variableTable.setInitialized(varName);
         }
         return variableTable.getType(varName);
     } else if (ctx->constant()) {

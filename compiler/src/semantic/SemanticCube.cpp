@@ -43,12 +43,20 @@ SemanticCube::SemanticCube(ErrorHandler &errorHandler) : errorHandler(errorHandl
     cube["float"]["int"]["!="] = "bool";
     cube["float"]["int"]["<"] = "bool";
     cube["float"]["int"][">"] = "bool";
+
+    cube["float"]["int"]["="] = "error";
+    cube["int"]["float"]["="] = "error";
 }
 
 // method to retrieve the result type for a given operation between two types
 std::string SemanticCube::getResultType(const std::string &type1, const std::string &type2, const std::string &operation) const {
     if (cube.count(type1) && cube.at(type1).count(type2) && cube.at(type1).at(type2).count(operation)) {
         std::string result = cube.at(type1).at(type2).at(operation);
+
+        if (operation == "=" && type1 == "int" && type2 == "float") {
+            errorHandler.reportError("Warning: Implicit conversion from 'float' to 'int' may lose precision.");
+        }
+
         if (result == "error") {
             errorHandler.reportError("Incompatible types for operation '" + operation + "' between '" + type1 + "' and '" + type2 + "'");
         }
