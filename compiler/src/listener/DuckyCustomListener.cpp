@@ -91,12 +91,19 @@ void DuckyCustomListener::enterPrint(duckyParser::PrintContext *ctx) {
 
 void DuckyCustomListener::exitPrint(duckyParser::PrintContext *ctx) {
     std::cout << "Print: ";
+    bool firstItem = true;
     for (auto item : ctx->print_list()->print_item()) {
+        if (!firstItem) {
+            std::cout << " ";
+        }
         if (item->STRING_LITERAL()) {
-            std::cout << Utils::escapeQuotes(item->STRING_LITERAL()->getText());
+            std::string text = item->STRING_LITERAL()->getText();
+            text = text.substr(1, text.length() - 2);
+            std::cout << text;
         } else {
             std::cout << item->expression()->getText();
         }
+        firstItem = false;
     }
     std::cout << std::endl;
 }
