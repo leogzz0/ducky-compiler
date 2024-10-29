@@ -1,0 +1,12 @@
+program FunctionTest;
+
+function myFunc(x : int, y : float) {
+  print("Function called");
+}
+
+main {
+  myFunc(10);  // Llamada con parámetros insuficientes
+  unknownFunc(5, 2);  // Llamada a función no declarada
+}
+
+end

@@ -19,6 +19,9 @@ std::vector<std::string> ErrorHandler::getErrors() const {
 
 // outputs all error messages to the standard output
 void ErrorHandler::printErrors() const {
+    if (errors.empty()) return;
+
+    std::cerr << "\nErrors found during compilation:" << std::endl;
     for (const auto &error : errors) {
         std::cerr << error << std::endl;
     }

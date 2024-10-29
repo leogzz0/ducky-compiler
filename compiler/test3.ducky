@@ -1,0 +1,18 @@
+program TypeCheck;
+
+vars {
+  x : int;
+  y : float;
+}
+
+main {
+  x = y;  // Asignación de tipo incorrecto (float -> int)
+  y = 5.0;
+
+  while (x) do {  // Condición no booleana ni explícitamente entera
+    print("In loop");
+    x = x - 1;
+  }
+}
+
+end

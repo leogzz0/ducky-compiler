@@ -43,6 +43,8 @@ class DuckyCustomListener : public duckyBaseListener {
 
 		std::string getType(duckyParser::ExpressionContext *ctx);
 		std::string getType(duckyParser::ExpContext *ctx);
+		std::string getType(duckyParser::TermContext *ctx);
+		std::string getType(duckyParser::FactorContext *ctx);
 };
 
 #endif // DUCKY_CUSTOM_LISTENER_H

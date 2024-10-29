@@ -1,0 +1,14 @@
+program TestProgram;
+
+vars {
+  a, b : int;
+  a : float;  // Variable duplicada
+  c : int;
+}
+
+main {
+  a = 5;
+  b = a + c;  // Uso de variable no inicializada
+}
+
+end

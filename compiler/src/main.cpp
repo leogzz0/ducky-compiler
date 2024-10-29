@@ -38,13 +38,20 @@ int main(int argc, const char *argv[]) {
     VariableTable variableTable;
     ErrorHandler errorHandler;
     FunctionDirectory functionDirectory;
-    SemanticCube semanticCube;
+    SemanticCube semanticCube(errorHandler);
 
     // create an instance of the custom listener
     DuckyCustomListener listener(variableTable, errorHandler, functionDirectory, semanticCube);
 
     // create a parse tree walker and walk the tree with the listener
     tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
+
+    if (errorHandler.hasErrors()) {
+        std::cerr << "\nErrors found during compilation:\n";
+        errorHandler.printErrors();
+    } else {
+        std::cout << "Compilation successful, no semantic errors found." << std::endl;
+    }
 
     // export the parse tree in .dot format for graphical visualization (optional)
     std::ofstream out("tree.dot");
