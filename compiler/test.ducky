@@ -5,8 +5,8 @@ vars {
   z : float;
 }
 
-function myFunc(a : int, b : float) {
-  x = a + b;
+function myFunc(a : int, x : float) {
+  // x = a + b;
   print("The result is", x);
 }
 
