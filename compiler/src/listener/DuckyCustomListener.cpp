@@ -35,7 +35,12 @@ void DuckyCustomListener::exitVar_decl(duckyParser::Var_declContext *ctx) {
 // funciton declaration entry and exit
 void DuckyCustomListener::enterFunc_decl(duckyParser::Func_declContext *ctx) {
     std::string functionName = ctx->ID()->getText();
-    functionDirectory.addFunction(functionName, {});  // add the function without parameters initially
+    std::vector<std::string> paramTypes;
+    for (auto param : ctx->param_list()->param()) {
+        std::string paramType = param->data_type()->getText();
+        paramTypes.push_back(paramType);
+    }
+    functionDirectory.addFunction(functionName, paramTypes);  // add the function without parameters initially
     variableTable.enterScope();  // enter function scope for parameters
 }
 
@@ -50,10 +55,11 @@ void DuckyCustomListener::exitFunction_call(duckyParser::Function_callContext *c
         errorHandler.reportError("Function '" + functionName + "' is not declared.");
     } else {
         auto paramTypes = functionDirectory.getParamTypes(functionName);
-        auto argCount = ctx->arg_list()->expression().size();
+        size_t expectedCount = paramTypes.size();
+        size_t argCount = ctx->arg_list()->expression().size();
 
-        if (argCount != paramTypes.size()) {
-            errorHandler.reportError("Argument count mismatch for function '" + functionName + "'. Expected " + std::to_string(paramTypes.size()) + ", but got " + std::to_string(argCount));
+        if (argCount != expectedCount) {
+            errorHandler.reportError("Argument count mismatch for function '" + functionName + "'. Expected " + std::to_string(expectedCount) + ", but got " + std::to_string(argCount));
         } else {
             for (size_t i = 0; i < argCount; ++i) {
                 std::string argType = getType(ctx->arg_list()->expression(i));
