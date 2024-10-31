@@ -22,9 +22,6 @@ public:
   virtual void enterVar_declarations(duckyParser::Var_declarationsContext * /*ctx*/) override { }
   virtual void exitVar_declarations(duckyParser::Var_declarationsContext * /*ctx*/) override { }
 
-  virtual void enterVar_decl_list(duckyParser::Var_decl_listContext * /*ctx*/) override { }
-  virtual void exitVar_decl_list(duckyParser::Var_decl_listContext * /*ctx*/) override { }
-
   virtual void enterVar_decl(duckyParser::Var_declContext * /*ctx*/) override { }
   virtual void exitVar_decl(duckyParser::Var_declContext * /*ctx*/) override { }
 

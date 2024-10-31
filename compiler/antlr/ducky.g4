@@ -3,14 +3,13 @@ grammar ducky;
 /* Lexer Rules */
 
 MAIN_FUNC    : 'program';
-VARS         : 'vars';
+VARS         : 'var';
 MAIN_BLOCK   : 'main';
 END_BLOCK    : 'end';
 INTEGER_TYPE : 'int';
 FLOAT_TYPE   : 'float';
 PRINT        : 'print';
 WHILE        : 'while';
-DO           : 'do';
 IF           : 'if';
 ELSE         : 'else';
 FUNCTION     : 'function';
@@ -59,20 +58,15 @@ COMMENT
 /* Parser Rules */
 
 program
-    : MAIN_FUNC ID SEMI var_declarations func_declarations MAIN_BLOCK block END_BLOCK
+    : MAIN_FUNC ID SEMI var_declarations func_declarations MAIN_BLOCK LPAREN RPAREN block END_BLOCK
     ;
 
 var_declarations
-    : VARS LBRACE var_decl_list RBRACE
-    |   /* empty */
-    ;
-
-var_decl_list
-    : var_decl+
+    : (var_decl)+
     ;
 
 var_decl
-    : var_list COLON data_type SEMI
+    : VARS var_list COLON data_type SEMI
     ;
 
 var_list
@@ -85,8 +79,7 @@ data_type
     ;
 
 func_declarations
-    : func_decl func_declarations
-    |   /* empty */
+    : func_decl*
     ;
 
 func_decl
@@ -116,6 +109,7 @@ statement
     | loop
     | condition
     | function_call
+    | var_decl
     ;
 
 assignment
@@ -136,15 +130,15 @@ print_item
     ;
 
 loop
-    : WHILE LPAREN expression RPAREN DO block
+    : WHILE LPAREN expression RPAREN block
     ;
 
 condition
-    : IF LPAREN expression RPAREN DO block else_block
+    : IF LPAREN expression RPAREN block else_block
     ;
 
 else_block
-    : ELSE DO block
+    : ELSE block
     |   /* empty */
     ;
 

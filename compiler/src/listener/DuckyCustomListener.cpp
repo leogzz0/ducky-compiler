@@ -22,7 +22,9 @@ void DuckyCustomListener::exitVar_decl(duckyParser::Var_declContext *ctx) {
     std::string dataType = ctx->data_type()->getText();
     for (auto id : ctx->var_list()->ID()) {
         std::string varName = id->getText();
-        if (variableTable.exists(varName)) {
+        if (functionDirectory.currentFunctionHasParameter(varName)) {
+            errorHandler.reportError("Variable '" + varName + "' is already declared as a parameter in this function.");
+        } else if (variableTable.exists(varName)) {
             errorHandler.reportError("Variable '" + varName + "' is already declared in this scope.");
         } else {
             variableTable.addVariable(varName, dataType);

@@ -1,0 +1,38 @@
+program test4;
+
+var a, b, c : int;
+var x, y, z : float;
+
+func testingCube() {
+	a = 5;
+	b = 7;
+    if (a > b) {
+        print(a);
+    }
+
+    while (a > b) {
+        print(a);
+        a = a - 1;
+    }
+}
+
+func testingParameters(param1 : int, param2 : float) {
+	print(param1, param2);
+	var newVariable : int;
+	newVariable = 4;
+    x = newVariable * param1;
+    z = - 6;
+	print(x);
+}
+
+func functionExample(var3 : int, var4: float) {
+    print(var3, var4);
+}
+
+main() {
+	testingCube();
+	testingParameters(3, 7.4);
+	functionExample(3, 2.3);
+}
+
+end

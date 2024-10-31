@@ -52,22 +52,21 @@ void duckyParserInitialize() {
 #endif
   auto staticData = std::make_unique<DuckyParserStaticData>(
     std::vector<std::string>{
-      "program", "var_declarations", "var_decl_list", "var_decl", "var_list", 
-      "data_type", "func_declarations", "func_decl", "param_list", "param", 
-      "block", "statements", "statement", "assignment", "print", "print_list", 
-      "print_item", "loop", "condition", "else_block", "function_call", 
-      "arg_list", "expression", "comparison_operator", "exp", "term", "factor", 
-      "constant"
+      "program", "var_declarations", "var_decl", "var_list", "data_type", 
+      "func_declarations", "func_decl", "param_list", "param", "block", 
+      "statements", "statement", "assignment", "print", "print_list", "print_item", 
+      "loop", "condition", "else_block", "function_call", "arg_list", "expression", 
+      "comparison_operator", "exp", "term", "factor", "constant"
     },
     std::vector<std::string>{
-      "", "'program'", "'vars'", "'main'", "'end'", "'int'", "'float'", 
-      "'print'", "'while'", "'do'", "'if'", "'else'", "'function'", "'='", 
-      "';'", "':'", "','", "'('", "')'", "'{'", "'}'", "'+'", "'-'", "'*'", 
-      "'/'", "'>'", "'<'", "'!='", "'=='"
+      "", "'program'", "'var'", "'main'", "'end'", "'int'", "'float'", "'print'", 
+      "'while'", "'if'", "'else'", "'function'", "'='", "';'", "':'", "','", 
+      "'('", "')'", "'{'", "'}'", "'+'", "'-'", "'*'", "'/'", "'>'", "'<'", 
+      "'!='", "'=='"
     },
     std::vector<std::string>{
       "", "MAIN_FUNC", "VARS", "MAIN_BLOCK", "END_BLOCK", "INTEGER_TYPE", 
-      "FLOAT_TYPE", "PRINT", "WHILE", "DO", "IF", "ELSE", "FUNCTION", "ASSIGN", 
+      "FLOAT_TYPE", "PRINT", "WHILE", "IF", "ELSE", "FUNCTION", "ASSIGN", 
       "SEMI", "COLON", "COMMA", "LPAREN", "RPAREN", "LBRACE", "RBRACE", 
       "PLUS", "MINUS", "MULT", "DIV", "GREATER_THAN", "LESS_THAN", "NOT_EQUAL", 
       "EQUAL", "ID", "INTEGER_CONSTANT", "FLOAT_CONSTANT", "STRING_LITERAL", 
@@ -75,79 +74,79 @@ void duckyParserInitialize() {
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,34,238,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
+  	4,1,33,233,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
   	7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,
   	14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,
-  	21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,2,27,7,27,1,0,1,
-  	0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,3,1,72,8,1,1,2,
-  	4,2,75,8,2,11,2,12,2,76,1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,4,5,4,87,8,4,10,
-  	4,12,4,90,9,4,1,5,1,5,1,6,1,6,1,6,1,6,3,6,98,8,6,1,7,1,7,1,7,1,7,1,7,
-  	1,7,1,7,1,8,1,8,1,8,5,8,110,8,8,10,8,12,8,113,9,8,1,8,3,8,116,8,8,1,9,
-  	1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,11,4,11,127,8,11,11,11,12,11,128,1,
-  	12,1,12,1,12,1,12,1,12,3,12,136,8,12,1,13,1,13,1,13,1,13,1,13,1,14,1,
-  	14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,5,15,152,8,15,10,15,12,15,155,9,
-  	15,1,16,1,16,3,16,159,8,16,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,18,1,
-  	18,1,18,1,18,1,18,1,18,1,18,1,18,1,19,1,19,1,19,1,19,3,19,180,8,19,1,
-  	20,1,20,1,20,1,20,1,20,1,20,1,21,1,21,1,21,5,21,191,8,21,10,21,12,21,
-  	194,9,21,1,21,3,21,197,8,21,1,22,1,22,1,22,1,22,3,22,203,8,22,1,23,1,
-  	23,1,24,1,24,1,24,5,24,210,8,24,10,24,12,24,213,9,24,1,25,1,25,1,25,5,
-  	25,218,8,25,10,25,12,25,221,9,25,1,26,3,26,224,8,26,1,26,1,26,3,26,228,
-  	8,26,1,26,1,26,1,26,1,26,3,26,234,8,26,1,27,1,27,1,27,0,0,28,0,2,4,6,
-  	8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,
-  	0,5,1,0,5,6,1,0,25,28,1,0,21,22,1,0,23,24,1,0,30,31,231,0,56,1,0,0,0,
-  	2,71,1,0,0,0,4,74,1,0,0,0,6,78,1,0,0,0,8,83,1,0,0,0,10,91,1,0,0,0,12,
-  	97,1,0,0,0,14,99,1,0,0,0,16,115,1,0,0,0,18,117,1,0,0,0,20,121,1,0,0,0,
-  	22,126,1,0,0,0,24,135,1,0,0,0,26,137,1,0,0,0,28,142,1,0,0,0,30,148,1,
-  	0,0,0,32,158,1,0,0,0,34,160,1,0,0,0,36,167,1,0,0,0,38,179,1,0,0,0,40,
-  	181,1,0,0,0,42,196,1,0,0,0,44,198,1,0,0,0,46,204,1,0,0,0,48,206,1,0,0,
-  	0,50,214,1,0,0,0,52,233,1,0,0,0,54,235,1,0,0,0,56,57,5,1,0,0,57,58,5,
-  	29,0,0,58,59,5,14,0,0,59,60,3,2,1,0,60,61,3,12,6,0,61,62,5,3,0,0,62,63,
-  	3,20,10,0,63,64,5,4,0,0,64,1,1,0,0,0,65,66,5,2,0,0,66,67,5,19,0,0,67,
-  	68,3,4,2,0,68,69,5,20,0,0,69,72,1,0,0,0,70,72,1,0,0,0,71,65,1,0,0,0,71,
-  	70,1,0,0,0,72,3,1,0,0,0,73,75,3,6,3,0,74,73,1,0,0,0,75,76,1,0,0,0,76,
-  	74,1,0,0,0,76,77,1,0,0,0,77,5,1,0,0,0,78,79,3,8,4,0,79,80,5,15,0,0,80,
-  	81,3,10,5,0,81,82,5,14,0,0,82,7,1,0,0,0,83,88,5,29,0,0,84,85,5,16,0,0,
-  	85,87,5,29,0,0,86,84,1,0,0,0,87,90,1,0,0,0,88,86,1,0,0,0,88,89,1,0,0,
-  	0,89,9,1,0,0,0,90,88,1,0,0,0,91,92,7,0,0,0,92,11,1,0,0,0,93,94,3,14,7,
-  	0,94,95,3,12,6,0,95,98,1,0,0,0,96,98,1,0,0,0,97,93,1,0,0,0,97,96,1,0,
-  	0,0,98,13,1,0,0,0,99,100,5,12,0,0,100,101,5,29,0,0,101,102,5,17,0,0,102,
-  	103,3,16,8,0,103,104,5,18,0,0,104,105,3,20,10,0,105,15,1,0,0,0,106,111,
-  	3,18,9,0,107,108,5,16,0,0,108,110,3,18,9,0,109,107,1,0,0,0,110,113,1,
-  	0,0,0,111,109,1,0,0,0,111,112,1,0,0,0,112,116,1,0,0,0,113,111,1,0,0,0,
-  	114,116,1,0,0,0,115,106,1,0,0,0,115,114,1,0,0,0,116,17,1,0,0,0,117,118,
-  	5,29,0,0,118,119,5,15,0,0,119,120,3,10,5,0,120,19,1,0,0,0,121,122,5,19,
-  	0,0,122,123,3,22,11,0,123,124,5,20,0,0,124,21,1,0,0,0,125,127,3,24,12,
-  	0,126,125,1,0,0,0,127,128,1,0,0,0,128,126,1,0,0,0,128,129,1,0,0,0,129,
-  	23,1,0,0,0,130,136,3,26,13,0,131,136,3,28,14,0,132,136,3,34,17,0,133,
-  	136,3,36,18,0,134,136,3,40,20,0,135,130,1,0,0,0,135,131,1,0,0,0,135,132,
-  	1,0,0,0,135,133,1,0,0,0,135,134,1,0,0,0,136,25,1,0,0,0,137,138,5,29,0,
-  	0,138,139,5,13,0,0,139,140,3,44,22,0,140,141,5,14,0,0,141,27,1,0,0,0,
-  	142,143,5,7,0,0,143,144,5,17,0,0,144,145,3,30,15,0,145,146,5,18,0,0,146,
-  	147,5,14,0,0,147,29,1,0,0,0,148,153,3,32,16,0,149,150,5,16,0,0,150,152,
-  	3,32,16,0,151,149,1,0,0,0,152,155,1,0,0,0,153,151,1,0,0,0,153,154,1,0,
-  	0,0,154,31,1,0,0,0,155,153,1,0,0,0,156,159,3,44,22,0,157,159,5,32,0,0,
-  	158,156,1,0,0,0,158,157,1,0,0,0,159,33,1,0,0,0,160,161,5,8,0,0,161,162,
-  	5,17,0,0,162,163,3,44,22,0,163,164,5,18,0,0,164,165,5,9,0,0,165,166,3,
-  	20,10,0,166,35,1,0,0,0,167,168,5,10,0,0,168,169,5,17,0,0,169,170,3,44,
-  	22,0,170,171,5,18,0,0,171,172,5,9,0,0,172,173,3,20,10,0,173,174,3,38,
-  	19,0,174,37,1,0,0,0,175,176,5,11,0,0,176,177,5,9,0,0,177,180,3,20,10,
-  	0,178,180,1,0,0,0,179,175,1,0,0,0,179,178,1,0,0,0,180,39,1,0,0,0,181,
-  	182,5,29,0,0,182,183,5,17,0,0,183,184,3,42,21,0,184,185,5,18,0,0,185,
-  	186,5,14,0,0,186,41,1,0,0,0,187,192,3,44,22,0,188,189,5,16,0,0,189,191,
-  	3,44,22,0,190,188,1,0,0,0,191,194,1,0,0,0,192,190,1,0,0,0,192,193,1,0,
-  	0,0,193,197,1,0,0,0,194,192,1,0,0,0,195,197,1,0,0,0,196,187,1,0,0,0,196,
-  	195,1,0,0,0,197,43,1,0,0,0,198,202,3,48,24,0,199,200,3,46,23,0,200,201,
-  	3,48,24,0,201,203,1,0,0,0,202,199,1,0,0,0,202,203,1,0,0,0,203,45,1,0,
-  	0,0,204,205,7,1,0,0,205,47,1,0,0,0,206,211,3,50,25,0,207,208,7,2,0,0,
-  	208,210,3,50,25,0,209,207,1,0,0,0,210,213,1,0,0,0,211,209,1,0,0,0,211,
-  	212,1,0,0,0,212,49,1,0,0,0,213,211,1,0,0,0,214,219,3,52,26,0,215,216,
-  	7,3,0,0,216,218,3,52,26,0,217,215,1,0,0,0,218,221,1,0,0,0,219,217,1,0,
-  	0,0,219,220,1,0,0,0,220,51,1,0,0,0,221,219,1,0,0,0,222,224,7,2,0,0,223,
-  	222,1,0,0,0,223,224,1,0,0,0,224,227,1,0,0,0,225,228,3,54,27,0,226,228,
-  	5,29,0,0,227,225,1,0,0,0,227,226,1,0,0,0,228,234,1,0,0,0,229,230,5,17,
-  	0,0,230,231,3,44,22,0,231,232,5,18,0,0,232,234,1,0,0,0,233,223,1,0,0,
-  	0,233,229,1,0,0,0,234,53,1,0,0,0,235,236,7,4,0,0,236,55,1,0,0,0,19,71,
-  	76,88,97,111,115,128,135,153,158,179,192,196,202,211,219,223,227,233
+  	21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,1,0,1,0,1,0,1,0,
+  	3,0,59,8,0,1,0,3,0,62,8,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,4,1,71,8,1,11,1,
+  	12,1,72,1,2,1,2,1,2,1,2,1,2,1,2,1,3,1,3,1,3,5,3,84,8,3,10,3,12,3,87,9,
+  	3,1,4,1,4,1,5,5,5,92,8,5,10,5,12,5,95,9,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,
+  	1,7,1,7,1,7,5,7,107,8,7,10,7,12,7,110,9,7,1,7,3,7,113,8,7,1,8,1,8,1,8,
+  	1,8,1,9,1,9,1,9,1,9,1,10,4,10,124,8,10,11,10,12,10,125,1,11,1,11,1,11,
+  	1,11,1,11,1,11,3,11,134,8,11,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,
+  	1,13,1,13,1,13,1,14,1,14,1,14,5,14,150,8,14,10,14,12,14,153,9,14,1,15,
+  	1,15,3,15,157,8,15,1,16,1,16,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,
+  	1,17,1,17,1,17,1,18,1,18,1,18,3,18,175,8,18,1,19,1,19,1,19,1,19,1,19,
+  	1,19,1,20,1,20,1,20,5,20,186,8,20,10,20,12,20,189,9,20,1,20,3,20,192,
+  	8,20,1,21,1,21,1,21,1,21,3,21,198,8,21,1,22,1,22,1,23,1,23,1,23,5,23,
+  	205,8,23,10,23,12,23,208,9,23,1,24,1,24,1,24,5,24,213,8,24,10,24,12,24,
+  	216,9,24,1,25,3,25,219,8,25,1,25,1,25,3,25,223,8,25,1,25,1,25,1,25,1,
+  	25,3,25,229,8,25,1,26,1,26,1,26,0,0,27,0,2,4,6,8,10,12,14,16,18,20,22,
+  	24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,0,5,1,0,5,6,1,0,24,27,1,
+  	0,20,21,1,0,22,23,1,0,29,30,229,0,54,1,0,0,0,2,70,1,0,0,0,4,74,1,0,0,
+  	0,6,80,1,0,0,0,8,88,1,0,0,0,10,93,1,0,0,0,12,96,1,0,0,0,14,112,1,0,0,
+  	0,16,114,1,0,0,0,18,118,1,0,0,0,20,123,1,0,0,0,22,133,1,0,0,0,24,135,
+  	1,0,0,0,26,140,1,0,0,0,28,146,1,0,0,0,30,156,1,0,0,0,32,158,1,0,0,0,34,
+  	164,1,0,0,0,36,174,1,0,0,0,38,176,1,0,0,0,40,191,1,0,0,0,42,193,1,0,0,
+  	0,44,199,1,0,0,0,46,201,1,0,0,0,48,209,1,0,0,0,50,228,1,0,0,0,52,230,
+  	1,0,0,0,54,55,5,1,0,0,55,56,5,28,0,0,56,58,5,13,0,0,57,59,3,2,1,0,58,
+  	57,1,0,0,0,58,59,1,0,0,0,59,61,1,0,0,0,60,62,3,10,5,0,61,60,1,0,0,0,61,
+  	62,1,0,0,0,62,63,1,0,0,0,63,64,5,3,0,0,64,65,5,16,0,0,65,66,5,17,0,0,
+  	66,67,3,18,9,0,67,68,5,4,0,0,68,1,1,0,0,0,69,71,3,4,2,0,70,69,1,0,0,0,
+  	71,72,1,0,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,3,1,0,0,0,74,75,5,2,0,0,
+  	75,76,3,6,3,0,76,77,5,14,0,0,77,78,3,8,4,0,78,79,5,13,0,0,79,5,1,0,0,
+  	0,80,85,5,28,0,0,81,82,5,15,0,0,82,84,5,28,0,0,83,81,1,0,0,0,84,87,1,
+  	0,0,0,85,83,1,0,0,0,85,86,1,0,0,0,86,7,1,0,0,0,87,85,1,0,0,0,88,89,7,
+  	0,0,0,89,9,1,0,0,0,90,92,3,12,6,0,91,90,1,0,0,0,92,95,1,0,0,0,93,91,1,
+  	0,0,0,93,94,1,0,0,0,94,11,1,0,0,0,95,93,1,0,0,0,96,97,5,11,0,0,97,98,
+  	5,28,0,0,98,99,5,16,0,0,99,100,3,14,7,0,100,101,5,17,0,0,101,102,3,18,
+  	9,0,102,13,1,0,0,0,103,108,3,16,8,0,104,105,5,15,0,0,105,107,3,16,8,0,
+  	106,104,1,0,0,0,107,110,1,0,0,0,108,106,1,0,0,0,108,109,1,0,0,0,109,113,
+  	1,0,0,0,110,108,1,0,0,0,111,113,1,0,0,0,112,103,1,0,0,0,112,111,1,0,0,
+  	0,113,15,1,0,0,0,114,115,5,28,0,0,115,116,5,14,0,0,116,117,3,8,4,0,117,
+  	17,1,0,0,0,118,119,5,18,0,0,119,120,3,20,10,0,120,121,5,19,0,0,121,19,
+  	1,0,0,0,122,124,3,22,11,0,123,122,1,0,0,0,124,125,1,0,0,0,125,123,1,0,
+  	0,0,125,126,1,0,0,0,126,21,1,0,0,0,127,134,3,24,12,0,128,134,3,26,13,
+  	0,129,134,3,32,16,0,130,134,3,34,17,0,131,134,3,38,19,0,132,134,3,4,2,
+  	0,133,127,1,0,0,0,133,128,1,0,0,0,133,129,1,0,0,0,133,130,1,0,0,0,133,
+  	131,1,0,0,0,133,132,1,0,0,0,134,23,1,0,0,0,135,136,5,28,0,0,136,137,5,
+  	12,0,0,137,138,3,42,21,0,138,139,5,13,0,0,139,25,1,0,0,0,140,141,5,7,
+  	0,0,141,142,5,16,0,0,142,143,3,28,14,0,143,144,5,17,0,0,144,145,5,13,
+  	0,0,145,27,1,0,0,0,146,151,3,30,15,0,147,148,5,15,0,0,148,150,3,30,15,
+  	0,149,147,1,0,0,0,150,153,1,0,0,0,151,149,1,0,0,0,151,152,1,0,0,0,152,
+  	29,1,0,0,0,153,151,1,0,0,0,154,157,3,42,21,0,155,157,5,31,0,0,156,154,
+  	1,0,0,0,156,155,1,0,0,0,157,31,1,0,0,0,158,159,5,8,0,0,159,160,5,16,0,
+  	0,160,161,3,42,21,0,161,162,5,17,0,0,162,163,3,18,9,0,163,33,1,0,0,0,
+  	164,165,5,9,0,0,165,166,5,16,0,0,166,167,3,42,21,0,167,168,5,17,0,0,168,
+  	169,3,18,9,0,169,170,3,36,18,0,170,35,1,0,0,0,171,172,5,10,0,0,172,175,
+  	3,18,9,0,173,175,1,0,0,0,174,171,1,0,0,0,174,173,1,0,0,0,175,37,1,0,0,
+  	0,176,177,5,28,0,0,177,178,5,16,0,0,178,179,3,40,20,0,179,180,5,17,0,
+  	0,180,181,5,13,0,0,181,39,1,0,0,0,182,187,3,42,21,0,183,184,5,15,0,0,
+  	184,186,3,42,21,0,185,183,1,0,0,0,186,189,1,0,0,0,187,185,1,0,0,0,187,
+  	188,1,0,0,0,188,192,1,0,0,0,189,187,1,0,0,0,190,192,1,0,0,0,191,182,1,
+  	0,0,0,191,190,1,0,0,0,192,41,1,0,0,0,193,197,3,46,23,0,194,195,3,44,22,
+  	0,195,196,3,46,23,0,196,198,1,0,0,0,197,194,1,0,0,0,197,198,1,0,0,0,198,
+  	43,1,0,0,0,199,200,7,1,0,0,200,45,1,0,0,0,201,206,3,48,24,0,202,203,7,
+  	2,0,0,203,205,3,48,24,0,204,202,1,0,0,0,205,208,1,0,0,0,206,204,1,0,0,
+  	0,206,207,1,0,0,0,207,47,1,0,0,0,208,206,1,0,0,0,209,214,3,50,25,0,210,
+  	211,7,3,0,0,211,213,3,50,25,0,212,210,1,0,0,0,213,216,1,0,0,0,214,212,
+  	1,0,0,0,214,215,1,0,0,0,215,49,1,0,0,0,216,214,1,0,0,0,217,219,7,2,0,
+  	0,218,217,1,0,0,0,218,219,1,0,0,0,219,222,1,0,0,0,220,223,3,52,26,0,221,
+  	223,5,28,0,0,222,220,1,0,0,0,222,221,1,0,0,0,223,229,1,0,0,0,224,225,
+  	5,16,0,0,225,226,3,42,21,0,226,227,5,17,0,0,227,229,1,0,0,0,228,218,1,
+  	0,0,0,228,224,1,0,0,0,229,51,1,0,0,0,230,231,7,4,0,0,231,53,1,0,0,0,20,
+  	58,61,72,85,93,108,112,125,133,151,156,174,187,191,197,206,214,218,222,
+  	228
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -214,16 +213,16 @@ tree::TerminalNode* duckyParser::ProgramContext::SEMI() {
   return getToken(duckyParser::SEMI, 0);
 }
 
-duckyParser::Var_declarationsContext* duckyParser::ProgramContext::var_declarations() {
-  return getRuleContext<duckyParser::Var_declarationsContext>(0);
-}
-
-duckyParser::Func_declarationsContext* duckyParser::ProgramContext::func_declarations() {
-  return getRuleContext<duckyParser::Func_declarationsContext>(0);
-}
-
 tree::TerminalNode* duckyParser::ProgramContext::MAIN_BLOCK() {
   return getToken(duckyParser::MAIN_BLOCK, 0);
+}
+
+tree::TerminalNode* duckyParser::ProgramContext::LPAREN() {
+  return getToken(duckyParser::LPAREN, 0);
+}
+
+tree::TerminalNode* duckyParser::ProgramContext::RPAREN() {
+  return getToken(duckyParser::RPAREN, 0);
 }
 
 duckyParser::BlockContext* duckyParser::ProgramContext::block() {
@@ -232,6 +231,14 @@ duckyParser::BlockContext* duckyParser::ProgramContext::block() {
 
 tree::TerminalNode* duckyParser::ProgramContext::END_BLOCK() {
   return getToken(duckyParser::END_BLOCK, 0);
+}
+
+duckyParser::Var_declarationsContext* duckyParser::ProgramContext::var_declarations() {
+  return getRuleContext<duckyParser::Var_declarationsContext>(0);
+}
+
+duckyParser::Func_declarationsContext* duckyParser::ProgramContext::func_declarations() {
+  return getRuleContext<duckyParser::Func_declarationsContext>(0);
 }
 
 
@@ -254,6 +261,7 @@ void duckyParser::ProgramContext::exitRule(tree::ParseTreeListener *listener) {
 duckyParser::ProgramContext* duckyParser::program() {
   ProgramContext *_localctx = _tracker.createInstance<ProgramContext>(_ctx, getState());
   enterRule(_localctx, 0, duckyParser::RuleProgram);
+  size_t _la = 0;
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -264,21 +272,42 @@ duckyParser::ProgramContext* duckyParser::program() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(56);
+    setState(54);
     match(duckyParser::MAIN_FUNC);
-    setState(57);
+    setState(55);
     match(duckyParser::ID);
-    setState(58);
+    setState(56);
     match(duckyParser::SEMI);
-    setState(59);
-    var_declarations();
-    setState(60);
-    func_declarations();
+    setState(58);
+    _errHandler->sync(this);
+
+    _la = _input->LA(1);
+    if (_la == duckyParser::VARS) {
+      setState(57);
+      var_declarations();
+    }
     setState(61);
-    match(duckyParser::MAIN_BLOCK);
-    setState(62);
-    block();
+    _errHandler->sync(this);
+
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx)) {
+    case 1: {
+      setState(60);
+      func_declarations();
+      break;
+    }
+
+    default:
+      break;
+    }
     setState(63);
+    match(duckyParser::MAIN_BLOCK);
+    setState(64);
+    match(duckyParser::LPAREN);
+    setState(65);
+    match(duckyParser::RPAREN);
+    setState(66);
+    block();
+    setState(67);
     match(duckyParser::END_BLOCK);
    
   }
@@ -297,20 +326,12 @@ duckyParser::Var_declarationsContext::Var_declarationsContext(ParserRuleContext 
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* duckyParser::Var_declarationsContext::VARS() {
-  return getToken(duckyParser::VARS, 0);
+std::vector<duckyParser::Var_declContext *> duckyParser::Var_declarationsContext::var_decl() {
+  return getRuleContexts<duckyParser::Var_declContext>();
 }
 
-tree::TerminalNode* duckyParser::Var_declarationsContext::LBRACE() {
-  return getToken(duckyParser::LBRACE, 0);
-}
-
-duckyParser::Var_decl_listContext* duckyParser::Var_declarationsContext::var_decl_list() {
-  return getRuleContext<duckyParser::Var_decl_listContext>(0);
-}
-
-tree::TerminalNode* duckyParser::Var_declarationsContext::RBRACE() {
-  return getToken(duckyParser::RBRACE, 0);
+duckyParser::Var_declContext* duckyParser::Var_declarationsContext::var_decl(size_t i) {
+  return getRuleContext<duckyParser::Var_declContext>(i);
 }
 
 
@@ -333,86 +354,6 @@ void duckyParser::Var_declarationsContext::exitRule(tree::ParseTreeListener *lis
 duckyParser::Var_declarationsContext* duckyParser::var_declarations() {
   Var_declarationsContext *_localctx = _tracker.createInstance<Var_declarationsContext>(_ctx, getState());
   enterRule(_localctx, 2, duckyParser::RuleVar_declarations);
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    setState(71);
-    _errHandler->sync(this);
-    switch (_input->LA(1)) {
-      case duckyParser::VARS: {
-        enterOuterAlt(_localctx, 1);
-        setState(65);
-        match(duckyParser::VARS);
-        setState(66);
-        match(duckyParser::LBRACE);
-        setState(67);
-        var_decl_list();
-        setState(68);
-        match(duckyParser::RBRACE);
-        break;
-      }
-
-      case duckyParser::MAIN_BLOCK:
-      case duckyParser::FUNCTION: {
-        enterOuterAlt(_localctx, 2);
-
-        break;
-      }
-
-    default:
-      throw NoViableAltException(this);
-    }
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- Var_decl_listContext ------------------------------------------------------------------
-
-duckyParser::Var_decl_listContext::Var_decl_listContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-std::vector<duckyParser::Var_declContext *> duckyParser::Var_decl_listContext::var_decl() {
-  return getRuleContexts<duckyParser::Var_declContext>();
-}
-
-duckyParser::Var_declContext* duckyParser::Var_decl_listContext::var_decl(size_t i) {
-  return getRuleContext<duckyParser::Var_declContext>(i);
-}
-
-
-size_t duckyParser::Var_decl_listContext::getRuleIndex() const {
-  return duckyParser::RuleVar_decl_list;
-}
-
-void duckyParser::Var_decl_listContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<duckyListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterVar_decl_list(this);
-}
-
-void duckyParser::Var_decl_listContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<duckyListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitVar_decl_list(this);
-}
-
-duckyParser::Var_decl_listContext* duckyParser::var_decl_list() {
-  Var_decl_listContext *_localctx = _tracker.createInstance<Var_decl_listContext>(_ctx, getState());
-  enterRule(_localctx, 4, duckyParser::RuleVar_decl_list);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -424,16 +365,16 @@ duckyParser::Var_decl_listContext* duckyParser::var_decl_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(74); 
+    setState(70); 
     _errHandler->sync(this);
     _la = _input->LA(1);
     do {
-      setState(73);
+      setState(69);
       var_decl();
-      setState(76); 
+      setState(72); 
       _errHandler->sync(this);
       _la = _input->LA(1);
-    } while (_la == duckyParser::ID);
+    } while (_la == duckyParser::VARS);
    
   }
   catch (RecognitionException &e) {
@@ -449,6 +390,10 @@ duckyParser::Var_decl_listContext* duckyParser::var_decl_list() {
 
 duckyParser::Var_declContext::Var_declContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* duckyParser::Var_declContext::VARS() {
+  return getToken(duckyParser::VARS, 0);
 }
 
 duckyParser::Var_listContext* duckyParser::Var_declContext::var_list() {
@@ -486,7 +431,7 @@ void duckyParser::Var_declContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::Var_declContext* duckyParser::var_decl() {
   Var_declContext *_localctx = _tracker.createInstance<Var_declContext>(_ctx, getState());
-  enterRule(_localctx, 6, duckyParser::RuleVar_decl);
+  enterRule(_localctx, 4, duckyParser::RuleVar_decl);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -497,13 +442,15 @@ duckyParser::Var_declContext* duckyParser::var_decl() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(78);
+    setState(74);
+    match(duckyParser::VARS);
+    setState(75);
     var_list();
-    setState(79);
+    setState(76);
     match(duckyParser::COLON);
-    setState(80);
+    setState(77);
     data_type();
-    setState(81);
+    setState(78);
     match(duckyParser::SEMI);
    
   }
@@ -557,7 +504,7 @@ void duckyParser::Var_listContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::Var_listContext* duckyParser::var_list() {
   Var_listContext *_localctx = _tracker.createInstance<Var_listContext>(_ctx, getState());
-  enterRule(_localctx, 8, duckyParser::RuleVar_list);
+  enterRule(_localctx, 6, duckyParser::RuleVar_list);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -569,17 +516,17 @@ duckyParser::Var_listContext* duckyParser::var_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(83);
+    setState(80);
     match(duckyParser::ID);
-    setState(88);
+    setState(85);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::COMMA) {
-      setState(84);
+      setState(81);
       match(duckyParser::COMMA);
-      setState(85);
+      setState(82);
       match(duckyParser::ID);
-      setState(90);
+      setState(87);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -627,7 +574,7 @@ void duckyParser::Data_typeContext::exitRule(tree::ParseTreeListener *listener) 
 
 duckyParser::Data_typeContext* duckyParser::data_type() {
   Data_typeContext *_localctx = _tracker.createInstance<Data_typeContext>(_ctx, getState());
-  enterRule(_localctx, 10, duckyParser::RuleData_type);
+  enterRule(_localctx, 8, duckyParser::RuleData_type);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -639,7 +586,7 @@ duckyParser::Data_typeContext* duckyParser::data_type() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(91);
+    setState(88);
     _la = _input->LA(1);
     if (!(_la == duckyParser::INTEGER_TYPE
 
@@ -667,12 +614,12 @@ duckyParser::Func_declarationsContext::Func_declarationsContext(ParserRuleContex
   : ParserRuleContext(parent, invokingState) {
 }
 
-duckyParser::Func_declContext* duckyParser::Func_declarationsContext::func_decl() {
-  return getRuleContext<duckyParser::Func_declContext>(0);
+std::vector<duckyParser::Func_declContext *> duckyParser::Func_declarationsContext::func_decl() {
+  return getRuleContexts<duckyParser::Func_declContext>();
 }
 
-duckyParser::Func_declarationsContext* duckyParser::Func_declarationsContext::func_declarations() {
-  return getRuleContext<duckyParser::Func_declarationsContext>(0);
+duckyParser::Func_declContext* duckyParser::Func_declarationsContext::func_decl(size_t i) {
+  return getRuleContext<duckyParser::Func_declContext>(i);
 }
 
 
@@ -694,7 +641,8 @@ void duckyParser::Func_declarationsContext::exitRule(tree::ParseTreeListener *li
 
 duckyParser::Func_declarationsContext* duckyParser::func_declarations() {
   Func_declarationsContext *_localctx = _tracker.createInstance<Func_declarationsContext>(_ctx, getState());
-  enterRule(_localctx, 12, duckyParser::RuleFunc_declarations);
+  enterRule(_localctx, 10, duckyParser::RuleFunc_declarations);
+  size_t _la = 0;
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -704,26 +652,16 @@ duckyParser::Func_declarationsContext* duckyParser::func_declarations() {
     exitRule();
   });
   try {
-    setState(97);
+    enterOuterAlt(_localctx, 1);
+    setState(93);
     _errHandler->sync(this);
-    switch (_input->LA(1)) {
-      case duckyParser::FUNCTION: {
-        enterOuterAlt(_localctx, 1);
-        setState(93);
-        func_decl();
-        setState(94);
-        func_declarations();
-        break;
-      }
-
-      case duckyParser::MAIN_BLOCK: {
-        enterOuterAlt(_localctx, 2);
-
-        break;
-      }
-
-    default:
-      throw NoViableAltException(this);
+    _la = _input->LA(1);
+    while (_la == duckyParser::FUNCTION) {
+      setState(90);
+      func_decl();
+      setState(95);
+      _errHandler->sync(this);
+      _la = _input->LA(1);
     }
    
   }
@@ -785,7 +723,7 @@ void duckyParser::Func_declContext::exitRule(tree::ParseTreeListener *listener) 
 
 duckyParser::Func_declContext* duckyParser::func_decl() {
   Func_declContext *_localctx = _tracker.createInstance<Func_declContext>(_ctx, getState());
-  enterRule(_localctx, 14, duckyParser::RuleFunc_decl);
+  enterRule(_localctx, 12, duckyParser::RuleFunc_decl);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -796,17 +734,17 @@ duckyParser::Func_declContext* duckyParser::func_decl() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(99);
+    setState(96);
     match(duckyParser::FUNCTION);
-    setState(100);
+    setState(97);
     match(duckyParser::ID);
-    setState(101);
+    setState(98);
     match(duckyParser::LPAREN);
-    setState(102);
+    setState(99);
     param_list();
-    setState(103);
+    setState(100);
     match(duckyParser::RPAREN);
-    setState(104);
+    setState(101);
     block();
    
   }
@@ -860,7 +798,7 @@ void duckyParser::Param_listContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::Param_listContext* duckyParser::param_list() {
   Param_listContext *_localctx = _tracker.createInstance<Param_listContext>(_ctx, getState());
-  enterRule(_localctx, 16, duckyParser::RuleParam_list);
+  enterRule(_localctx, 14, duckyParser::RuleParam_list);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -871,22 +809,22 @@ duckyParser::Param_listContext* duckyParser::param_list() {
     exitRule();
   });
   try {
-    setState(115);
+    setState(112);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::ID: {
         enterOuterAlt(_localctx, 1);
-        setState(106);
+        setState(103);
         param();
-        setState(111);
+        setState(108);
         _errHandler->sync(this);
         _la = _input->LA(1);
         while (_la == duckyParser::COMMA) {
-          setState(107);
+          setState(104);
           match(duckyParser::COMMA);
-          setState(108);
+          setState(105);
           param();
-          setState(113);
+          setState(110);
           _errHandler->sync(this);
           _la = _input->LA(1);
         }
@@ -950,7 +888,7 @@ void duckyParser::ParamContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::ParamContext* duckyParser::param() {
   ParamContext *_localctx = _tracker.createInstance<ParamContext>(_ctx, getState());
-  enterRule(_localctx, 18, duckyParser::RuleParam);
+  enterRule(_localctx, 16, duckyParser::RuleParam);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -961,11 +899,11 @@ duckyParser::ParamContext* duckyParser::param() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(117);
+    setState(114);
     match(duckyParser::ID);
-    setState(118);
+    setState(115);
     match(duckyParser::COLON);
-    setState(119);
+    setState(116);
     data_type();
    
   }
@@ -1015,7 +953,7 @@ void duckyParser::BlockContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::BlockContext* duckyParser::block() {
   BlockContext *_localctx = _tracker.createInstance<BlockContext>(_ctx, getState());
-  enterRule(_localctx, 20, duckyParser::RuleBlock);
+  enterRule(_localctx, 18, duckyParser::RuleBlock);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1026,11 +964,11 @@ duckyParser::BlockContext* duckyParser::block() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(121);
+    setState(118);
     match(duckyParser::LBRACE);
-    setState(122);
+    setState(119);
     statements();
-    setState(123);
+    setState(120);
     match(duckyParser::RBRACE);
    
   }
@@ -1076,7 +1014,7 @@ void duckyParser::StatementsContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::StatementsContext* duckyParser::statements() {
   StatementsContext *_localctx = _tracker.createInstance<StatementsContext>(_ctx, getState());
-  enterRule(_localctx, 22, duckyParser::RuleStatements);
+  enterRule(_localctx, 20, duckyParser::RuleStatements);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -1088,17 +1026,17 @@ duckyParser::StatementsContext* duckyParser::statements() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(126); 
+    setState(123); 
     _errHandler->sync(this);
     _la = _input->LA(1);
     do {
-      setState(125);
+      setState(122);
       statement();
-      setState(128); 
+      setState(125); 
       _errHandler->sync(this);
       _la = _input->LA(1);
     } while ((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & 536872320) != 0));
+      ((1ULL << _la) & 268436356) != 0));
    
   }
   catch (RecognitionException &e) {
@@ -1136,6 +1074,10 @@ duckyParser::Function_callContext* duckyParser::StatementContext::function_call(
   return getRuleContext<duckyParser::Function_callContext>(0);
 }
 
+duckyParser::Var_declContext* duckyParser::StatementContext::var_decl() {
+  return getRuleContext<duckyParser::Var_declContext>(0);
+}
+
 
 size_t duckyParser::StatementContext::getRuleIndex() const {
   return duckyParser::RuleStatement;
@@ -1155,7 +1097,7 @@ void duckyParser::StatementContext::exitRule(tree::ParseTreeListener *listener) 
 
 duckyParser::StatementContext* duckyParser::statement() {
   StatementContext *_localctx = _tracker.createInstance<StatementContext>(_ctx, getState());
-  enterRule(_localctx, 24, duckyParser::RuleStatement);
+  enterRule(_localctx, 22, duckyParser::RuleStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1165,41 +1107,48 @@ duckyParser::StatementContext* duckyParser::statement() {
     exitRule();
   });
   try {
-    setState(135);
+    setState(133);
     _errHandler->sync(this);
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx)) {
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
     case 1: {
       enterOuterAlt(_localctx, 1);
-      setState(130);
+      setState(127);
       assignment();
       break;
     }
 
     case 2: {
       enterOuterAlt(_localctx, 2);
-      setState(131);
+      setState(128);
       print();
       break;
     }
 
     case 3: {
       enterOuterAlt(_localctx, 3);
-      setState(132);
+      setState(129);
       loop();
       break;
     }
 
     case 4: {
       enterOuterAlt(_localctx, 4);
-      setState(133);
+      setState(130);
       condition();
       break;
     }
 
     case 5: {
       enterOuterAlt(_localctx, 5);
-      setState(134);
+      setState(131);
       function_call();
+      break;
+    }
+
+    case 6: {
+      enterOuterAlt(_localctx, 6);
+      setState(132);
+      var_decl();
       break;
     }
 
@@ -1258,7 +1207,7 @@ void duckyParser::AssignmentContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::AssignmentContext* duckyParser::assignment() {
   AssignmentContext *_localctx = _tracker.createInstance<AssignmentContext>(_ctx, getState());
-  enterRule(_localctx, 26, duckyParser::RuleAssignment);
+  enterRule(_localctx, 24, duckyParser::RuleAssignment);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1269,13 +1218,13 @@ duckyParser::AssignmentContext* duckyParser::assignment() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(137);
+    setState(135);
     match(duckyParser::ID);
-    setState(138);
+    setState(136);
     match(duckyParser::ASSIGN);
-    setState(139);
+    setState(137);
     expression();
-    setState(140);
+    setState(138);
     match(duckyParser::SEMI);
    
   }
@@ -1333,7 +1282,7 @@ void duckyParser::PrintContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::PrintContext* duckyParser::print() {
   PrintContext *_localctx = _tracker.createInstance<PrintContext>(_ctx, getState());
-  enterRule(_localctx, 28, duckyParser::RulePrint);
+  enterRule(_localctx, 26, duckyParser::RulePrint);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1344,15 +1293,15 @@ duckyParser::PrintContext* duckyParser::print() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(142);
+    setState(140);
     match(duckyParser::PRINT);
-    setState(143);
+    setState(141);
     match(duckyParser::LPAREN);
-    setState(144);
+    setState(142);
     print_list();
-    setState(145);
+    setState(143);
     match(duckyParser::RPAREN);
-    setState(146);
+    setState(144);
     match(duckyParser::SEMI);
    
   }
@@ -1406,7 +1355,7 @@ void duckyParser::Print_listContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::Print_listContext* duckyParser::print_list() {
   Print_listContext *_localctx = _tracker.createInstance<Print_listContext>(_ctx, getState());
-  enterRule(_localctx, 30, duckyParser::RulePrint_list);
+  enterRule(_localctx, 28, duckyParser::RulePrint_list);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -1418,17 +1367,17 @@ duckyParser::Print_listContext* duckyParser::print_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(148);
+    setState(146);
     print_item();
-    setState(153);
+    setState(151);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::COMMA) {
-      setState(149);
+      setState(147);
       match(duckyParser::COMMA);
-      setState(150);
+      setState(148);
       print_item();
-      setState(155);
+      setState(153);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -1476,7 +1425,7 @@ void duckyParser::Print_itemContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::Print_itemContext* duckyParser::print_item() {
   Print_itemContext *_localctx = _tracker.createInstance<Print_itemContext>(_ctx, getState());
-  enterRule(_localctx, 32, duckyParser::RulePrint_item);
+  enterRule(_localctx, 30, duckyParser::RulePrint_item);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1486,7 +1435,7 @@ duckyParser::Print_itemContext* duckyParser::print_item() {
     exitRule();
   });
   try {
-    setState(158);
+    setState(156);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::LPAREN:
@@ -1496,14 +1445,14 @@ duckyParser::Print_itemContext* duckyParser::print_item() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(156);
+        setState(154);
         expression();
         break;
       }
 
       case duckyParser::STRING_LITERAL: {
         enterOuterAlt(_localctx, 2);
-        setState(157);
+        setState(155);
         match(duckyParser::STRING_LITERAL);
         break;
       }
@@ -1544,10 +1493,6 @@ tree::TerminalNode* duckyParser::LoopContext::RPAREN() {
   return getToken(duckyParser::RPAREN, 0);
 }
 
-tree::TerminalNode* duckyParser::LoopContext::DO() {
-  return getToken(duckyParser::DO, 0);
-}
-
 duckyParser::BlockContext* duckyParser::LoopContext::block() {
   return getRuleContext<duckyParser::BlockContext>(0);
 }
@@ -1571,7 +1516,7 @@ void duckyParser::LoopContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::LoopContext* duckyParser::loop() {
   LoopContext *_localctx = _tracker.createInstance<LoopContext>(_ctx, getState());
-  enterRule(_localctx, 34, duckyParser::RuleLoop);
+  enterRule(_localctx, 32, duckyParser::RuleLoop);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1582,17 +1527,15 @@ duckyParser::LoopContext* duckyParser::loop() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(160);
+    setState(158);
     match(duckyParser::WHILE);
-    setState(161);
+    setState(159);
     match(duckyParser::LPAREN);
-    setState(162);
+    setState(160);
     expression();
-    setState(163);
+    setState(161);
     match(duckyParser::RPAREN);
-    setState(164);
-    match(duckyParser::DO);
-    setState(165);
+    setState(162);
     block();
    
   }
@@ -1627,10 +1570,6 @@ tree::TerminalNode* duckyParser::ConditionContext::RPAREN() {
   return getToken(duckyParser::RPAREN, 0);
 }
 
-tree::TerminalNode* duckyParser::ConditionContext::DO() {
-  return getToken(duckyParser::DO, 0);
-}
-
 duckyParser::BlockContext* duckyParser::ConditionContext::block() {
   return getRuleContext<duckyParser::BlockContext>(0);
 }
@@ -1658,7 +1597,7 @@ void duckyParser::ConditionContext::exitRule(tree::ParseTreeListener *listener) 
 
 duckyParser::ConditionContext* duckyParser::condition() {
   ConditionContext *_localctx = _tracker.createInstance<ConditionContext>(_ctx, getState());
-  enterRule(_localctx, 36, duckyParser::RuleCondition);
+  enterRule(_localctx, 34, duckyParser::RuleCondition);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1669,19 +1608,17 @@ duckyParser::ConditionContext* duckyParser::condition() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(167);
+    setState(164);
     match(duckyParser::IF);
-    setState(168);
+    setState(165);
     match(duckyParser::LPAREN);
-    setState(169);
+    setState(166);
     expression();
-    setState(170);
+    setState(167);
     match(duckyParser::RPAREN);
-    setState(171);
-    match(duckyParser::DO);
-    setState(172);
+    setState(168);
     block();
-    setState(173);
+    setState(169);
     else_block();
    
   }
@@ -1702,10 +1639,6 @@ duckyParser::Else_blockContext::Else_blockContext(ParserRuleContext *parent, siz
 
 tree::TerminalNode* duckyParser::Else_blockContext::ELSE() {
   return getToken(duckyParser::ELSE, 0);
-}
-
-tree::TerminalNode* duckyParser::Else_blockContext::DO() {
-  return getToken(duckyParser::DO, 0);
 }
 
 duckyParser::BlockContext* duckyParser::Else_blockContext::block() {
@@ -1731,7 +1664,7 @@ void duckyParser::Else_blockContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::Else_blockContext* duckyParser::else_block() {
   Else_blockContext *_localctx = _tracker.createInstance<Else_blockContext>(_ctx, getState());
-  enterRule(_localctx, 38, duckyParser::RuleElse_block);
+  enterRule(_localctx, 36, duckyParser::RuleElse_block);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1741,20 +1674,19 @@ duckyParser::Else_blockContext* duckyParser::else_block() {
     exitRule();
   });
   try {
-    setState(179);
+    setState(174);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::ELSE: {
         enterOuterAlt(_localctx, 1);
-        setState(175);
+        setState(171);
         match(duckyParser::ELSE);
-        setState(176);
-        match(duckyParser::DO);
-        setState(177);
+        setState(172);
         block();
         break;
       }
 
+      case duckyParser::VARS:
       case duckyParser::PRINT:
       case duckyParser::WHILE:
       case duckyParser::IF:
@@ -1824,7 +1756,7 @@ void duckyParser::Function_callContext::exitRule(tree::ParseTreeListener *listen
 
 duckyParser::Function_callContext* duckyParser::function_call() {
   Function_callContext *_localctx = _tracker.createInstance<Function_callContext>(_ctx, getState());
-  enterRule(_localctx, 40, duckyParser::RuleFunction_call);
+  enterRule(_localctx, 38, duckyParser::RuleFunction_call);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1835,15 +1767,15 @@ duckyParser::Function_callContext* duckyParser::function_call() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(181);
+    setState(176);
     match(duckyParser::ID);
-    setState(182);
+    setState(177);
     match(duckyParser::LPAREN);
-    setState(183);
+    setState(178);
     arg_list();
-    setState(184);
+    setState(179);
     match(duckyParser::RPAREN);
-    setState(185);
+    setState(180);
     match(duckyParser::SEMI);
    
   }
@@ -1897,7 +1829,7 @@ void duckyParser::Arg_listContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::Arg_listContext* duckyParser::arg_list() {
   Arg_listContext *_localctx = _tracker.createInstance<Arg_listContext>(_ctx, getState());
-  enterRule(_localctx, 42, duckyParser::RuleArg_list);
+  enterRule(_localctx, 40, duckyParser::RuleArg_list);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -1908,7 +1840,7 @@ duckyParser::Arg_listContext* duckyParser::arg_list() {
     exitRule();
   });
   try {
-    setState(196);
+    setState(191);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::LPAREN:
@@ -1918,17 +1850,17 @@ duckyParser::Arg_listContext* duckyParser::arg_list() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(187);
+        setState(182);
         expression();
-        setState(192);
+        setState(187);
         _errHandler->sync(this);
         _la = _input->LA(1);
         while (_la == duckyParser::COMMA) {
-          setState(188);
+          setState(183);
           match(duckyParser::COMMA);
-          setState(189);
+          setState(184);
           expression();
-          setState(194);
+          setState(189);
           _errHandler->sync(this);
           _la = _input->LA(1);
         }
@@ -1992,7 +1924,7 @@ void duckyParser::ExpressionContext::exitRule(tree::ParseTreeListener *listener)
 
 duckyParser::ExpressionContext* duckyParser::expression() {
   ExpressionContext *_localctx = _tracker.createInstance<ExpressionContext>(_ctx, getState());
-  enterRule(_localctx, 44, duckyParser::RuleExpression);
+  enterRule(_localctx, 42, duckyParser::RuleExpression);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2004,17 +1936,17 @@ duckyParser::ExpressionContext* duckyParser::expression() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(198);
+    setState(193);
     exp();
-    setState(202);
+    setState(197);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if ((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & 503316480) != 0)) {
-      setState(199);
+      ((1ULL << _la) & 251658240) != 0)) {
+      setState(194);
       comparison_operator();
-      setState(200);
+      setState(195);
       exp();
     }
    
@@ -2069,7 +2001,7 @@ void duckyParser::Comparison_operatorContext::exitRule(tree::ParseTreeListener *
 
 duckyParser::Comparison_operatorContext* duckyParser::comparison_operator() {
   Comparison_operatorContext *_localctx = _tracker.createInstance<Comparison_operatorContext>(_ctx, getState());
-  enterRule(_localctx, 46, duckyParser::RuleComparison_operator);
+  enterRule(_localctx, 44, duckyParser::RuleComparison_operator);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2081,10 +2013,10 @@ duckyParser::Comparison_operatorContext* duckyParser::comparison_operator() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(204);
+    setState(199);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & 503316480) != 0))) {
+      ((1ULL << _la) & 251658240) != 0))) {
     _errHandler->recoverInline(this);
     }
     else {
@@ -2151,7 +2083,7 @@ void duckyParser::ExpContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::ExpContext* duckyParser::exp() {
   ExpContext *_localctx = _tracker.createInstance<ExpContext>(_ctx, getState());
-  enterRule(_localctx, 48, duckyParser::RuleExp);
+  enterRule(_localctx, 46, duckyParser::RuleExp);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2163,15 +2095,15 @@ duckyParser::ExpContext* duckyParser::exp() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(206);
+    setState(201);
     term();
-    setState(211);
+    setState(206);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::PLUS
 
     || _la == duckyParser::MINUS) {
-      setState(207);
+      setState(202);
       _la = _input->LA(1);
       if (!(_la == duckyParser::PLUS
 
@@ -2182,9 +2114,9 @@ duckyParser::ExpContext* duckyParser::exp() {
         _errHandler->reportMatch(this);
         consume();
       }
-      setState(208);
+      setState(203);
       term();
-      setState(213);
+      setState(208);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -2248,7 +2180,7 @@ void duckyParser::TermContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::TermContext* duckyParser::term() {
   TermContext *_localctx = _tracker.createInstance<TermContext>(_ctx, getState());
-  enterRule(_localctx, 50, duckyParser::RuleTerm);
+  enterRule(_localctx, 48, duckyParser::RuleTerm);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2260,15 +2192,15 @@ duckyParser::TermContext* duckyParser::term() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(214);
+    setState(209);
     factor();
-    setState(219);
+    setState(214);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::MULT
 
     || _la == duckyParser::DIV) {
-      setState(215);
+      setState(210);
       _la = _input->LA(1);
       if (!(_la == duckyParser::MULT
 
@@ -2279,9 +2211,9 @@ duckyParser::TermContext* duckyParser::term() {
         _errHandler->reportMatch(this);
         consume();
       }
-      setState(216);
+      setState(211);
       factor();
-      setState(221);
+      setState(216);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -2349,7 +2281,7 @@ void duckyParser::FactorContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::FactorContext* duckyParser::factor() {
   FactorContext *_localctx = _tracker.createInstance<FactorContext>(_ctx, getState());
-  enterRule(_localctx, 52, duckyParser::RuleFactor);
+  enterRule(_localctx, 50, duckyParser::RuleFactor);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2360,7 +2292,7 @@ duckyParser::FactorContext* duckyParser::factor() {
     exitRule();
   });
   try {
-    setState(233);
+    setState(228);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::PLUS:
@@ -2369,14 +2301,14 @@ duckyParser::FactorContext* duckyParser::factor() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(223);
+        setState(218);
         _errHandler->sync(this);
 
         _la = _input->LA(1);
         if (_la == duckyParser::PLUS
 
         || _la == duckyParser::MINUS) {
-          setState(222);
+          setState(217);
           _la = _input->LA(1);
           if (!(_la == duckyParser::PLUS
 
@@ -2388,18 +2320,18 @@ duckyParser::FactorContext* duckyParser::factor() {
             consume();
           }
         }
-        setState(227);
+        setState(222);
         _errHandler->sync(this);
         switch (_input->LA(1)) {
           case duckyParser::INTEGER_CONSTANT:
           case duckyParser::FLOAT_CONSTANT: {
-            setState(225);
+            setState(220);
             constant();
             break;
           }
 
           case duckyParser::ID: {
-            setState(226);
+            setState(221);
             match(duckyParser::ID);
             break;
           }
@@ -2412,11 +2344,11 @@ duckyParser::FactorContext* duckyParser::factor() {
 
       case duckyParser::LPAREN: {
         enterOuterAlt(_localctx, 2);
-        setState(229);
+        setState(224);
         match(duckyParser::LPAREN);
-        setState(230);
+        setState(225);
         expression();
-        setState(231);
+        setState(226);
         match(duckyParser::RPAREN);
         break;
       }
@@ -2468,7 +2400,7 @@ void duckyParser::ConstantContext::exitRule(tree::ParseTreeListener *listener) {
 
 duckyParser::ConstantContext* duckyParser::constant() {
   ConstantContext *_localctx = _tracker.createInstance<ConstantContext>(_ctx, getState());
-  enterRule(_localctx, 54, duckyParser::RuleConstant);
+  enterRule(_localctx, 52, duckyParser::RuleConstant);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -2480,7 +2412,7 @@ duckyParser::ConstantContext* duckyParser::constant() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(235);
+    setState(230);
     _la = _input->LA(1);
     if (!(_la == duckyParser::INTEGER_CONSTANT
 

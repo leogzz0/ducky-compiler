@@ -20,9 +20,6 @@ public:
   virtual void enterVar_declarations(duckyParser::Var_declarationsContext *ctx) = 0;
   virtual void exitVar_declarations(duckyParser::Var_declarationsContext *ctx) = 0;
 
-  virtual void enterVar_decl_list(duckyParser::Var_decl_listContext *ctx) = 0;
-  virtual void exitVar_decl_list(duckyParser::Var_decl_listContext *ctx) = 0;
-
   virtual void enterVar_decl(duckyParser::Var_declContext *ctx) = 0;
   virtual void exitVar_decl(duckyParser::Var_declContext *ctx) = 0;
 

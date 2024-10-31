@@ -14,6 +14,8 @@ class FunctionDirectory {
 		std::vector<std::string> getParamTypes(const std::string &funcName) const;
 		std::string getReturnType(const std::string &funcName) const;
 		void setReturnType(const std::string &funcName, const std::string &returnType);
+		void setCurrentFunction(const std::string &funcName);
+		bool currentFunctionHasParameter(const std::string &paramName) const;
 
 	private:
 		struct FunctionInfo {
@@ -22,6 +24,7 @@ class FunctionDirectory {
 		};
 
 		std::unordered_map<std::string, FunctionInfo> functions;
+		std::string currentFunction;
 };
 
 #endif // FUNCTIONDIRECTORY_H

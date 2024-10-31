@@ -13,12 +13,12 @@ class  duckyLexer : public antlr4::Lexer {
 public:
   enum {
     MAIN_FUNC = 1, VARS = 2, MAIN_BLOCK = 3, END_BLOCK = 4, INTEGER_TYPE = 5, 
-    FLOAT_TYPE = 6, PRINT = 7, WHILE = 8, DO = 9, IF = 10, ELSE = 11, FUNCTION = 12, 
-    ASSIGN = 13, SEMI = 14, COLON = 15, COMMA = 16, LPAREN = 17, RPAREN = 18, 
-    LBRACE = 19, RBRACE = 20, PLUS = 21, MINUS = 22, MULT = 23, DIV = 24, 
-    GREATER_THAN = 25, LESS_THAN = 26, NOT_EQUAL = 27, EQUAL = 28, ID = 29, 
-    INTEGER_CONSTANT = 30, FLOAT_CONSTANT = 31, STRING_LITERAL = 32, WS = 33, 
-    COMMENT = 34
+    FLOAT_TYPE = 6, PRINT = 7, WHILE = 8, IF = 9, ELSE = 10, FUNCTION = 11, 
+    ASSIGN = 12, SEMI = 13, COLON = 14, COMMA = 15, LPAREN = 16, RPAREN = 17, 
+    LBRACE = 18, RBRACE = 19, PLUS = 20, MINUS = 21, MULT = 22, DIV = 23, 
+    GREATER_THAN = 24, LESS_THAN = 25, NOT_EQUAL = 26, EQUAL = 27, ID = 28, 
+    INTEGER_CONSTANT = 29, FLOAT_CONSTANT = 30, STRING_LITERAL = 31, WS = 32, 
+    COMMENT = 33
   };
 
   explicit duckyLexer(antlr4::CharStream *input);
