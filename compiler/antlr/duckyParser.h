@@ -23,12 +23,13 @@ public:
 
   enum {
     RuleProgram = 0, RuleVar_declarations = 1, RuleVar_decl = 2, RuleVar_list = 3, 
-    RuleData_type = 4, RuleFunc_declarations = 5, RuleFunc_decl = 6, RuleParam_list = 7, 
-    RuleParam = 8, RuleBlock = 9, RuleStatements = 10, RuleStatement = 11, 
-    RuleAssignment = 12, RulePrint = 13, RulePrint_list = 14, RulePrint_item = 15, 
-    RuleLoop = 16, RuleCondition = 17, RuleElse_block = 18, RuleFunction_call = 19, 
-    RuleArg_list = 20, RuleExpression = 21, RuleComparison_operator = 22, 
-    RuleExp = 23, RuleTerm = 24, RuleFactor = 25, RuleConstant = 26
+    RuleData_type = 4, RuleFunc_declarations = 5, RuleFunc_decl = 6, RuleFunc_block = 7, 
+    RuleFunc_var_declarations = 8, RuleParam_list = 9, RuleParam = 10, RuleBlock = 11, 
+    RuleStatements = 12, RuleStatement = 13, RuleAssignment = 14, RulePrint = 15, 
+    RulePrint_list = 16, RulePrint_item = 17, RuleLoop = 18, RuleCondition = 19, 
+    RuleElse_block = 20, RuleFunction_call = 21, RuleArg_list = 22, RuleExpression = 23, 
+    RuleComparison_operator = 24, RuleExp = 25, RuleTerm = 26, RuleFactor = 27, 
+    RuleConstant = 28
   };
 
   explicit duckyParser(antlr4::TokenStream *input);
@@ -55,6 +56,8 @@ public:
   class Data_typeContext;
   class Func_declarationsContext;
   class Func_declContext;
+  class Func_blockContext;
+  class Func_var_declarationsContext;
   class Param_listContext;
   class ParamContext;
   class BlockContext;
@@ -182,7 +185,7 @@ public:
     antlr4::tree::TerminalNode *LPAREN();
     Param_listContext *param_list();
     antlr4::tree::TerminalNode *RPAREN();
-    BlockContext *block();
+    Func_blockContext *func_block();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -190,6 +193,36 @@ public:
   };
 
   Func_declContext* func_decl();
+
+  class  Func_blockContext : public antlr4::ParserRuleContext {
+  public:
+    Func_blockContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *LBRACE();
+    Func_var_declarationsContext *func_var_declarations();
+    StatementsContext *statements();
+    antlr4::tree::TerminalNode *RBRACE();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  Func_blockContext* func_block();
+
+  class  Func_var_declarationsContext : public antlr4::ParserRuleContext {
+  public:
+    Func_var_declarationsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<Var_declContext *> var_decl();
+    Var_declContext* var_decl(size_t i);
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  Func_var_declarationsContext* func_var_declarations();
 
   class  Param_listContext : public antlr4::ParserRuleContext {
   public:
@@ -260,7 +293,6 @@ public:
     LoopContext *loop();
     ConditionContext *condition();
     Function_callContext *function_call();
-    Var_declContext *var_decl();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
