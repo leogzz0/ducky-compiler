@@ -22,9 +22,7 @@ void DuckyCustomListener::exitVar_decl(duckyParser::Var_declContext *ctx) {
     std::string dataType = ctx->data_type()->getText();
     for (auto id : ctx->var_list()->ID()) {
         std::string varName = id->getText();
-        if (functionDirectory.currentFunctionHasParameter(varName)) {
-            errorHandler.reportError("Variable '" + varName + "' is already declared as a parameter in this function.");
-        } else if (variableTable.exists(varName)) {
+        if (variableTable.exists(varName)) {
             errorHandler.reportError("Variable '" + varName + "' is already declared in this scope.");
         } else {
             variableTable.addVariable(varName, dataType);
@@ -33,18 +31,23 @@ void DuckyCustomListener::exitVar_decl(duckyParser::Var_declContext *ctx) {
     }
 }
 
+
 //************************************** FUNCTIONS **************************************//
 // funciton declaration entry and exit
 void DuckyCustomListener::enterFunc_decl(duckyParser::Func_declContext *ctx) {
     std::string functionName = ctx->ID()->getText();
     std::vector<std::string> paramTypes;
+    variableTable.enterScope();
     for (auto param : ctx->param_list()->param()) {
+        std::string paramName = param->ID()->getText();
         std::string paramType = param->data_type()->getText();
         paramTypes.push_back(paramType);
+        variableTable.addVariable(paramName, paramType);
+        variableTable.setInitialized(paramName);
     }
-    functionDirectory.addFunction(functionName, paramTypes);  // add the function without parameters initially
-    variableTable.enterScope();  // enter function scope for parameters
+    functionDirectory.addFunction(functionName, paramTypes);
 }
+
 
 void DuckyCustomListener::exitFunc_decl(duckyParser::Func_declContext *ctx) {
     variableTable.exitScope();  // exit function scope

@@ -1,0 +1,67 @@
+program mainTest;
+
+var a, b, c : int;
+var x, y, z : float;
+
+function initializeVariables() {
+    a = 10;
+    b = 5;
+    c = 0;
+    x = 3.14;
+    y = 2.5;
+    z = -1.0;
+}
+
+function compareValues() {
+    if (a > b) {
+        print("a is greater than b:", a);
+    } else {
+        print("a is not greater than b");
+    }
+
+    if (x < y) {
+        print("x is less than y:", x);
+    } else {
+        print("x is not less than y");
+    }
+}
+
+function countdown(start : int) {
+    print("Countdown from", start);
+    while (start > 0) {
+        print("Counting:", start);
+        start = start - 1;
+    }
+    print("Countdown complete!");
+}
+
+function performCalculations(param1 : int, param2 : float) {
+    var temp : int;
+    temp = param1 + a;
+    print("Sum of param1 and a:", temp);
+
+    a = temp * param1;
+    b = param1 - 5;
+    x = param2 * y;
+    z = param2 / x;
+
+    print("Updated a:", a);
+    print("Updated x:", x);
+    print("Updated z:", z);
+}
+
+function printSummary(var1 : int, var2 : float) {
+    print("Summary of inputs:");
+    print("Integer value:", var1);
+    print("Float value:", var2);
+}
+
+main() {
+    initializeVariables();
+    compareValues();
+    countdown(3);
+    performCalculations(6, 8.5);
+    printSummary(a, x);
+}
+
+end

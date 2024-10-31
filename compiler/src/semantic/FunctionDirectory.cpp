@@ -40,11 +40,3 @@ void FunctionDirectory::setReturnType(const std::string &funcName, const std::st
 void FunctionDirectory::setCurrentFunction(const std::string &funcName) {
     currentFunction = funcName;
 }
-
-bool FunctionDirectory::currentFunctionHasParameter(const std::string &paramName) const {
-    if (!currentFunction.empty() && functions.count(currentFunction)) {
-        const auto &params = functions.at(currentFunction).paramTypes;
-        return std::find(params.begin(), params.end(), paramName) != params.end();
-    }
-    return false;
-}

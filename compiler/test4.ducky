@@ -20,8 +20,8 @@ function testingParameters(param1 : int, param2 : float) {
 	print(param1, param2);
 	var newVariable : int;
 	newVariable = 4;
-    x = newVariable * param1;
-    z = - 6;
+    a = newVariable * param1;
+    b = - 6;
 	print(x);
 }
 

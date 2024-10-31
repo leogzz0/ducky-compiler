@@ -8,6 +8,7 @@
 #include "../include/semantic/SemanticCube.h"
 #include "../include/semantic/VariableTable.h"
 #include "../include/semantic/ErrorHandler.h"
+#include "../include/utils/Utils.h"
 
 using namespace antlr4;
 
@@ -55,17 +56,27 @@ int main(int argc, const char *argv[]) {
 
     // export the parse tree in .dot format for graphical visualization (optional)
     std::ofstream out("tree.dot");
-    int nodeCounter = 1;
-    out << "digraph G {" << std::endl;
+        int nodeCounter = 1;
+        out << "digraph G {" << std::endl;
 
-    // lambda function to write nodes in .dot format
-    std::function<void(tree::ParseTree *, int)> writeNode = [&](tree::ParseTree *node, int nodeId) {
-        std::string label = node->getText();
-        out << "  node" << nodeId << " [label=\"" << label << "\"];" << std::endl;
-        for (size_t i = 0; i < node->children.size(); i++) {
-            int childId = ++nodeCounter;
-            out << "  node" << nodeId << " -> node" << childId << ";" << std::endl;
-            writeNode(node->children[i], childId);
+        // lambda function to write nodes in .dot format
+        std::function<void(tree::ParseTree *, int)> writeNode = [&](tree::ParseTree *node, int nodeId) {
+        // Check if the node is a terminal or a rule
+        if (node->children.empty()) {
+            // Terminal node (token)
+            std::string label = Utils::escapeQuotes(node->getText());
+            out << "  node" << nodeId << " [label=\"" << label << "\"];" << std::endl;
+        } else {
+            // Non-terminal node (rule)
+            std::string label = Utils::sanitizeIdentifier(node->getText());
+            out << "  node" << nodeId << " [label=\"" << label << "\"];" << std::endl;
+
+            // Process each child node
+            for (size_t i = 0; i < node->children.size(); i++) {
+                int childId = ++nodeCounter;
+                out << "  node" << nodeId << " -> node" << childId << ";" << std::endl;
+                writeNode(node->children[i], childId); // Recursive call for each child
+            }
         }
     };
 
