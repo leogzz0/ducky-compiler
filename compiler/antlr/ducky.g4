@@ -1,7 +1,5 @@
 grammar ducky;
 
-c
-
 /* Parser Rules */
 
 program
