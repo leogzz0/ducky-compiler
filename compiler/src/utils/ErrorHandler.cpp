@@ -1,6 +1,6 @@
 // ErrorHandler.cpp
 
-#include "../../include/semantic/ErrorHandler.h"
+#include "../../include/utils/ErrorHandler.h"
 
 // reports an error message and stores it in the error list
 void ErrorHandler::reportError(const std::string &message) {

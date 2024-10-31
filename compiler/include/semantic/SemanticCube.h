@@ -1,6 +1,6 @@
 // SemanticCube.h
 
-#include "../../include/semantic/ErrorHandler.h"
+#include "../../include/utils/ErrorHandler.h"
 
 #ifndef SEMANTIC_CUBE_H
 #define SEMANTIC_CUBE_H

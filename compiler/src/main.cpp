@@ -7,7 +7,7 @@
 #include "../include/semantic/FunctionDirectory.h"
 #include "../include/semantic/SemanticCube.h"
 #include "../include/semantic/VariableTable.h"
-#include "../include/semantic/ErrorHandler.h"
+#include "../include/utils/ErrorHandler.h"
 #include "../include/utils/Utils.h"
 
 using namespace antlr4;
