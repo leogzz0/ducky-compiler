@@ -1,5 +1,5 @@
 digraph G {
-  node1 [label="programtest4;vara,b,c:int;varx,y,z:float;functestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}functestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}funcfunctionExample(var3:int,var4:float){print(var3,var4);}main(){testingCube();testingParameters(3,7.4);functionExample(3,2.3);}end"];
+  node1 [label="programtest4;vara,b,c:int;varx,y,z:float;functiontestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}functiontestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}functionfunctionExample(var3:int,var4:float){print(var3,var4);}main(){testingCube();testingParameters(3,7.4);functionExample(3,2.3);}end"];
   node1 -> node2;
   node2 [label="program"];
   node1 -> node3;
@@ -57,11 +57,11 @@ digraph G {
   node18 -> node29;
   node29 [label=";"];
   node1 -> node30;
-  node30 [label="functestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}functestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}funcfunctionExample(var3:int,var4:float){print(var3,var4);}"];
+  node30 [label="functiontestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}functiontestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}functionfunctionExample(var3:int,var4:float){print(var3,var4);}"];
   node30 -> node31;
-  node31 [label="functestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}"];
+  node31 [label="functiontestingCube(){a=5;b=7;if(a>b){print(a);}while(a>b){print(a);a=a-1;}}"];
   node31 -> node32;
-  node32 [label="func"];
+  node32 [label="function"];
   node31 -> node33;
   node33 [label="testingCube"];
   node31 -> node34;
@@ -287,9 +287,9 @@ digraph G {
   node37 -> node144;
   node144 [label="}"];
   node30 -> node145;
-  node145 [label="functestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}"];
+  node145 [label="functiontestingParameters(param1:int,param2:float){print(param1,param2);varnewVariable:int;newVariable=4;x=newVariable*param1;z=-6;print(x);}"];
   node145 -> node146;
-  node146 [label="func"];
+  node146 [label="function"];
   node145 -> node147;
   node147 [label="testingParameters"];
   node145 -> node148;
@@ -485,9 +485,9 @@ digraph G {
   node162 -> node243;
   node243 [label="}"];
   node30 -> node244;
-  node244 [label="funcfunctionExample(var3:int,var4:float){print(var3,var4);}"];
+  node244 [label="functionfunctionExample(var3:int,var4:float){print(var3,var4);}"];
   node244 -> node245;
-  node245 [label="func"];
+  node245 [label="function"];
   node244 -> node246;
   node246 [label="functionExample"];
   node244 -> node247;

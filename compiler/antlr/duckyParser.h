@@ -83,13 +83,13 @@ public:
     antlr4::tree::TerminalNode *MAIN_FUNC();
     antlr4::tree::TerminalNode *ID();
     antlr4::tree::TerminalNode *SEMI();
+    Var_declarationsContext *var_declarations();
+    Func_declarationsContext *func_declarations();
     antlr4::tree::TerminalNode *MAIN_BLOCK();
     antlr4::tree::TerminalNode *LPAREN();
     antlr4::tree::TerminalNode *RPAREN();
     BlockContext *block();
     antlr4::tree::TerminalNode *END_BLOCK();
-    Var_declarationsContext *var_declarations();
-    Func_declarationsContext *func_declarations();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

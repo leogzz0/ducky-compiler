@@ -74,79 +74,77 @@ void duckyParserInitialize() {
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,33,233,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
+  	4,1,33,229,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
   	7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,
   	14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,
   	21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,1,0,1,0,1,0,1,0,
-  	3,0,59,8,0,1,0,3,0,62,8,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,4,1,71,8,1,11,1,
-  	12,1,72,1,2,1,2,1,2,1,2,1,2,1,2,1,3,1,3,1,3,5,3,84,8,3,10,3,12,3,87,9,
-  	3,1,4,1,4,1,5,5,5,92,8,5,10,5,12,5,95,9,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,
-  	1,7,1,7,1,7,5,7,107,8,7,10,7,12,7,110,9,7,1,7,3,7,113,8,7,1,8,1,8,1,8,
-  	1,8,1,9,1,9,1,9,1,9,1,10,4,10,124,8,10,11,10,12,10,125,1,11,1,11,1,11,
-  	1,11,1,11,1,11,3,11,134,8,11,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,
-  	1,13,1,13,1,13,1,14,1,14,1,14,5,14,150,8,14,10,14,12,14,153,9,14,1,15,
-  	1,15,3,15,157,8,15,1,16,1,16,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,
-  	1,17,1,17,1,17,1,18,1,18,1,18,3,18,175,8,18,1,19,1,19,1,19,1,19,1,19,
-  	1,19,1,20,1,20,1,20,5,20,186,8,20,10,20,12,20,189,9,20,1,20,3,20,192,
-  	8,20,1,21,1,21,1,21,1,21,3,21,198,8,21,1,22,1,22,1,23,1,23,1,23,5,23,
-  	205,8,23,10,23,12,23,208,9,23,1,24,1,24,1,24,5,24,213,8,24,10,24,12,24,
-  	216,9,24,1,25,3,25,219,8,25,1,25,1,25,3,25,223,8,25,1,25,1,25,1,25,1,
-  	25,3,25,229,8,25,1,26,1,26,1,26,0,0,27,0,2,4,6,8,10,12,14,16,18,20,22,
-  	24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,0,5,1,0,5,6,1,0,24,27,1,
-  	0,20,21,1,0,22,23,1,0,29,30,229,0,54,1,0,0,0,2,70,1,0,0,0,4,74,1,0,0,
-  	0,6,80,1,0,0,0,8,88,1,0,0,0,10,93,1,0,0,0,12,96,1,0,0,0,14,112,1,0,0,
-  	0,16,114,1,0,0,0,18,118,1,0,0,0,20,123,1,0,0,0,22,133,1,0,0,0,24,135,
-  	1,0,0,0,26,140,1,0,0,0,28,146,1,0,0,0,30,156,1,0,0,0,32,158,1,0,0,0,34,
-  	164,1,0,0,0,36,174,1,0,0,0,38,176,1,0,0,0,40,191,1,0,0,0,42,193,1,0,0,
-  	0,44,199,1,0,0,0,46,201,1,0,0,0,48,209,1,0,0,0,50,228,1,0,0,0,52,230,
-  	1,0,0,0,54,55,5,1,0,0,55,56,5,28,0,0,56,58,5,13,0,0,57,59,3,2,1,0,58,
-  	57,1,0,0,0,58,59,1,0,0,0,59,61,1,0,0,0,60,62,3,10,5,0,61,60,1,0,0,0,61,
-  	62,1,0,0,0,62,63,1,0,0,0,63,64,5,3,0,0,64,65,5,16,0,0,65,66,5,17,0,0,
-  	66,67,3,18,9,0,67,68,5,4,0,0,68,1,1,0,0,0,69,71,3,4,2,0,70,69,1,0,0,0,
-  	71,72,1,0,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,3,1,0,0,0,74,75,5,2,0,0,
-  	75,76,3,6,3,0,76,77,5,14,0,0,77,78,3,8,4,0,78,79,5,13,0,0,79,5,1,0,0,
-  	0,80,85,5,28,0,0,81,82,5,15,0,0,82,84,5,28,0,0,83,81,1,0,0,0,84,87,1,
-  	0,0,0,85,83,1,0,0,0,85,86,1,0,0,0,86,7,1,0,0,0,87,85,1,0,0,0,88,89,7,
-  	0,0,0,89,9,1,0,0,0,90,92,3,12,6,0,91,90,1,0,0,0,92,95,1,0,0,0,93,91,1,
-  	0,0,0,93,94,1,0,0,0,94,11,1,0,0,0,95,93,1,0,0,0,96,97,5,11,0,0,97,98,
-  	5,28,0,0,98,99,5,16,0,0,99,100,3,14,7,0,100,101,5,17,0,0,101,102,3,18,
-  	9,0,102,13,1,0,0,0,103,108,3,16,8,0,104,105,5,15,0,0,105,107,3,16,8,0,
-  	106,104,1,0,0,0,107,110,1,0,0,0,108,106,1,0,0,0,108,109,1,0,0,0,109,113,
-  	1,0,0,0,110,108,1,0,0,0,111,113,1,0,0,0,112,103,1,0,0,0,112,111,1,0,0,
-  	0,113,15,1,0,0,0,114,115,5,28,0,0,115,116,5,14,0,0,116,117,3,8,4,0,117,
-  	17,1,0,0,0,118,119,5,18,0,0,119,120,3,20,10,0,120,121,5,19,0,0,121,19,
-  	1,0,0,0,122,124,3,22,11,0,123,122,1,0,0,0,124,125,1,0,0,0,125,123,1,0,
-  	0,0,125,126,1,0,0,0,126,21,1,0,0,0,127,134,3,24,12,0,128,134,3,26,13,
-  	0,129,134,3,32,16,0,130,134,3,34,17,0,131,134,3,38,19,0,132,134,3,4,2,
-  	0,133,127,1,0,0,0,133,128,1,0,0,0,133,129,1,0,0,0,133,130,1,0,0,0,133,
-  	131,1,0,0,0,133,132,1,0,0,0,134,23,1,0,0,0,135,136,5,28,0,0,136,137,5,
-  	12,0,0,137,138,3,42,21,0,138,139,5,13,0,0,139,25,1,0,0,0,140,141,5,7,
-  	0,0,141,142,5,16,0,0,142,143,3,28,14,0,143,144,5,17,0,0,144,145,5,13,
-  	0,0,145,27,1,0,0,0,146,151,3,30,15,0,147,148,5,15,0,0,148,150,3,30,15,
-  	0,149,147,1,0,0,0,150,153,1,0,0,0,151,149,1,0,0,0,151,152,1,0,0,0,152,
-  	29,1,0,0,0,153,151,1,0,0,0,154,157,3,42,21,0,155,157,5,31,0,0,156,154,
-  	1,0,0,0,156,155,1,0,0,0,157,31,1,0,0,0,158,159,5,8,0,0,159,160,5,16,0,
-  	0,160,161,3,42,21,0,161,162,5,17,0,0,162,163,3,18,9,0,163,33,1,0,0,0,
-  	164,165,5,9,0,0,165,166,5,16,0,0,166,167,3,42,21,0,167,168,5,17,0,0,168,
-  	169,3,18,9,0,169,170,3,36,18,0,170,35,1,0,0,0,171,172,5,10,0,0,172,175,
-  	3,18,9,0,173,175,1,0,0,0,174,171,1,0,0,0,174,173,1,0,0,0,175,37,1,0,0,
-  	0,176,177,5,28,0,0,177,178,5,16,0,0,178,179,3,40,20,0,179,180,5,17,0,
-  	0,180,181,5,13,0,0,181,39,1,0,0,0,182,187,3,42,21,0,183,184,5,15,0,0,
-  	184,186,3,42,21,0,185,183,1,0,0,0,186,189,1,0,0,0,187,185,1,0,0,0,187,
-  	188,1,0,0,0,188,192,1,0,0,0,189,187,1,0,0,0,190,192,1,0,0,0,191,182,1,
-  	0,0,0,191,190,1,0,0,0,192,41,1,0,0,0,193,197,3,46,23,0,194,195,3,44,22,
-  	0,195,196,3,46,23,0,196,198,1,0,0,0,197,194,1,0,0,0,197,198,1,0,0,0,198,
-  	43,1,0,0,0,199,200,7,1,0,0,200,45,1,0,0,0,201,206,3,48,24,0,202,203,7,
-  	2,0,0,203,205,3,48,24,0,204,202,1,0,0,0,205,208,1,0,0,0,206,204,1,0,0,
-  	0,206,207,1,0,0,0,207,47,1,0,0,0,208,206,1,0,0,0,209,214,3,50,25,0,210,
-  	211,7,3,0,0,211,213,3,50,25,0,212,210,1,0,0,0,213,216,1,0,0,0,214,212,
-  	1,0,0,0,214,215,1,0,0,0,215,49,1,0,0,0,216,214,1,0,0,0,217,219,7,2,0,
-  	0,218,217,1,0,0,0,218,219,1,0,0,0,219,222,1,0,0,0,220,223,3,52,26,0,221,
-  	223,5,28,0,0,222,220,1,0,0,0,222,221,1,0,0,0,223,229,1,0,0,0,224,225,
-  	5,16,0,0,225,226,3,42,21,0,226,227,5,17,0,0,227,229,1,0,0,0,228,218,1,
-  	0,0,0,228,224,1,0,0,0,229,51,1,0,0,0,230,231,7,4,0,0,231,53,1,0,0,0,20,
-  	58,61,72,85,93,108,112,125,133,151,156,174,187,191,197,206,214,218,222,
-  	228
+  	1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,4,1,67,8,1,11,1,12,1,68,1,2,1,2,1,2,1,
+  	2,1,2,1,2,1,3,1,3,1,3,5,3,80,8,3,10,3,12,3,83,9,3,1,4,1,4,1,5,5,5,88,
+  	8,5,10,5,12,5,91,9,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,5,7,103,
+  	8,7,10,7,12,7,106,9,7,1,7,3,7,109,8,7,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,
+  	1,10,4,10,120,8,10,11,10,12,10,121,1,11,1,11,1,11,1,11,1,11,1,11,3,11,
+  	130,8,11,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,13,1,14,
+  	1,14,1,14,5,14,146,8,14,10,14,12,14,149,9,14,1,15,1,15,3,15,153,8,15,
+  	1,16,1,16,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,18,
+  	1,18,1,18,3,18,171,8,18,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,1,20,
+  	5,20,182,8,20,10,20,12,20,185,9,20,1,20,3,20,188,8,20,1,21,1,21,1,21,
+  	1,21,3,21,194,8,21,1,22,1,22,1,23,1,23,1,23,5,23,201,8,23,10,23,12,23,
+  	204,9,23,1,24,1,24,1,24,5,24,209,8,24,10,24,12,24,212,9,24,1,25,3,25,
+  	215,8,25,1,25,1,25,3,25,219,8,25,1,25,1,25,1,25,1,25,3,25,225,8,25,1,
+  	26,1,26,1,26,0,0,27,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,
+  	36,38,40,42,44,46,48,50,52,0,5,1,0,5,6,1,0,24,27,1,0,20,21,1,0,22,23,
+  	1,0,29,30,223,0,54,1,0,0,0,2,66,1,0,0,0,4,70,1,0,0,0,6,76,1,0,0,0,8,84,
+  	1,0,0,0,10,89,1,0,0,0,12,92,1,0,0,0,14,108,1,0,0,0,16,110,1,0,0,0,18,
+  	114,1,0,0,0,20,119,1,0,0,0,22,129,1,0,0,0,24,131,1,0,0,0,26,136,1,0,0,
+  	0,28,142,1,0,0,0,30,152,1,0,0,0,32,154,1,0,0,0,34,160,1,0,0,0,36,170,
+  	1,0,0,0,38,172,1,0,0,0,40,187,1,0,0,0,42,189,1,0,0,0,44,195,1,0,0,0,46,
+  	197,1,0,0,0,48,205,1,0,0,0,50,224,1,0,0,0,52,226,1,0,0,0,54,55,5,1,0,
+  	0,55,56,5,28,0,0,56,57,5,13,0,0,57,58,3,2,1,0,58,59,3,10,5,0,59,60,5,
+  	3,0,0,60,61,5,16,0,0,61,62,5,17,0,0,62,63,3,18,9,0,63,64,5,4,0,0,64,1,
+  	1,0,0,0,65,67,3,4,2,0,66,65,1,0,0,0,67,68,1,0,0,0,68,66,1,0,0,0,68,69,
+  	1,0,0,0,69,3,1,0,0,0,70,71,5,2,0,0,71,72,3,6,3,0,72,73,5,14,0,0,73,74,
+  	3,8,4,0,74,75,5,13,0,0,75,5,1,0,0,0,76,81,5,28,0,0,77,78,5,15,0,0,78,
+  	80,5,28,0,0,79,77,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,0,0,0,82,
+  	7,1,0,0,0,83,81,1,0,0,0,84,85,7,0,0,0,85,9,1,0,0,0,86,88,3,12,6,0,87,
+  	86,1,0,0,0,88,91,1,0,0,0,89,87,1,0,0,0,89,90,1,0,0,0,90,11,1,0,0,0,91,
+  	89,1,0,0,0,92,93,5,11,0,0,93,94,5,28,0,0,94,95,5,16,0,0,95,96,3,14,7,
+  	0,96,97,5,17,0,0,97,98,3,18,9,0,98,13,1,0,0,0,99,104,3,16,8,0,100,101,
+  	5,15,0,0,101,103,3,16,8,0,102,100,1,0,0,0,103,106,1,0,0,0,104,102,1,0,
+  	0,0,104,105,1,0,0,0,105,109,1,0,0,0,106,104,1,0,0,0,107,109,1,0,0,0,108,
+  	99,1,0,0,0,108,107,1,0,0,0,109,15,1,0,0,0,110,111,5,28,0,0,111,112,5,
+  	14,0,0,112,113,3,8,4,0,113,17,1,0,0,0,114,115,5,18,0,0,115,116,3,20,10,
+  	0,116,117,5,19,0,0,117,19,1,0,0,0,118,120,3,22,11,0,119,118,1,0,0,0,120,
+  	121,1,0,0,0,121,119,1,0,0,0,121,122,1,0,0,0,122,21,1,0,0,0,123,130,3,
+  	24,12,0,124,130,3,26,13,0,125,130,3,32,16,0,126,130,3,34,17,0,127,130,
+  	3,38,19,0,128,130,3,4,2,0,129,123,1,0,0,0,129,124,1,0,0,0,129,125,1,0,
+  	0,0,129,126,1,0,0,0,129,127,1,0,0,0,129,128,1,0,0,0,130,23,1,0,0,0,131,
+  	132,5,28,0,0,132,133,5,12,0,0,133,134,3,42,21,0,134,135,5,13,0,0,135,
+  	25,1,0,0,0,136,137,5,7,0,0,137,138,5,16,0,0,138,139,3,28,14,0,139,140,
+  	5,17,0,0,140,141,5,13,0,0,141,27,1,0,0,0,142,147,3,30,15,0,143,144,5,
+  	15,0,0,144,146,3,30,15,0,145,143,1,0,0,0,146,149,1,0,0,0,147,145,1,0,
+  	0,0,147,148,1,0,0,0,148,29,1,0,0,0,149,147,1,0,0,0,150,153,3,42,21,0,
+  	151,153,5,31,0,0,152,150,1,0,0,0,152,151,1,0,0,0,153,31,1,0,0,0,154,155,
+  	5,8,0,0,155,156,5,16,0,0,156,157,3,42,21,0,157,158,5,17,0,0,158,159,3,
+  	18,9,0,159,33,1,0,0,0,160,161,5,9,0,0,161,162,5,16,0,0,162,163,3,42,21,
+  	0,163,164,5,17,0,0,164,165,3,18,9,0,165,166,3,36,18,0,166,35,1,0,0,0,
+  	167,168,5,10,0,0,168,171,3,18,9,0,169,171,1,0,0,0,170,167,1,0,0,0,170,
+  	169,1,0,0,0,171,37,1,0,0,0,172,173,5,28,0,0,173,174,5,16,0,0,174,175,
+  	3,40,20,0,175,176,5,17,0,0,176,177,5,13,0,0,177,39,1,0,0,0,178,183,3,
+  	42,21,0,179,180,5,15,0,0,180,182,3,42,21,0,181,179,1,0,0,0,182,185,1,
+  	0,0,0,183,181,1,0,0,0,183,184,1,0,0,0,184,188,1,0,0,0,185,183,1,0,0,0,
+  	186,188,1,0,0,0,187,178,1,0,0,0,187,186,1,0,0,0,188,41,1,0,0,0,189,193,
+  	3,46,23,0,190,191,3,44,22,0,191,192,3,46,23,0,192,194,1,0,0,0,193,190,
+  	1,0,0,0,193,194,1,0,0,0,194,43,1,0,0,0,195,196,7,1,0,0,196,45,1,0,0,0,
+  	197,202,3,48,24,0,198,199,7,2,0,0,199,201,3,48,24,0,200,198,1,0,0,0,201,
+  	204,1,0,0,0,202,200,1,0,0,0,202,203,1,0,0,0,203,47,1,0,0,0,204,202,1,
+  	0,0,0,205,210,3,50,25,0,206,207,7,3,0,0,207,209,3,50,25,0,208,206,1,0,
+  	0,0,209,212,1,0,0,0,210,208,1,0,0,0,210,211,1,0,0,0,211,49,1,0,0,0,212,
+  	210,1,0,0,0,213,215,7,2,0,0,214,213,1,0,0,0,214,215,1,0,0,0,215,218,1,
+  	0,0,0,216,219,3,52,26,0,217,219,5,28,0,0,218,216,1,0,0,0,218,217,1,0,
+  	0,0,219,225,1,0,0,0,220,221,5,16,0,0,221,222,3,42,21,0,222,223,5,17,0,
+  	0,223,225,1,0,0,0,224,214,1,0,0,0,224,220,1,0,0,0,225,51,1,0,0,0,226,
+  	227,7,4,0,0,227,53,1,0,0,0,18,68,81,89,104,108,121,129,147,152,170,183,
+  	187,193,202,210,214,218,224
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -213,6 +211,14 @@ tree::TerminalNode* duckyParser::ProgramContext::SEMI() {
   return getToken(duckyParser::SEMI, 0);
 }
 
+duckyParser::Var_declarationsContext* duckyParser::ProgramContext::var_declarations() {
+  return getRuleContext<duckyParser::Var_declarationsContext>(0);
+}
+
+duckyParser::Func_declarationsContext* duckyParser::ProgramContext::func_declarations() {
+  return getRuleContext<duckyParser::Func_declarationsContext>(0);
+}
+
 tree::TerminalNode* duckyParser::ProgramContext::MAIN_BLOCK() {
   return getToken(duckyParser::MAIN_BLOCK, 0);
 }
@@ -231,14 +237,6 @@ duckyParser::BlockContext* duckyParser::ProgramContext::block() {
 
 tree::TerminalNode* duckyParser::ProgramContext::END_BLOCK() {
   return getToken(duckyParser::END_BLOCK, 0);
-}
-
-duckyParser::Var_declarationsContext* duckyParser::ProgramContext::var_declarations() {
-  return getRuleContext<duckyParser::Var_declarationsContext>(0);
-}
-
-duckyParser::Func_declarationsContext* duckyParser::ProgramContext::func_declarations() {
-  return getRuleContext<duckyParser::Func_declarationsContext>(0);
 }
 
 
@@ -261,7 +259,6 @@ void duckyParser::ProgramContext::exitRule(tree::ParseTreeListener *listener) {
 duckyParser::ProgramContext* duckyParser::program() {
   ProgramContext *_localctx = _tracker.createInstance<ProgramContext>(_ctx, getState());
   enterRule(_localctx, 0, duckyParser::RuleProgram);
-  size_t _la = 0;
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -278,36 +275,19 @@ duckyParser::ProgramContext* duckyParser::program() {
     match(duckyParser::ID);
     setState(56);
     match(duckyParser::SEMI);
+    setState(57);
+    var_declarations();
     setState(58);
-    _errHandler->sync(this);
-
-    _la = _input->LA(1);
-    if (_la == duckyParser::VARS) {
-      setState(57);
-      var_declarations();
-    }
-    setState(61);
-    _errHandler->sync(this);
-
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx)) {
-    case 1: {
-      setState(60);
-      func_declarations();
-      break;
-    }
-
-    default:
-      break;
-    }
-    setState(63);
+    func_declarations();
+    setState(59);
     match(duckyParser::MAIN_BLOCK);
-    setState(64);
+    setState(60);
     match(duckyParser::LPAREN);
-    setState(65);
+    setState(61);
     match(duckyParser::RPAREN);
-    setState(66);
+    setState(62);
     block();
-    setState(67);
+    setState(63);
     match(duckyParser::END_BLOCK);
    
   }
@@ -365,13 +345,13 @@ duckyParser::Var_declarationsContext* duckyParser::var_declarations() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(70); 
+    setState(66); 
     _errHandler->sync(this);
     _la = _input->LA(1);
     do {
-      setState(69);
+      setState(65);
       var_decl();
-      setState(72); 
+      setState(68); 
       _errHandler->sync(this);
       _la = _input->LA(1);
     } while (_la == duckyParser::VARS);
@@ -442,15 +422,15 @@ duckyParser::Var_declContext* duckyParser::var_decl() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(74);
+    setState(70);
     match(duckyParser::VARS);
-    setState(75);
+    setState(71);
     var_list();
-    setState(76);
+    setState(72);
     match(duckyParser::COLON);
-    setState(77);
+    setState(73);
     data_type();
-    setState(78);
+    setState(74);
     match(duckyParser::SEMI);
    
   }
@@ -516,17 +496,17 @@ duckyParser::Var_listContext* duckyParser::var_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(80);
+    setState(76);
     match(duckyParser::ID);
-    setState(85);
+    setState(81);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::COMMA) {
-      setState(81);
+      setState(77);
       match(duckyParser::COMMA);
-      setState(82);
+      setState(78);
       match(duckyParser::ID);
-      setState(87);
+      setState(83);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -586,7 +566,7 @@ duckyParser::Data_typeContext* duckyParser::data_type() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(88);
+    setState(84);
     _la = _input->LA(1);
     if (!(_la == duckyParser::INTEGER_TYPE
 
@@ -653,13 +633,13 @@ duckyParser::Func_declarationsContext* duckyParser::func_declarations() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(93);
+    setState(89);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::FUNCTION) {
-      setState(90);
+      setState(86);
       func_decl();
-      setState(95);
+      setState(91);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -734,17 +714,17 @@ duckyParser::Func_declContext* duckyParser::func_decl() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(96);
+    setState(92);
     match(duckyParser::FUNCTION);
-    setState(97);
+    setState(93);
     match(duckyParser::ID);
-    setState(98);
+    setState(94);
     match(duckyParser::LPAREN);
-    setState(99);
+    setState(95);
     param_list();
-    setState(100);
+    setState(96);
     match(duckyParser::RPAREN);
-    setState(101);
+    setState(97);
     block();
    
   }
@@ -809,22 +789,22 @@ duckyParser::Param_listContext* duckyParser::param_list() {
     exitRule();
   });
   try {
-    setState(112);
+    setState(108);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::ID: {
         enterOuterAlt(_localctx, 1);
-        setState(103);
+        setState(99);
         param();
-        setState(108);
+        setState(104);
         _errHandler->sync(this);
         _la = _input->LA(1);
         while (_la == duckyParser::COMMA) {
-          setState(104);
+          setState(100);
           match(duckyParser::COMMA);
-          setState(105);
+          setState(101);
           param();
-          setState(110);
+          setState(106);
           _errHandler->sync(this);
           _la = _input->LA(1);
         }
@@ -899,11 +879,11 @@ duckyParser::ParamContext* duckyParser::param() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(114);
+    setState(110);
     match(duckyParser::ID);
-    setState(115);
+    setState(111);
     match(duckyParser::COLON);
-    setState(116);
+    setState(112);
     data_type();
    
   }
@@ -964,11 +944,11 @@ duckyParser::BlockContext* duckyParser::block() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(118);
+    setState(114);
     match(duckyParser::LBRACE);
-    setState(119);
+    setState(115);
     statements();
-    setState(120);
+    setState(116);
     match(duckyParser::RBRACE);
    
   }
@@ -1026,13 +1006,13 @@ duckyParser::StatementsContext* duckyParser::statements() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(123); 
+    setState(119); 
     _errHandler->sync(this);
     _la = _input->LA(1);
     do {
-      setState(122);
+      setState(118);
       statement();
-      setState(125); 
+      setState(121); 
       _errHandler->sync(this);
       _la = _input->LA(1);
     } while ((((_la & ~ 0x3fULL) == 0) &&
@@ -1107,47 +1087,47 @@ duckyParser::StatementContext* duckyParser::statement() {
     exitRule();
   });
   try {
-    setState(133);
+    setState(129);
     _errHandler->sync(this);
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx)) {
     case 1: {
       enterOuterAlt(_localctx, 1);
-      setState(127);
+      setState(123);
       assignment();
       break;
     }
 
     case 2: {
       enterOuterAlt(_localctx, 2);
-      setState(128);
+      setState(124);
       print();
       break;
     }
 
     case 3: {
       enterOuterAlt(_localctx, 3);
-      setState(129);
+      setState(125);
       loop();
       break;
     }
 
     case 4: {
       enterOuterAlt(_localctx, 4);
-      setState(130);
+      setState(126);
       condition();
       break;
     }
 
     case 5: {
       enterOuterAlt(_localctx, 5);
-      setState(131);
+      setState(127);
       function_call();
       break;
     }
 
     case 6: {
       enterOuterAlt(_localctx, 6);
-      setState(132);
+      setState(128);
       var_decl();
       break;
     }
@@ -1218,13 +1198,13 @@ duckyParser::AssignmentContext* duckyParser::assignment() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(135);
+    setState(131);
     match(duckyParser::ID);
-    setState(136);
+    setState(132);
     match(duckyParser::ASSIGN);
-    setState(137);
+    setState(133);
     expression();
-    setState(138);
+    setState(134);
     match(duckyParser::SEMI);
    
   }
@@ -1293,15 +1273,15 @@ duckyParser::PrintContext* duckyParser::print() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(140);
+    setState(136);
     match(duckyParser::PRINT);
-    setState(141);
+    setState(137);
     match(duckyParser::LPAREN);
-    setState(142);
+    setState(138);
     print_list();
-    setState(143);
+    setState(139);
     match(duckyParser::RPAREN);
-    setState(144);
+    setState(140);
     match(duckyParser::SEMI);
    
   }
@@ -1367,17 +1347,17 @@ duckyParser::Print_listContext* duckyParser::print_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(146);
+    setState(142);
     print_item();
-    setState(151);
+    setState(147);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::COMMA) {
-      setState(147);
+      setState(143);
       match(duckyParser::COMMA);
-      setState(148);
+      setState(144);
       print_item();
-      setState(153);
+      setState(149);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -1435,7 +1415,7 @@ duckyParser::Print_itemContext* duckyParser::print_item() {
     exitRule();
   });
   try {
-    setState(156);
+    setState(152);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::LPAREN:
@@ -1445,14 +1425,14 @@ duckyParser::Print_itemContext* duckyParser::print_item() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(154);
+        setState(150);
         expression();
         break;
       }
 
       case duckyParser::STRING_LITERAL: {
         enterOuterAlt(_localctx, 2);
-        setState(155);
+        setState(151);
         match(duckyParser::STRING_LITERAL);
         break;
       }
@@ -1527,15 +1507,15 @@ duckyParser::LoopContext* duckyParser::loop() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(158);
+    setState(154);
     match(duckyParser::WHILE);
-    setState(159);
+    setState(155);
     match(duckyParser::LPAREN);
-    setState(160);
+    setState(156);
     expression();
-    setState(161);
+    setState(157);
     match(duckyParser::RPAREN);
-    setState(162);
+    setState(158);
     block();
    
   }
@@ -1608,17 +1588,17 @@ duckyParser::ConditionContext* duckyParser::condition() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(164);
+    setState(160);
     match(duckyParser::IF);
-    setState(165);
+    setState(161);
     match(duckyParser::LPAREN);
-    setState(166);
+    setState(162);
     expression();
-    setState(167);
+    setState(163);
     match(duckyParser::RPAREN);
-    setState(168);
+    setState(164);
     block();
-    setState(169);
+    setState(165);
     else_block();
    
   }
@@ -1674,14 +1654,14 @@ duckyParser::Else_blockContext* duckyParser::else_block() {
     exitRule();
   });
   try {
-    setState(174);
+    setState(170);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::ELSE: {
         enterOuterAlt(_localctx, 1);
-        setState(171);
+        setState(167);
         match(duckyParser::ELSE);
-        setState(172);
+        setState(168);
         block();
         break;
       }
@@ -1767,15 +1747,15 @@ duckyParser::Function_callContext* duckyParser::function_call() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(176);
+    setState(172);
     match(duckyParser::ID);
-    setState(177);
+    setState(173);
     match(duckyParser::LPAREN);
-    setState(178);
+    setState(174);
     arg_list();
-    setState(179);
+    setState(175);
     match(duckyParser::RPAREN);
-    setState(180);
+    setState(176);
     match(duckyParser::SEMI);
    
   }
@@ -1840,7 +1820,7 @@ duckyParser::Arg_listContext* duckyParser::arg_list() {
     exitRule();
   });
   try {
-    setState(191);
+    setState(187);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::LPAREN:
@@ -1850,17 +1830,17 @@ duckyParser::Arg_listContext* duckyParser::arg_list() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(182);
+        setState(178);
         expression();
-        setState(187);
+        setState(183);
         _errHandler->sync(this);
         _la = _input->LA(1);
         while (_la == duckyParser::COMMA) {
-          setState(183);
+          setState(179);
           match(duckyParser::COMMA);
-          setState(184);
+          setState(180);
           expression();
-          setState(189);
+          setState(185);
           _errHandler->sync(this);
           _la = _input->LA(1);
         }
@@ -1936,17 +1916,17 @@ duckyParser::ExpressionContext* duckyParser::expression() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(193);
+    setState(189);
     exp();
-    setState(197);
+    setState(193);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if ((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & 251658240) != 0)) {
-      setState(194);
+      setState(190);
       comparison_operator();
-      setState(195);
+      setState(191);
       exp();
     }
    
@@ -2013,7 +1993,7 @@ duckyParser::Comparison_operatorContext* duckyParser::comparison_operator() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(199);
+    setState(195);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & 251658240) != 0))) {
@@ -2095,15 +2075,15 @@ duckyParser::ExpContext* duckyParser::exp() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(201);
+    setState(197);
     term();
-    setState(206);
+    setState(202);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::PLUS
 
     || _la == duckyParser::MINUS) {
-      setState(202);
+      setState(198);
       _la = _input->LA(1);
       if (!(_la == duckyParser::PLUS
 
@@ -2114,9 +2094,9 @@ duckyParser::ExpContext* duckyParser::exp() {
         _errHandler->reportMatch(this);
         consume();
       }
-      setState(203);
+      setState(199);
       term();
-      setState(208);
+      setState(204);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -2192,15 +2172,15 @@ duckyParser::TermContext* duckyParser::term() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(209);
+    setState(205);
     factor();
-    setState(214);
+    setState(210);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == duckyParser::MULT
 
     || _la == duckyParser::DIV) {
-      setState(210);
+      setState(206);
       _la = _input->LA(1);
       if (!(_la == duckyParser::MULT
 
@@ -2211,9 +2191,9 @@ duckyParser::TermContext* duckyParser::term() {
         _errHandler->reportMatch(this);
         consume();
       }
-      setState(211);
+      setState(207);
       factor();
-      setState(216);
+      setState(212);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -2292,7 +2272,7 @@ duckyParser::FactorContext* duckyParser::factor() {
     exitRule();
   });
   try {
-    setState(228);
+    setState(224);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case duckyParser::PLUS:
@@ -2301,14 +2281,14 @@ duckyParser::FactorContext* duckyParser::factor() {
       case duckyParser::INTEGER_CONSTANT:
       case duckyParser::FLOAT_CONSTANT: {
         enterOuterAlt(_localctx, 1);
-        setState(218);
+        setState(214);
         _errHandler->sync(this);
 
         _la = _input->LA(1);
         if (_la == duckyParser::PLUS
 
         || _la == duckyParser::MINUS) {
-          setState(217);
+          setState(213);
           _la = _input->LA(1);
           if (!(_la == duckyParser::PLUS
 
@@ -2320,18 +2300,18 @@ duckyParser::FactorContext* duckyParser::factor() {
             consume();
           }
         }
-        setState(222);
+        setState(218);
         _errHandler->sync(this);
         switch (_input->LA(1)) {
           case duckyParser::INTEGER_CONSTANT:
           case duckyParser::FLOAT_CONSTANT: {
-            setState(220);
+            setState(216);
             constant();
             break;
           }
 
           case duckyParser::ID: {
-            setState(221);
+            setState(217);
             match(duckyParser::ID);
             break;
           }
@@ -2344,11 +2324,11 @@ duckyParser::FactorContext* duckyParser::factor() {
 
       case duckyParser::LPAREN: {
         enterOuterAlt(_localctx, 2);
-        setState(224);
+        setState(220);
         match(duckyParser::LPAREN);
-        setState(225);
+        setState(221);
         expression();
-        setState(226);
+        setState(222);
         match(duckyParser::RPAREN);
         break;
       }
@@ -2412,7 +2392,7 @@ duckyParser::ConstantContext* duckyParser::constant() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(230);
+    setState(226);
     _la = _input->LA(1);
     if (!(_la == duckyParser::INTEGER_CONSTANT
 

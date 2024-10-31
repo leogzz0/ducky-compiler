@@ -3,7 +3,7 @@ program test4;
 var a, b, c : int;
 var x, y, z : float;
 
-func testingCube() {
+function testingCube() {
 	a = 5;
 	b = 7;
     if (a > b) {
@@ -16,7 +16,7 @@ func testingCube() {
     }
 }
 
-func testingParameters(param1 : int, param2 : float) {
+function testingParameters(param1 : int, param2 : float) {
 	print(param1, param2);
 	var newVariable : int;
 	newVariable = 4;
@@ -25,7 +25,7 @@ func testingParameters(param1 : int, param2 : float) {
 	print(x);
 }
 
-func functionExample(var3 : int, var4: float) {
+function functionExample(var3 : int, var4: float) {
     print(var3, var4);
 }
 
