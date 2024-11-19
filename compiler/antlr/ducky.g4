@@ -28,6 +28,7 @@ GREATER_THAN : '>';
 LESS_THAN    : '<';
 NOT_EQUAL    : '!=';
 EQUAL        : '==';
+
 ID
     : [a-zA-Z][a-zA-Z0-9_]*
     ;
@@ -48,13 +49,12 @@ COMMENT
     ;
 
 /* Parser Rules */
-
 program
-    : MAIN_FUNC ID SEMI var_declarations func_declarations MAIN_BLOCK LPAREN RPAREN block END_BLOCK
+    : MAIN_FUNC ID SEMI var_declarations? func_declarations MAIN_BLOCK LPAREN RPAREN block END_BLOCK
     ;
 
 var_declarations
-    : (var_decl)+
+    : var_decl*
     ;
 
 var_decl
@@ -79,11 +79,7 @@ func_decl
     ;
 
 func_block
-    : LBRACE func_var_declarations statements RBRACE
-    ;
-
-func_var_declarations
-    : (var_decl)*
+    : LBRACE var_declarations? statements RBRACE
     ;
 
 param_list
@@ -170,8 +166,8 @@ term
     ;
 
 factor
-    : (PLUS | MINUS)? (constant | ID)
-    | LPAREN expression RPAREN
+    : LPAREN expression RPAREN
+    | (PLUS | MINUS)? (constant | ID)
     ;
 
 constant

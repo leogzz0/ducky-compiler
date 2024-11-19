@@ -40,9 +40,6 @@ public:
   virtual void enterFunc_block(duckyParser::Func_blockContext * /*ctx*/) override { }
   virtual void exitFunc_block(duckyParser::Func_blockContext * /*ctx*/) override { }
 
-  virtual void enterFunc_var_declarations(duckyParser::Func_var_declarationsContext * /*ctx*/) override { }
-  virtual void exitFunc_var_declarations(duckyParser::Func_var_declarationsContext * /*ctx*/) override { }
-
   virtual void enterParam_list(duckyParser::Param_listContext * /*ctx*/) override { }
   virtual void exitParam_list(duckyParser::Param_listContext * /*ctx*/) override { }
 

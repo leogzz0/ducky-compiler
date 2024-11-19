@@ -14,8 +14,8 @@ function uno(j : int) {
 
 function dos(i : int, j : int) {
 	var x, y : int;
-	x = i+j;
-	if (x > j*k) {
+	x = i + j;
+	if (x > j * k) {
 		print(x);
 	} else {
 		print(x);
@@ -23,9 +23,9 @@ function dos(i : int, j : int) {
 }
 
 main() {
-	//read(k);
-	i=5; j=i*2+1;
-	dos(j-i, j);
+	i = 5; 
+	j = i * 2 + 1;
+	uno(j);
 }
 
 end
