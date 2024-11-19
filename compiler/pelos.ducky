@@ -1,0 +1,31 @@
+program pelos;
+
+var i, j, k : int;
+
+function uno(j : int) {
+	var i : int;
+	i = j + (k - j * 2 + j);
+	if (k > 0) {
+		print(i);
+	} else {
+		print(i + k);
+	}
+}
+
+function dos(i : int, j : int) {
+	var x, y : int;
+	x = i+j;
+	if (x > j*k) {
+		print(x);
+	} else {
+		print(x);
+	}
+}
+
+main() {
+	//read(k);
+	i=5; j=i*2+1;
+	dos(j-i, j);
+}
+
+end

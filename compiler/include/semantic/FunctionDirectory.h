@@ -1,29 +1,45 @@
-// FunctionDirectory.h
-
-#ifndef FUNCTIONDIRECTORY_H
-#define FUNCTIONDIRECTORY_H
-
+// include/FunctionDirectory.h
+#pragma once
+#include "VariableTable.h"
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <vector>
+#include <memory>
 
-class FunctionDirectory {
-	public:
-		bool exists(const std::string &funcName) const;
-		void addFunction(const std::string &funcName, const std::vector<std::string> &paramTypes);
-		std::vector<std::string> getParamTypes(const std::string &funcName) const;
-		std::string getReturnType(const std::string &funcName) const;
-		void setReturnType(const std::string &funcName, const std::string &returnType);
-		void setCurrentFunction(const std::string &funcName);
-
-	private:
-		struct FunctionInfo {
-			std::vector<std::string> paramTypes;
-			std::string returnType;
-		};
-
-		std::unordered_map<std::string, FunctionInfo> functions;
-		std::string currentFunction;
+struct Parameter {
+    std::string name;
+    VarType type;
 };
 
-#endif // FUNCTIONDIRECTORY_H
+struct Function {
+    std::string name;
+    VarType returnType;
+    std::vector<Parameter> parameters;
+    int startQuad;          // Starting quadruple index
+    VariableTable localVars;
+    int functionId;         // Unique identifier for the function
+};
+
+class FunctionDirectory {
+public:
+    FunctionDirectory();
+    
+    // Core functions
+    bool addFunction(const std::string& name, VarType returnType);
+    bool functionExists(const std::string& name) const;
+    Function* getFunction(const std::string& name);
+    
+    // Parameter handling
+    void addParameter(const std::string& funcName, const std::string& paramName, VarType type);
+    bool validateParameters(const std::string& funcName, const std::vector<VarType>& paramTypes);
+    int getParameterCount(const std::string& funcName) const;
+    
+    // Utility functions
+    void setStartQuad(const std::string& funcName, int quad);
+    int getFunctionId(const std::string& funcName) const;
+    void printDirectory() const;
+
+private:
+    std::map<std::string, Function> functions;
+    int nextFunctionId;  // For generating unique function IDs
+};

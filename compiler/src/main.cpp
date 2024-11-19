@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "../antlr/duckyLexer.h"
 #include "../antlr/duckyParser.h"
@@ -7,86 +8,59 @@
 #include "../include/semantic/FunctionDirectory.h"
 #include "../include/semantic/SemanticCube.h"
 #include "../include/semantic/VariableTable.h"
-#include "../include/utils/ErrorHandler.h"
-#include "../include/utils/Utils.h"
 
-using namespace antlr4;
-
-int main(int argc, const char *argv[]) {
-    // check if an input file was provided
-    if (argc < 2) {
-        std::cerr << "Please provide an input file as an argument." << std::endl;
+int main(int argc, char* argv[]) {
+    // Check if filename is provided
+    if (argc != 2) {
+        std::cout << "Usage: " << argv[0] << " <filename.ducky>" << std::endl;
         return 1;
     }
 
-    // open the input file
-    std::ifstream inputFile(argv[1]);
-    if (!inputFile.is_open()) {
-        std::cerr << "Error: Could not open the file: " << argv[1] << std::endl;
+    // Read the input file
+    std::ifstream file;
+    file.open(argv[1]);
+    if (!file.is_open()) {
+        std::cout << "Could not open file: " << argv[1] << std::endl;
         return 1;
     }
 
-    // create the ANTLR input stream from the file
-    ANTLRInputStream input(inputFile);
-    duckyLexer lexer(&input);             // init the lexer
-    CommonTokenStream tokens(&lexer);     // create the token stream
-    duckyParser parser(&tokens);          // init the parser
+    // Read file into string
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    std::string content = buffer.str();
+    file.close();
 
-    // parse the file to get the parse tree
-    tree::ParseTree *tree = parser.program();
+    try {
+        // Create the input stream
+        antlr4::ANTLRInputStream input(content);
+        
+        // Create lexer
+        duckyLexer lexer(&input);
+        antlr4::CommonTokenStream tokens(&lexer);
+        
+        // Create parser
+        duckyParser parser(&tokens);
+        
+        // Parse the input
+        antlr4::tree::ParseTree* tree = parser.program();
 
-    // init dependencies for semantic analysis
-    VariableTable variableTable;
-    ErrorHandler errorHandler;
-    FunctionDirectory functionDirectory;
-    SemanticCube semanticCube(errorHandler);
-
-    // create an instance of the custom listener
-    DuckyCustomListener listener(variableTable, errorHandler, functionDirectory, semanticCube);
-
-    // create a parse tree walker and walk the tree with the listener
-    tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
-
-    if (errorHandler.hasErrors()) {
-        std::cerr << "\nErrors found during compilation:\n";
-        errorHandler.printErrors();
-    } else {
-        std::cout << "Compilation successful, no semantic errors found." << std::endl;
-    }
-
-    // export the parse tree in .dot format for graphical visualization (optional)
-    std::ofstream out("tree.dot");
-        int nodeCounter = 1;
-        out << "digraph G {" << std::endl;
-
-        // lambda function to write nodes in .dot format
-        std::function<void(tree::ParseTree *, int)> writeNode = [&](tree::ParseTree *node, int nodeId) {
-        // Check if the node is a terminal or a rule
-        if (node->children.empty()) {
-            // Terminal node (token)
-            std::string label = Utils::escapeQuotes(node->getText());
-            out << "  node" << nodeId << " [label=\"" << label << "\"];" << std::endl;
-        } else {
-            // Non-terminal node (rule)
-            std::string label = Utils::sanitizeIdentifier(node->getText());
-            out << "  node" << nodeId << " [label=\"" << label << "\"];" << std::endl;
-
-            // Process each child node
-            for (size_t i = 0; i < node->children.size(); i++) {
-                int childId = ++nodeCounter;
-                out << "  node" << nodeId << " -> node" << childId << ";" << std::endl;
-                writeNode(node->children[i], childId); // Recursive call for each child
-            }
+        if (parser.getNumberOfSyntaxErrors() > 0) {
+            std::cout << "Syntax errors found!" << std::endl;
+            return 1;
         }
-    };
 
-    // start writing from the root node
-    writeNode(tree, 1);
+        // Create and use custom listener
+        DuckyCustomListener listener;
+        antlr4::tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
 
-    // end with the .dot file
-    out << "}" << std::endl;
-    out.close();
-    std::cout << "Parse tree exported to 'tree.dot'." << std::endl;
+        // Print compilation results
+        std::cout << "\n=== Compilation Results for " << argv[1] << " ===" << std::endl;
+        listener.printTables();
+
+    } catch (const std::exception& e) {
+        std::cout << "Error: " << e.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }

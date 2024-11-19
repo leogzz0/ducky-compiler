@@ -3,15 +3,6 @@ program mainTest;
 var a, b, c : int;
 var x, y, z : float;
 
-function initializeVariables() {
-    a = 10;
-    b = 5;
-    c = 0;
-    x = 3.14;
-    y = 2.5;
-    z = -1.0;
-}
-
 function compareValues() {
     if (a > b) {
         print("a is greater than b:", a);
@@ -57,7 +48,12 @@ function printSummary(var1 : int, var2 : float) {
 }
 
 main() {
-    initializeVariables();
+    a = 10;
+    b = 5;
+    c = 0;
+    x = 3.14;
+    y = 2.5;
+    z = -1.0;
     compareValues();
     countdown(3);
     performCalculations(6, 8.5);

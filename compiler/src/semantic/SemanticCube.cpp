@@ -1,67 +1,79 @@
 #include "../../include/semantic/SemanticCube.h"
+#include <stdexcept>
 
-// constructor to initialize the semantic cube with type compatibilities
-SemanticCube::SemanticCube(ErrorHandler &errorHandler) : errorHandler(errorHandler) {
-    // int operations
-    cube["int"]["int"]["+"] = "int";
-    cube["int"]["int"]["-"] = "int";
-    cube["int"]["int"]["*"] = "int";
-    cube["int"]["int"]["/"] = "int";
-    cube["int"]["int"]["="] = "int";
-    cube["int"]["int"]["=="] = "bool";
-    cube["int"]["int"]["!="] = "bool";
-    cube["int"]["int"]["<"] = "bool";
-    cube["int"]["int"][">"] = "bool";
-
-    // float operations
-    cube["float"]["float"]["+"] = "float";
-    cube["float"]["float"]["-"] = "float";
-    cube["float"]["float"]["*"] = "float";
-    cube["float"]["float"]["/"] = "float";
-    cube["float"]["float"]["="] = "float";
-    cube["float"]["float"]["=="] = "bool";
-    cube["float"]["float"]["!="] = "bool";
-    cube["float"]["float"]["<"] = "bool";
-    cube["float"]["float"][">"] = "bool";
-
-    // mixed operations: `int` with `float`
-    cube["int"]["float"]["+"] = "float";
-    cube["int"]["float"]["-"] = "float";
-    cube["int"]["float"]["*"] = "float";
-    cube["int"]["float"]["/"] = "float";
-    cube["float"]["int"]["+"] = "float";
-    cube["float"]["int"]["-"] = "float";
-    cube["float"]["int"]["*"] = "float";
-    cube["float"]["int"]["/"] = "float";
-
-    // mixed comparisons: `int` with `float`
-    cube["int"]["float"]["=="] = "bool";
-    cube["int"]["float"]["!="] = "bool";
-    cube["int"]["float"]["<"] = "bool";
-    cube["int"]["float"][">"] = "bool";
-    cube["float"]["int"]["=="] = "bool";
-    cube["float"]["int"]["!="] = "bool";
-    cube["float"]["int"]["<"] = "bool";
-    cube["float"]["int"][">"] = "bool";
-
-    cube["float"]["int"]["="] = "error";
-    cube["int"]["float"]["="] = "error";
+SemanticCube::SemanticCube() {
+    initializeRules();
 }
 
-// method to retrieve the result type for a given operation between two types
-std::string SemanticCube::getResultType(const std::string &type1, const std::string &type2, const std::string &operation) const {
-    if (cube.count(type1) && cube.at(type1).count(type2) && cube.at(type1).at(type2).count(operation)) {
-        std::string result = cube.at(type1).at(type2).at(operation);
+void SemanticCube::initializeRules() {
+    // Arithmetic operations: INT op INT = INT
+    typeRules[std::make_tuple(VarType::INT, VarType::INT, Operation::PLUS)] = VarType::INT;
+    typeRules[std::make_tuple(VarType::INT, VarType::INT, Operation::MINUS)] = VarType::INT;
+    typeRules[std::make_tuple(VarType::INT, VarType::INT, Operation::MULT)] = VarType::INT;
+    typeRules[std::make_tuple(VarType::INT, VarType::INT, Operation::DIV)] = VarType::FLOAT; // Division always returns float
 
-        if (operation == "=" && type1 == "int" && type2 == "float") {
-            errorHandler.reportError("Warning: Implicit conversion from 'float' to 'int' may lose precision.");
-        }
+    // INT op FLOAT = FLOAT
+    typeRules[std::make_tuple(VarType::INT, VarType::FLOAT, Operation::PLUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::INT, VarType::FLOAT, Operation::MINUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::INT, VarType::FLOAT, Operation::MULT)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::INT, VarType::FLOAT, Operation::DIV)] = VarType::FLOAT;
 
-        if (result == "error") {
-            errorHandler.reportError("Incompatible types for operation '" + operation + "' between '" + type1 + "' and '" + type2 + "'");
+    // FLOAT op INT = FLOAT
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::INT, Operation::PLUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::INT, Operation::MINUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::INT, Operation::MULT)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::INT, Operation::DIV)] = VarType::FLOAT;
+
+    // FLOAT op FLOAT = FLOAT
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::FLOAT, Operation::PLUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::FLOAT, Operation::MINUS)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::FLOAT, Operation::MULT)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::FLOAT, Operation::DIV)] = VarType::FLOAT;
+
+    // Comparison operations always return INT (as boolean)
+    for (VarType t1 : {VarType::INT, VarType::FLOAT}) {
+        for (VarType t2 : {VarType::INT, VarType::FLOAT}) {
+            typeRules[std::make_tuple(t1, t2, Operation::GREATER_THAN)] = VarType::INT;
+            typeRules[std::make_tuple(t1, t2, Operation::LESS_THAN)] = VarType::INT;
+            typeRules[std::make_tuple(t1, t2, Operation::EQUAL)] = VarType::INT;
+            typeRules[std::make_tuple(t1, t2, Operation::NOT_EQUAL)] = VarType::INT;
         }
-        return result;
     }
-    errorHandler.reportError("Operation '" + operation + "' is undefined for types '" + type1 + "' and '" + type2 + "'");
-    return "error";
+
+    // Assignment rules
+    typeRules[std::make_tuple(VarType::INT, VarType::INT, Operation::ASSIGN)] = VarType::INT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::FLOAT, Operation::ASSIGN)] = VarType::FLOAT;
+    typeRules[std::make_tuple(VarType::FLOAT, VarType::INT, Operation::ASSIGN)] = VarType::FLOAT;
+    // Note: INT = FLOAT is not allowed to prevent loss of precision
+}
+
+VarType SemanticCube::getResultType(VarType left, VarType right, Operation op) {
+    auto key = std::make_tuple(left, right, op);
+    auto it = typeRules.find(key);
+    
+    if (it == typeRules.end()) {
+        throw std::runtime_error("Invalid operation between types: " + operationToString(op));
+    }
+    
+    return it->second;
+}
+
+bool SemanticCube::isValidOperation(VarType left, VarType right, Operation op) {
+    auto key = std::make_tuple(left, right, op);
+    return typeRules.find(key) != typeRules.end();
+}
+
+std::string SemanticCube::operationToString(Operation op) {
+    switch (op) {
+        case Operation::PLUS: return "PLUS";
+        case Operation::MINUS: return "MINUS";
+        case Operation::MULT: return "MULTIPLY";
+        case Operation::DIV: return "DIVIDE";
+        case Operation::GREATER_THAN: return "GREATER THAN";
+        case Operation::LESS_THAN: return "LESS THAN";
+        case Operation::EQUAL: return "EQUAL";
+        case Operation::NOT_EQUAL: return "NOT EQUAL";
+        case Operation::ASSIGN: return "ASSIGN";
+        default: return "UNKNOWN";
+    }
 }

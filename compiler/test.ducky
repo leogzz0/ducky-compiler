@@ -1,21 +1,18 @@
-program myProgram;
+program test;
 
-vars {
-  x, y : int;
-  z : float;
+var x, y : int;
+
+function sum(a : int, b : int) {
+    a = a + b;
+    print("Sum is:", a);
 }
 
-function myFunc(a : int, x : float) {
-  // x = a + b;
-  print("The result is", x);
-}
+main() {
+    x = 5;
+    y = 3;
 
-main {
-  x = -5;
-  y = 10;
-  while (x < y) do {
-    x = -x * 1;
-  }
+    sum(3, 6);
+    sum(x, y);
 }
 
 end
