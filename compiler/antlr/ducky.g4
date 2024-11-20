@@ -39,8 +39,9 @@ FLOAT_CONSTANT
     : [0-9]+ '.' [0-9]+
     ;
 STRING_LITERAL
-    : '"' ~["\r\n]* '"'
+    : '"' ('\\' . | ~["\\\r\n])* '"'
     ;
+
 WS
     : [ \t\r\n]+ -> skip
     ;

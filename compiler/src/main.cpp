@@ -8,59 +8,59 @@
 #include "../include/semantic/FunctionDirectory.h"
 #include "../include/semantic/SemanticCube.h"
 #include "../include/semantic/VariableTable.h"
+#include "../include/memory/VirtualMemory.h"
+
+void printQuadruple(const std::tuple<std::string, int, int, int>& quad) {
+    std::cout << "(" << std::get<0>(quad) << ", " << std::get<1>(quad) << ", " << std::get<2>(quad) << ", " << std::get<3>(quad) << ")\n";
+}
 
 int main(int argc, char* argv[]) {
-    // Check if filename is provided
     if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " <filename.ducky>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <input_file>\n";
         return 1;
     }
-
-    // Read the input file
-    std::ifstream file;
-    file.open(argv[1]);
-    if (!file.is_open()) {
-        std::cout << "Could not open file: " << argv[1] << std::endl;
-        return 1;
-    }
-
-    // Read file into string
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    std::string content = buffer.str();
-    file.close();
 
     try {
-        // Create the input stream
-        antlr4::ANTLRInputStream input(content);
-        
-        // Create lexer
+        // Read input file
+        std::ifstream stream;
+        stream.open(argv[1]);
+        if (!stream.is_open()) {
+            throw std::runtime_error("Could not open input file: " + std::string(argv[1]));
+        }
+
+        // Create lexer and parser
+        antlr4::ANTLRInputStream input(stream);
         duckyLexer lexer(&input);
         antlr4::CommonTokenStream tokens(&lexer);
-        
-        // Create parser
         duckyParser parser(&tokens);
+
+        // Create and register custom listener
+        DuckyCustomListener listener(true);
+
+        parser.addParseListener(&listener);
         
-        // Parse the input
+        // Parse and traverse
         antlr4::tree::ParseTree* tree = parser.program();
 
         if (parser.getNumberOfSyntaxErrors() > 0) {
-            std::cout << "Syntax errors found!" << std::endl;
-            return 1;
+            throw std::runtime_error("Syntax errors found during parsing");
         }
 
-        // Create and use custom listener
-        DuckyCustomListener listener;
-        antlr4::tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
+        // Print generated quadruples
+        std::cout << "\nGenerated Quadruples:\n";
+        const auto& quadruples = listener.getQuadruples();
+        for (size_t i = 0; i < quadruples.size(); ++i) {
+            std::cout << i << ": ";
+            printQuadruple(quadruples[i]);
+        }
 
-        // Print compilation results
-        std::cout << "\n=== Compilation Results for " << argv[1] << " ===" << std::endl;
-        listener.printTables();
+        // Print memory state
+        listener.getMemoryManager().printMemory();
+
+        return 0;
 
     } catch (const std::exception& e) {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << "\n";
         return 1;
     }
-
-    return 0;
 }

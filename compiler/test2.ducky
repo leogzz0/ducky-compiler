@@ -1,14 +1,17 @@
-program FunctionTest;
+program test1;
 
-function myFunc(x : int, y : float) {
-  print("Function called");
-}
+var x, y : int;
 
-main {
-  // error: expecting 2 parameters, got 1
-  myFunc(10);
-  // error: funciton not declared
-  unknownFunc(5, 2);
-}
+main() {
+    x = 5;
+    y = 10;
+    if (x < y) {
+        print("x is less than y");
+        print(x);
+    } else {
+        print("x is not less than y"); 
+        print(y);
+    }
+} 
 
 end

@@ -1,16 +1,11 @@
-program TestProgram;
+program test;
 
-vars {
-  a, b : int;
-  // error: duplicated variable
-  a : float;
-  c : int;
-}
+var x, y : int;
 
-main {
-  a = 5;
-  // error: "c" is not declared
-  b = a + c;
+main() {
+    x = 5;
+    y = x + 10;
+    print(y);
 }
 
 end
