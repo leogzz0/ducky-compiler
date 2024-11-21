@@ -1,5 +1,3 @@
-// FunctionDirectory.h
-
 #ifndef FUNCTION_DIRECTORY_H
 #define FUNCTION_DIRECTORY_H
 
@@ -21,39 +19,39 @@ struct FunctionInfo {
 
 class FunctionDirectory {
 public:
-    // add a new function to the directory
-    bool addFunction(const std::string &name, Type returnType);
+    // Register a new function in the directory
+    bool registerFunction(const std::string &name, Type returnType);
 
-    // get function information by name
-    FunctionInfo *getFunctionInfo(const std::string &name);
+    // Fetch function information by name
+    FunctionInfo *fetchFunctionInfo(const std::string &name);
 
-    // access the entire function directory
-    std::unordered_map<std::string, FunctionInfo> *getFunctionDirectory();
+    // Access the entire function directory
+    std::unordered_map<std::string, FunctionInfo> *accessAllFunctions();
 
-    // get or set the current function context
-    FunctionInfo *getCurrentFunction();
-    void setCurrentFunction(FunctionInfo *function);
+    // Get or set the current function context
+    FunctionInfo *getActiveFunction();
+    void setActiveFunction(FunctionInfo *function);
 
-    // main function management
-    void setMainFunction(FunctionInfo *function);
-    FunctionInfo *getMainFunction();
+    // Main function management
+    void assignMainFunction(FunctionInfo *function);
+    FunctionInfo *retrieveMainFunction();
 
-    // modify the current function
-    void setStartAddressToCurFunc(int startAddress);
-    bool addParameterToCurFunc(const std::string &name, Type type, int memoryAddress);
-    bool addVariableToCurFunc(const std::string &name, Type type, int memoryAddress);
+    // Modify the current function
+    void assignStartAddressToActiveFunction(int startAddress);
+    bool addParameterToActiveFunction(const std::string &name, Type type, int memoryAddress);
+    bool addLocalVariableToActiveFunction(const std::string &name, Type type, int memoryAddress);
 
-    // variable scope management
-    VariableInfo *getVarInfoFuncScope(const std::string &name);
-    VariableInfo *getVarInFuncOrGlobalScope(const std::string &name);
+    // Variable scope management
+    VariableInfo *lookupVariableInFunctionScope(const std::string &name);
+    VariableInfo *lookupVariableInAnyScope(const std::string &name);
 
-    // check if the current scope is global
-    bool isGlobalScope();
+    // Check if the current scope is global
+    bool checkIfGlobalScope();
 
 private:
-    FunctionInfo *mainFunction = nullptr;        // pointer to the main function
-    FunctionInfo *currentFunction = nullptr;     // pointer to the currently active function
-    std::unordered_map<std::string, FunctionInfo> directory; // map of all functions
+    FunctionInfo *mainFunction = nullptr;        // Pointer to the main function
+    FunctionInfo *currentFunction = nullptr;     // Pointer to the currently active function
+    std::unordered_map<std::string, FunctionInfo> directory; // Map of all functions
 };
 
 #endif // FUNCTION_DIRECTORY_H

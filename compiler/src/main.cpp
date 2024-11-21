@@ -26,7 +26,7 @@ void printQuadruplesAsAddresses(const std::vector<Quadruple> &quadruples) {
 }
 
 void genOutputObjFile(DuckyCustomVisitor &visitor) {
-    std::string programName = visitor.functionDirectory.getMainFunction()->name;
+    std::string programName = visitor.functionDirectory.retrieveMainFunction()->name;
     std::ofstream out("./output/" + programName + ".obj");
     if (!out.is_open()) {
         std::cerr << "Could not open output file." << std::endl;
@@ -49,11 +49,11 @@ void genOutputObjFile(DuckyCustomVisitor &visitor) {
     // Write the function directory to the output file
     out << std::endl << "# Function Directory" << std::endl;
     out << "FUNCTIONS" << std::endl;
-    auto *functionDirectory = visitor.functionDirectory.getFunctionDirectory();
+    auto *functionDirectory = visitor.functionDirectory.accessAllFunctions();
     for (const auto &function : *functionDirectory) {
         const FunctionInfo &funcInfo = function.second;
         int localIntBase = 3000, localFloatBase = 4000;
-        if (funcInfo.name == visitor.functionDirectory.getMainFunction()->name) {
+        if (funcInfo.name == visitor.functionDirectory.retrieveMainFunction()->name) {
             localIntBase = 1000;
             localFloatBase = 2000;
         }

@@ -58,8 +58,8 @@ void DuckyCustomVisitor::generateQuadruple(const std::string &op, const std::str
 }
 
 int DuckyCustomVisitor::getAddress(const std::string &var, Type type) {
-    if (functionDirectory.getVarInFuncOrGlobalScope(var) != nullptr) {
-        return functionDirectory.getVarInFuncOrGlobalScope(var)->memoryAddress;
+    if (functionDirectory.lookupVariableInAnyScope(var) != nullptr) {
+        return functionDirectory.lookupVariableInAnyScope(var)->memoryAddress;
     }
     if (virtualMemory.findConstant(type, var) != -1) {
         return virtualMemory.findConstant(type, var);
@@ -74,8 +74,8 @@ antlrcpp::Any DuckyCustomVisitor::visitProgram(duckyParser::ProgramContext *ctx)
     std::string programName = ctx->ID()->getText();
 
     // Add the program to the function directory as a main function
-    functionDirectory.addFunction(programName, FUNCTION);
-    functionDirectory.setMainFunction(functionDirectory.getCurrentFunction());
+    functionDirectory.registerFunction(programName, FUNCTION);
+    functionDirectory.assignMainFunction(functionDirectory.getActiveFunction());
 
     // Generate GOTO quadruple for jumping to the main function
     jumpStack.push(quadruples.size());
@@ -96,8 +96,8 @@ antlrcpp::Any DuckyCustomVisitor::visitProgram(duckyParser::ProgramContext *ctx)
     }
 
     // Set main function details and update GOTO quadruple
-    functionDirectory.setCurrentFunction(functionDirectory.getMainFunction());
-    functionDirectory.setStartAddressToCurFunc(quadruples.size());
+    functionDirectory.setActiveFunction(functionDirectory.retrieveMainFunction());
+    functionDirectory.assignStartAddressToActiveFunction(quadruples.size());
     int startAddress = jumpStack.top();
     jumpStack.pop();
     quadruples[startAddress].result = {"", static_cast<int>(quadruples.size())};
@@ -129,7 +129,7 @@ antlrcpp::Any DuckyCustomVisitor::visitVar_decl(duckyParser::Var_declContext *ct
     Type varType = semanticCube.getTypeFromString(ctx->data_type()->getText());
     
     // Check if the variables declared are in the global or local scope
-    bool isGlobal = functionDirectory.isGlobalScope();
+    bool isGlobal = functionDirectory.checkIfGlobalScope();
 
     // Iterate over all the variables declared in the var_list
     for (auto id : ctx->var_list()->ID()) {
@@ -143,7 +143,7 @@ antlrcpp::Any DuckyCustomVisitor::visitVar_decl(duckyParser::Var_declContext *ct
         handleMemoryAllocationError(address, ctx->getStart());
         
         // Add the variable to the current function's variable table
-        functionDirectory.addVariableToCurFunc(varName, varType, address);
+        functionDirectory.addLocalVariableToActiveFunction(varName, varType, address);
     }
 
     return nullptr;
@@ -159,7 +159,7 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
     Type returnType = FUNCTION;
 
     // Add the function to the function directory
-    if (!functionDirectory.addFunction(functionName, returnType)) {
+    if (!functionDirectory.registerFunction(functionName, returnType)) {
         int line = ctx->getStart()->getLine();
         int column = ctx->getStart()->getCharPositionInLine();
         std::cerr << "Function " << functionName << " already declared. Line: " << line << ", Column: " << column << std::endl;
@@ -167,7 +167,7 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
     }
 
     // Set the starting address of the function
-    functionDirectory.setStartAddressToCurFunc(quadruples.size());
+    functionDirectory.assignStartAddressToActiveFunction(quadruples.size());
 
     // Process parameters
     int parameterIndex = 0;
@@ -180,7 +180,7 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
             int memoryAddress = (paramType == INT) ? virtualMemory.allocateLocalInt() : virtualMemory.allocateLocalFloat();
 
             // Add parameter to the function's local variables
-            if (!functionDirectory.addVariableToCurFunc(paramName, paramType, memoryAddress)) {
+            if (!functionDirectory.addLocalVariableToActiveFunction(paramName, paramType, memoryAddress)) {
                 int line = param->getStart()->getLine();
                 int column = param->getStart()->getCharPositionInLine();
                 std::cerr << "Parameter " << paramName << " already declared in function " << functionName << ". Line: " << line << ", Column: " << column << std::endl;
@@ -188,10 +188,10 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
             }
 
             // Update the parameter table for the function
-            functionDirectory.getCurrentFunction()->parametersTable.push_back({paramName, paramType, memoryAddress});
+            functionDirectory.getActiveFunction()->parametersTable.push_back({paramName, paramType, memoryAddress});
             parameterIndex++;
         }
-        functionDirectory.getCurrentFunction()->numParams = parameterIndex;
+        functionDirectory.getActiveFunction()->numParams = parameterIndex;
     }
 
     // Process variable declarations inside the function
@@ -238,7 +238,7 @@ antlrcpp::Any DuckyCustomVisitor::visitParam(duckyParser::ParamContext *ctx) {
     handleMemoryAllocationError(address, ctx->getStart());
 
     // Add the parameter to the function's parameter table
-    functionDirectory.addParameterToCurFunc(paramName, paramType, address);
+    functionDirectory.addParameterToActiveFunction(paramName, paramType, address);
 
     return nullptr;
 }
@@ -268,7 +268,7 @@ antlrcpp::Any DuckyCustomVisitor::visitAssignment(duckyParser::AssignmentContext
     std::string varName = ctx->ID()->getText();
 
     // Retrieve the variable information from the function directory
-    VariableInfo *varInfo = functionDirectory.getVarInFuncOrGlobalScope(varName);
+    VariableInfo *varInfo = functionDirectory.lookupVariableInAnyScope(varName);
 
     // If the variable is not found, handle the error
     if (varInfo == nullptr) {
@@ -349,11 +349,11 @@ antlrcpp::Any DuckyCustomVisitor::visitExpression(duckyParser::ExpressionContext
         std::string tempResult = createTempVar();
 
         // Allocate memory for the temporary variable
-        int address = allocateMemory(resultType, functionDirectory.isGlobalScope());
+        int address = allocateMemory(resultType, functionDirectory.checkIfGlobalScope());
         handleMemoryAllocationError(address, ctx->getStart());
 
         // Add the temporary variable to the function's variable table
-        functionDirectory.addVariableToCurFunc(tempResult, resultType, address);
+        functionDirectory.addLocalVariableToActiveFunction(tempResult, resultType, address);
 
         // Generate a quadruple for the relational operation
         Quadruple quad = {
@@ -412,11 +412,11 @@ antlrcpp::Any DuckyCustomVisitor::visitExp(duckyParser::ExpContext *ctx) {
         std::string tempResult = createTempVar();
 
         // Allocate memory for the temporary variable
-        int address = allocateMemory(resultType, functionDirectory.isGlobalScope());
+        int address = allocateMemory(resultType, functionDirectory.checkIfGlobalScope());
         handleMemoryAllocationError(address, ctx->getStart());
 
         // Add the temporary variable to the function's variable table
-        functionDirectory.addVariableToCurFunc(tempResult, resultType, address);
+        functionDirectory.addLocalVariableToActiveFunction(tempResult, resultType, address);
 
         // Generate a quadruple for the arithmetic operation
         Quadruple quad = {
@@ -479,11 +479,11 @@ antlrcpp::Any DuckyCustomVisitor::visitTerm(duckyParser::TermContext *ctx) {
             std::string tempResult = createTempVar();
 
             // Allocate memory for the temporary variable
-            int address = allocateMemory(resultType, functionDirectory.isGlobalScope());
+            int address = allocateMemory(resultType, functionDirectory.checkIfGlobalScope());
             handleMemoryAllocationError(address, ctx->getStart());
 
             // Add the temporary variable to the function's variable table
-            functionDirectory.addVariableToCurFunc(tempResult, resultType, address);
+            functionDirectory.addLocalVariableToActiveFunction(tempResult, resultType, address);
 
             // Generate a quadruple for the arithmetic operation
             Quadruple quad = {
@@ -514,7 +514,7 @@ antlrcpp::Any DuckyCustomVisitor::visitFactor(duckyParser::FactorContext *ctx) {
     } else if (ctx->ID() != nullptr) {
         // If the factor is an identifier, get its information
         operandName = ctx->ID()->getText();
-        VariableInfo *varInfo = functionDirectory.getVarInFuncOrGlobalScope(operandName);
+        VariableInfo *varInfo = functionDirectory.lookupVariableInAnyScope(operandName);
 
         // Handle undefined variable error
         if (varInfo == nullptr) {
@@ -550,11 +550,11 @@ antlrcpp::Any DuckyCustomVisitor::visitFactor(duckyParser::FactorContext *ctx) {
         typeStack.pop();
 
         // Allocate memory for the temporary variable
-        int address = allocateMemory(operandType, functionDirectory.isGlobalScope());
+        int address = allocateMemory(operandType, functionDirectory.checkIfGlobalScope());
         handleMemoryAllocationError(address, ctx->getStart());
 
         // Add the temporary variable to the function's variable table
-        functionDirectory.addVariableToCurFunc(tempResult, operandType, address);
+        functionDirectory.addLocalVariableToActiveFunction(tempResult, operandType, address);
 
         // Generate a quadruple for the unary minus operation
         Quadruple quad = {
@@ -727,67 +727,53 @@ antlrcpp::Any DuckyCustomVisitor::visitCondition(duckyParser::ConditionContext *
 // ******************************************* FUNCTION CALL *******************************************//
 
 antlrcpp::Any DuckyCustomVisitor::visitFunction_call(duckyParser::Function_callContext *ctx) {
-    // Get the function name
     std::string funcName = ctx->ID()->getText();
 
-    // Retrieve function information from the function directory
-    FunctionInfo *funcInfo = functionDirectory.getFunctionInfo(funcName);
-    if (funcInfo == nullptr) {
-        antlr4::Token *startToken = ctx->getStart();
-        int line = startToken->getLine();
-        int column = startToken->getCharPositionInLine();
-        std::cerr << "Function " << funcName << " not found. Line: " << line << ", Column: " << column << std::endl;
-        return nullptr;
+    // Retrieve function info
+    FunctionInfo *funcInfo = functionDirectory.fetchFunctionInfo(funcName);
+    if (!funcInfo) {
+        int line = ctx->getStart()->getLine();
+        int column = ctx->getStart()->getCharPositionInLine();
+        std::cerr << "Variable " << funcName << " not found. Line: " << line << ", Column: " << column << std::endl;
+        throw std::runtime_error("Variable info error.");
     }
 
-    // Generate the ERA quadruple to prepare for the function's activation record
-    Quadruple eraQuad = {{"ERA", -1}, {funcName, -1}, {"nil", -1}, {"nil", -1}};
-    quadruples.push_back(eraQuad);
+    // Generate ERA quadruple for the function call
+    Quadruple quad = {{"ERA", -1}, {funcName, -1}, {"nil", -1}, {"nil", -1}};
+    quadruples.push_back(quad);
 
-    // Check if the number of arguments matches the function's expected number of parameters
-    size_t argCount = ctx->arg_list()->expression().size();
-    if (argCount != funcInfo->numParams) {
-        antlr4::Token *startToken = ctx->getStart();
-        int line = startToken->getLine();
-        int column = startToken->getCharPositionInLine();
-        std::cerr << "Function " << funcName << " expects " << funcInfo->numParams << " arguments, but " << argCount << " were provided. Line: " << line << ", Column: " << column << std::endl;
-        return nullptr;
-    }
+    // Process arguments
+    int argCount = 0;
+    for (auto arg : ctx->arg_list()->expression()) {
+        visit(arg);
 
-    // Process the function arguments and generate PARAM quadruples
-    for (size_t i = 0; i < argCount; i++) {
-        // Visit the argument expression
-        visit(ctx->arg_list()->expression(i));
+        // Pop operand and type stacks
+        std::string argValue = operandStack.top(); operandStack.pop();
+        Type argType = typeStack.top(); typeStack.pop();
 
-        // Pop the result of the expression
-        std::string argument = operandStack.top();
-        operandStack.pop();
-
-        // Pop the type of the argument
-        Type argumentType = typeStack.top();
-        typeStack.pop();
-
-        // Retrieve the expected parameter type and address
-        Type expectedType = funcInfo->parametersTable[i].type;
-        int paramAddress = funcInfo->parametersTable[i].memoryAddress;
-
-        // Perform type checking
-        if (argumentType != expectedType) {
-            antlr4::Token *startToken = ctx->arg_list()->expression(i)->getStart();
-            int line = startToken->getLine();
-            int column = startToken->getCharPositionInLine();
-            std::cerr << "Argument " << i + 1 << " for function " << funcName << " must be of type " << semanticCube.getStringFromType(expectedType) << ". Line: " << line << ", Column: " << column << std::endl;
-            return nullptr;
+        // Type checking
+        if (argCount >= funcInfo->numParams || funcInfo->parametersTable[argCount].type != argType) {
+            int line = arg->getStart()->getLine();
+            int column = arg->getStart()->getCharPositionInLine();
+            std::cerr << "Argument " << argCount + 1 << " type mismatch for function " << funcName << ". Expected: " << semanticCube.getStringFromType(funcInfo->parametersTable[argCount].type) << ", Got: " << semanticCube.getStringFromType(argType) << ". Line: " << line << ", Column: " << column << std::endl;
+            throw std::runtime_error("Argument type mismatch.");
         }
 
-        // Generate a PARAM quadruple for the argument
-        Quadruple paramQuad = {{"PARAM", -1}, {argument, getAddress(argument, argumentType)}, {"nil", -1}, {std::to_string(paramAddress), paramAddress}};
-        quadruples.push_back(paramQuad);
+        // Generate PARAM quadruple
+        quad = {{"PARAM", -1}, {argValue, getAddress(argValue, argType)}, {"nil", -1}, {std::to_string(funcInfo->parametersTable[argCount].memoryAddress), funcInfo->parametersTable[argCount].memoryAddress}};
+        quadruples.push_back(quad);
+        ++argCount;
     }
 
-    // Generate the GOSUB quadruple to perform the function call
-    Quadruple gosubQuad = {{"GOSUB", -1}, {funcName, -1}, {"nil", -1}, {std::to_string(funcInfo->startAddress), funcInfo->startAddress}};
-    quadruples.push_back(gosubQuad);
+    if (argCount != funcInfo->numParams) {
+        std::cerr << "Incorrect number of arguments for function " << funcName << ". Expected: " << funcInfo->numParams << ", Got: " << argCount << std::endl;
+        throw std::runtime_error("Incorrect number of arguments.");
+    }
+
+    // Generate GOSUB quadruple
+    quad = {{"GOSUB", -1}, {funcName, -1}, {"nil", -1}, {std::to_string(funcInfo->startAddress), funcInfo->startAddress}};
+    quadruples.push_back(quad);
 
     return nullptr;
 }
+

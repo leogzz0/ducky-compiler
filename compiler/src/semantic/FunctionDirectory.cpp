@@ -3,8 +3,8 @@
 #include "../../include/semantic/FunctionDirectory.h"
 #include <iostream>
 
-// add a new function to the directory
-bool FunctionDirectory::addFunction(const std::string &name, Type returnType) {
+// register a new function in the directory
+bool FunctionDirectory::registerFunction(const std::string &name, Type returnType) {
     if (directory.find(name) != directory.end()) {
         std::cerr << "Function " << name << " already declared.\n";
         return false;
@@ -14,36 +14,37 @@ bool FunctionDirectory::addFunction(const std::string &name, Type returnType) {
     return true;
 }
 
-// get function information by name
-FunctionInfo* FunctionDirectory::getFunctionInfo(const std::string &name) {
+// fetch function information by name
+FunctionInfo* FunctionDirectory::fetchFunctionInfo(const std::string &name) {
     return directory.count(name) ? &directory[name] : nullptr;
 }
 
 // access the entire function directory
-std::unordered_map<std::string, FunctionInfo> *FunctionDirectory::getFunctionDirectory() {
+std::unordered_map<std::string, FunctionInfo> *FunctionDirectory::accessAllFunctions() {
     return &directory;
 }
 
 // get the currently active function
-FunctionInfo *FunctionDirectory::getCurrentFunction() {
+FunctionInfo *FunctionDirectory::getActiveFunction() {
     return currentFunction;
 }
 
 // set the currently active function
-void FunctionDirectory::setCurrentFunction(FunctionInfo *function) {
+void FunctionDirectory::setActiveFunction(FunctionInfo *function) {
     currentFunction = function;
 }
 
-// main function management
-void FunctionDirectory::setMainFunction(FunctionInfo *function) {
+// assign the main function
+void FunctionDirectory::assignMainFunction(FunctionInfo *function) {
     mainFunction = function;
 }
-FunctionInfo *FunctionDirectory::getMainFunction() {
+
+FunctionInfo *FunctionDirectory::retrieveMainFunction() {
     return mainFunction;
 }
 
-// set the start address of the current function
-void FunctionDirectory::setStartAddressToCurFunc(int startAddress) {
+// assign the start address of the current function
+void FunctionDirectory::assignStartAddressToActiveFunction(int startAddress) {
     if (!currentFunction) {
         std::cerr << "No current function to set start address.\n";
         return;
@@ -52,7 +53,7 @@ void FunctionDirectory::setStartAddressToCurFunc(int startAddress) {
 }
 
 // add a parameter to the current function
-bool FunctionDirectory::addParameterToCurFunc(const std::string &name, Type type, int memoryAddress) {
+bool FunctionDirectory::addParameterToActiveFunction(const std::string &name, Type type, int memoryAddress) {
     if (!currentFunction) {
         std::cerr << "No current function to add parameter to.\n";
         return false;
@@ -71,13 +72,12 @@ bool FunctionDirectory::addParameterToCurFunc(const std::string &name, Type type
 }
 
 // add a variable to the current function
-bool FunctionDirectory::addVariableToCurFunc(const std::string &name, Type type, int memoryAddress) {
+bool FunctionDirectory::addLocalVariableToActiveFunction(const std::string &name, Type type, int memoryAddress) {
     if (!currentFunction) {
         std::cerr << "No current function to add variable to.\n";
         return false;
     }
 
-    // check if variable already exists in parameters
     for (const auto &param : currentFunction->parametersTable) {
         if (param.name == name) {
             std::cerr << "Variable " << name << " already declared as a parameter.\n";
@@ -85,7 +85,6 @@ bool FunctionDirectory::addVariableToCurFunc(const std::string &name, Type type,
         }
     }
 
-    // check if variable already exists in current function's variable table
     if (currentFunction->variableTable.getVariableInfo(name)) {
         std::cerr << "Variable " << name << " already declared in function scope.\n";
         return false;
@@ -96,23 +95,21 @@ bool FunctionDirectory::addVariableToCurFunc(const std::string &name, Type type,
     return true;
 }
 
-// get variable info from the current function's scope
-VariableInfo* FunctionDirectory::getVarInfoFuncScope(const std::string &name) {
+// lookup variable info in the current function's scope
+VariableInfo* FunctionDirectory::lookupVariableInFunctionScope(const std::string &name) {
     if (currentFunction) {
         return currentFunction->variableTable.getVariableInfo(name);
     }
     return nullptr;
 }
 
-// get variable info from either function or global scope
-VariableInfo* FunctionDirectory::getVarInFuncOrGlobalScope(const std::string &name) {
+// lookup variable info in either function or global scope
+VariableInfo* FunctionDirectory::lookupVariableInAnyScope(const std::string &name) {
     if (currentFunction) {
-        // check current function's local variables
         if (auto var = currentFunction->variableTable.getVariableInfo(name)) {
             return var;
         }
 
-        // check current function's parameters
         for (auto &param : currentFunction->parametersTable) {
             if (param.name == name) {
                 return &param;
@@ -120,7 +117,6 @@ VariableInfo* FunctionDirectory::getVarInFuncOrGlobalScope(const std::string &na
         }
     }
 
-    // check global scope
     if (mainFunction) {
         return mainFunction->variableTable.getVariableInfo(name);
     }
@@ -129,6 +125,6 @@ VariableInfo* FunctionDirectory::getVarInFuncOrGlobalScope(const std::string &na
 }
 
 // check if the current scope is global
-bool FunctionDirectory::isGlobalScope() {
+bool FunctionDirectory::checkIfGlobalScope() {
     return currentFunction == mainFunction;
 }

@@ -1,0 +1,14 @@
+program simpleRecursion;
+
+function factorial(n: int) {
+    if (n == 1) {
+        print(1);
+    } else {
+        print(n);
+    };
+};
+
+main {
+    factorial(5);
+}
+end
