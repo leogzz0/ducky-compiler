@@ -170,18 +170,14 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
     functionDirectory.setStartAddressToCurFunc(quadruples.size());
 
     // Process parameters
+    int parameterIndex = 0;
     if (ctx->param_list() != nullptr) {
         for (auto param : ctx->param_list()->param()) {
             std::string paramName = param->ID()->getText();
             Type paramType = semanticCube.getTypeFromString(param->data_type()->getText());
 
             // Generate a memory address for the parameter
-            int memoryAddress;
-            if (functionDirectory.isGlobalScope()) {
-                memoryAddress = virtualMemory.allocateGlobalInt();  // or allocateGlobalFloat()
-            } else {
-                memoryAddress = virtualMemory.allocateLocalInt();   // or allocateLocalFloat()
-            }
+            int memoryAddress = (paramType == INT) ? virtualMemory.allocateLocalInt() : virtualMemory.allocateLocalFloat();
 
             // Add parameter to the function's local variables
             if (!functionDirectory.addVariableToCurFunc(paramName, paramType, memoryAddress)) {
@@ -190,7 +186,12 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
                 std::cerr << "Parameter " << paramName << " already declared in function " << functionName << ". Line: " << line << ", Column: " << column << std::endl;
                 return nullptr;
             }
+
+            // Update the parameter table for the function
+            functionDirectory.getCurrentFunction()->parametersTable.push_back({paramName, paramType, memoryAddress});
+            parameterIndex++;
         }
+        functionDirectory.getCurrentFunction()->numParams = parameterIndex;
     }
 
     // Process variable declarations inside the function
@@ -207,7 +208,6 @@ antlrcpp::Any DuckyCustomVisitor::visitFunc_decl(duckyParser::Func_declContext *
 
     return nullptr;
 }
-
 
 antlrcpp::Any DuckyCustomVisitor::visitFunc_declarations(duckyParser::Func_declarationsContext *ctx) {
     for (auto func_decl : ctx->func_decl()) {
@@ -741,20 +741,21 @@ antlrcpp::Any DuckyCustomVisitor::visitFunction_call(duckyParser::Function_callC
     }
 
     // Generate the ERA quadruple to prepare for the function's activation record
-    Quadruple quad = {{"ERA", -1}, {funcName, -1}, {"nil", -1}, {"nil", -1}};
-    quadruples.push_back(quad);
+    Quadruple eraQuad = {{"ERA", -1}, {funcName, -1}, {"nil", -1}, {"nil", -1}};
+    quadruples.push_back(eraQuad);
 
     // Check if the number of arguments matches the function's expected number of parameters
-    if (ctx->arg_list()->expression().size() != funcInfo->numParams) {
+    size_t argCount = ctx->arg_list()->expression().size();
+    if (argCount != funcInfo->numParams) {
         antlr4::Token *startToken = ctx->getStart();
         int line = startToken->getLine();
         int column = startToken->getCharPositionInLine();
-        std::cerr << "Function " << funcName << " expects " << funcInfo->numParams  << " arguments, but " << ctx->arg_list()->expression().size() << " were provided. Line: " << line << ", Column: " << column << std::endl;
+        std::cerr << "Function " << funcName << " expects " << funcInfo->numParams << " arguments, but " << argCount << " were provided. Line: " << line << ", Column: " << column << std::endl;
         return nullptr;
     }
 
     // Process the function arguments and generate PARAM quadruples
-    for (size_t i = 0; i < ctx->arg_list()->expression().size(); i++) {
+    for (size_t i = 0; i < argCount; i++) {
         // Visit the argument expression
         visit(ctx->arg_list()->expression(i));
 
@@ -768,7 +769,7 @@ antlrcpp::Any DuckyCustomVisitor::visitFunction_call(duckyParser::Function_callC
 
         // Retrieve the expected parameter type and address
         Type expectedType = funcInfo->parametersTable[i].type;
-        int address = funcInfo->parametersTable[i].memoryAddress;
+        int paramAddress = funcInfo->parametersTable[i].memoryAddress;
 
         // Perform type checking
         if (argumentType != expectedType) {
@@ -780,14 +781,13 @@ antlrcpp::Any DuckyCustomVisitor::visitFunction_call(duckyParser::Function_callC
         }
 
         // Generate a PARAM quadruple for the argument
-        quad = {{"PARAM", -1}, {argument, getAddress(argument, argumentType)}, {"nil", -1}, {std::to_string(address), address}};
-        quadruples.push_back(quad);
+        Quadruple paramQuad = {{"PARAM", -1}, {argument, getAddress(argument, argumentType)}, {"nil", -1}, {std::to_string(paramAddress), paramAddress}};
+        quadruples.push_back(paramQuad);
     }
 
     // Generate the GOSUB quadruple to perform the function call
-    int startAddress = funcInfo->startAddress;
-    quad = {{"GOSUB", -1}, {funcName, -1}, {"nil", -1}, {std::to_string(startAddress), startAddress}};
-    quadruples.push_back(quad);
+    Quadruple gosubQuad = {{"GOSUB", -1}, {funcName, -1}, {"nil", -1}, {std::to_string(funcInfo->startAddress), funcInfo->startAddress}};
+    quadruples.push_back(gosubQuad);
 
     return nullptr;
 }

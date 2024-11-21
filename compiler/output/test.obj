@@ -1,0 +1,33 @@
+# Constant Table
+CONSTANTS
+20000 1
+20001 5
+20002 7
+21000 3.14
+
+# Function Directory
+FUNCTIONS
+factorial function 1 3000 4000 5 1
+test function 10 1000 2000 3 0
+
+# Quadruples
+QUADRUPLES
+0: GOTO -1 -1 10
+1: = 20000 -1 9001
+2: > 9000 20000 9002
+3: GOTOF 9002 -1 9
+4: * 9001 9000 9003
+5: = 9003 -1 9001
+6: - 9000 20000 9004
+7: = 9004 -1 9000
+8: GOTO -1 -1 2
+9: ENDFUNC -1 -1 -1
+10: = 20001 -1 5000
+11: = 20002 -1 5001
+12: = 21000 -1 6000
+13: ERA factorial -1 -1
+14: PARAM 5000 -1 9000
+15: GOSUB factorial -1 1
+16: PRINT -1 -1 5001
+17: PRINT -1 -1 6000
+18: HALT -1 -1 -1
