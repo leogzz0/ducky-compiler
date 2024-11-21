@@ -1,50 +1,63 @@
-// VirtualMemory.h
 #ifndef VIRTUAL_MEMORY_H
 #define VIRTUAL_MEMORY_H
 
 #include <unordered_map>
 #include <string>
-#include <variant>
-
-struct MemorySegment {
-    int current;
-    std::unordered_map<int, std::variant<int, float, bool, std::string>> memory;
-    explicit MemorySegment(int start) : current(start) {}
-};
+#include "../semantic/Types.h"
 
 class VirtualMemory {
 private:
-    // Memory segments
-    MemorySegment globalInt{1000};
-    MemorySegment globalFloat{2000};
-    MemorySegment globalBool{3000};
-    
-    MemorySegment localInt{4000};
-    MemorySegment localFloat{5000};
-    MemorySegment localBool{6000};
-    
-    MemorySegment tempInt{7000};
-    MemorySegment tempFloat{8000};
-    MemorySegment tempBool{9000};
-    
-    MemorySegment constantInt{10000};
-    MemorySegment constantFloat{11000};
-    MemorySegment constantString{12000};
-    MemorySegment constantBool{13000};
-    
-    std::unordered_map<std::variant<int, float, bool, std::string>, int> constantsTable;
-    void printVariant(const std::variant<int, float, bool, std::string>& val) const;
+    // Global memory
+    int globalIntBase = 5000, globalIntPointer = 5000;
+    int globalFloatBase = 6000, globalFloatPointer = 6000;
+    int globalBoolBase = 7000, globalBoolPointer = 7000;
 
-private:
-    MemorySegment& getSegment(int address);
+    // Local memory  
+    int localIntBase = 9000, localIntPointer = 9000;
+    int localFloatBase = 10000, localFloatPointer = 10000;
+    int localBoolBase = 11000, localBoolPointer = 11000;
+
+    // Temporary memory
+    int tempIntBase = 43000, tempIntPointer = 43000;
+    int tempFloatBase = 44000, tempFloatPointer = 44000;
+    int tempBoolBase = 45000, tempBoolPointer = 45000;
+
+    // Constant memory
+    int constIntBase = 20000, constIntPointer = 20000;
+    int constFloatBase = 21000, constFloatPointer = 21000;
+    int constStringBase = 22000, constStringPointer = 22000;
+    int constBoolBase = 23000, constBoolPointer = 23000;
+
+    // Maps for constants
+    std::unordered_map<int, int> intConstants;
+    std::unordered_map<float, int> floatConstants; 
+    std::unordered_map<std::string, int> stringConstants;
+    std::unordered_map<bool, int> boolConstants;
 
 public:
-    int getAddress(const std::string& varType, const std::string& scope);
-    int getTempAddress(const std::string& varType);
-    int getConstantAddress(const std::string& value, const std::string& type);
-    void setValue(int address, const std::variant<int, float, bool, std::string>& value);
-    std::variant<int, float, bool, std::string> getValue(int address);
+    int allocateGlobalInt();
+    int allocateGlobalFloat();
+    int allocateGlobalBool();
+
+    int allocateLocalInt();
+    int allocateLocalFloat();
+    int allocateLocalBool();
+
+    int allocateTempInt();
+    int allocateTempFloat();
+    int allocateTempBool();
+
+    int findConstant(Type type, std::string value);
+    int getOrCreateConstant(Type type, std::string value);
+
+    void resetLocals();
+    void resetTemporaries();
     void printMemory() const;
+
+    // Accessors for constant maps
+    std::unordered_map<int, int> getIntConstants();
+    std::unordered_map<float, int> getFloatConstants();
+    std::unordered_map<std::string, int> getStringConstants();
 };
 
 #endif

@@ -1,31 +1,44 @@
 // VariableTable.h
+
 #ifndef VARIABLE_TABLE_H
 #define VARIABLE_TABLE_H
 
 #include <string>
 #include <unordered_map>
-#include <stdexcept>
+#include <iostream>
+#include "Types.h"
 
-struct VarInfo {
-    std::string type;
-    int address;
+struct VariableInfo {
+    std::string name;   // variable name
+    Type type;          // variable type (using the Type enum)
+    int memoryAddress;  // memory address of the variable
+
+    VariableInfo(const std::string& name, Type type, int memoryAddress)
+        : name(name), type(type), memoryAddress(memoryAddress) {}
+
+    VariableInfo() = default;
 };
 
 class VariableTable {
-private:
-    std::unordered_map<std::string, std::unordered_map<std::string, VarInfo>> variables;
-
 public:
-    VariableTable() {
-        variables["global"] = {};
-    }
+    // add a new variable to the table
+    bool addVariable(const std::string &name, Type type, int memoryAddress);
 
-    void setScope(const std::string& scope);
-    void addVariable(const std::string& scope, const std::string& name, const std::string& varType, int address);
-    std::string getVariableType(const std::string& scope, const std::string& name);
-    int getVariableAddress(const std::string& scope, const std::string& name);
-    void cleanVariables(const std::string& scope);
-    std::string findScope(const std::string& name, const std::string& currentScope);
+    // get a pointer to VariableInfo for a specific variable name
+    VariableInfo* getVariableInfo(const std::string &name);
+
+    // get all variables in the table
+    std::unordered_map<std::string, VariableInfo>* getVariables();
+
+    // update the memory address of an existing variable
+    bool setMemoryAddress(const std::string &name, int memoryAddress);
+
+    // print all variables for debugging
+    void printVariables() const;
+
+private:
+    // map of variable names to VariableInfo
+    std::unordered_map<std::string, VariableInfo> variables;
 };
 
-#endif
+#endif // VARIABLE_TABLE_H

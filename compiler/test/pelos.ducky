@@ -9,8 +9,8 @@ function uno(j : int) {
 		print(i);
 	} else {
 		print(i + k);
-	}
-}
+	};
+};
 
 function dos(i : int, j : int) {
 	var x, y : int;
@@ -19,10 +19,10 @@ function dos(i : int, j : int) {
 		print(x);
 	} else {
 		print(x);
-	}
-}
+	};
+};
 
-main() {
+main {
 	i = 5; 
 	j = i * 2 + 1;
 	uno(j);

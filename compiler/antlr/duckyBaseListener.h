@@ -37,20 +37,14 @@ public:
   virtual void enterFunc_decl(duckyParser::Func_declContext * /*ctx*/) override { }
   virtual void exitFunc_decl(duckyParser::Func_declContext * /*ctx*/) override { }
 
-  virtual void enterFunc_block(duckyParser::Func_blockContext * /*ctx*/) override { }
-  virtual void exitFunc_block(duckyParser::Func_blockContext * /*ctx*/) override { }
-
   virtual void enterParam_list(duckyParser::Param_listContext * /*ctx*/) override { }
   virtual void exitParam_list(duckyParser::Param_listContext * /*ctx*/) override { }
 
   virtual void enterParam(duckyParser::ParamContext * /*ctx*/) override { }
   virtual void exitParam(duckyParser::ParamContext * /*ctx*/) override { }
 
-  virtual void enterBlock(duckyParser::BlockContext * /*ctx*/) override { }
-  virtual void exitBlock(duckyParser::BlockContext * /*ctx*/) override { }
-
-  virtual void enterStatements(duckyParser::StatementsContext * /*ctx*/) override { }
-  virtual void exitStatements(duckyParser::StatementsContext * /*ctx*/) override { }
+  virtual void enterBody(duckyParser::BodyContext * /*ctx*/) override { }
+  virtual void exitBody(duckyParser::BodyContext * /*ctx*/) override { }
 
   virtual void enterStatement(duckyParser::StatementContext * /*ctx*/) override { }
   virtual void exitStatement(duckyParser::StatementContext * /*ctx*/) override { }
@@ -72,9 +66,6 @@ public:
 
   virtual void enterCondition(duckyParser::ConditionContext * /*ctx*/) override { }
   virtual void exitCondition(duckyParser::ConditionContext * /*ctx*/) override { }
-
-  virtual void enterElse_block(duckyParser::Else_blockContext * /*ctx*/) override { }
-  virtual void exitElse_block(duckyParser::Else_blockContext * /*ctx*/) override { }
 
   virtual void enterFunction_call(duckyParser::Function_callContext * /*ctx*/) override { }
   virtual void exitFunction_call(duckyParser::Function_callContext * /*ctx*/) override { }

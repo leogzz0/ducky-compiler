@@ -14,65 +14,49 @@
 
 class DuckyCustomListener : public duckyBaseListener {
 private:
-    bool printTraversal;
-    std::string currentScope;
-    
-    // Semantic structures
+    // Semantic tools
     VariableTable variableTable;
     FunctionDirectory functionDirectory;
     SemanticCube semanticCube;
-    Quadruple quadrupleManager;
     VirtualMemory memoryManager;
-    
+
+    // Quadruples
+    std::vector<Quadruple> quadruples;
+
     // Operation stacks
     std::stack<int> operandStack;
     std::stack<std::string> typeStack;
     std::stack<int> jumpStack;
-    
+
+    // State
+    bool printTraversal;
+    std::string currentScope;
     int tempVarCounter;
     int labelCounter;
 
 public:
+    // Constructor
     DuckyCustomListener(bool printTraversal = false);
-    
-    // Program
+
+    // Listener methods
     void enterProgram(duckyParser::ProgramContext* ctx) override;
     void exitProgram(duckyParser::ProgramContext* ctx) override;
-    
-    // Variables
+
     void exitVar_decl(duckyParser::Var_declContext* ctx) override;
-    
-    // Functions
-    void enterFunc_decl(duckyParser::Func_declContext* ctx) override;
-    void exitFunc_decl(duckyParser::Func_declContext* ctx) override;
-    
-    // Statements
     void exitAssignment(duckyParser::AssignmentContext* ctx) override;
     void exitPrint(duckyParser::PrintContext* ctx) override;
-    
-    // Control Flow
     void enterCondition(duckyParser::ConditionContext* ctx) override;
     void exitCondition(duckyParser::ConditionContext* ctx) override;
-    void enterLoop(duckyParser::LoopContext* ctx) override;
-    void exitLoop(duckyParser::LoopContext* ctx) override;
-    
-    // Expression Handling
-    void exitExpression(duckyParser::ExpressionContext* ctx) override;
-    void exitExp(duckyParser::ExpContext* ctx) override;
-    void exitTerm(duckyParser::TermContext* ctx) override;
-    void exitFactor(duckyParser::FactorContext* ctx) override;
 
-    // Getters
-    const auto& getQuadruples() const { return quadrupleManager.getQuadruples(); }
-    VirtualMemory& getMemoryManager() { return memoryManager; }
+    // Accessors
+    const std::vector<Quadruple>& getQuadruples() const { return quadruples; }
+    const VirtualMemory& getMemoryManager() const { return memoryManager; }
+    const FunctionDirectory& getFunctionDirectory() const { return functionDirectory; }
 
 private:
     // Helper methods
-    std::string getExpressionType(duckyParser::ExpressionContext* ctx);
-    void createTempQuadruple(const std::string& leftType, 
-                            const std::string& rightType, 
-                            const std::string& op, 
-                            const std::string& resultType);
+    void addQuadruple(const std::string& op, int arg1, int arg2, int result);
+    int createTempVar();
 };
 
-#endif
+#endif // DUCKY_CUSTOM_LISTENER_H

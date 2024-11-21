@@ -5,34 +5,19 @@
 
 #include <string>
 #include <unordered_map>
-#include <stdexcept>
-
-struct OperationKey {
-    std::string leftType;
-    std::string rightType;
-    std::string op;
-    
-    bool operator==(const OperationKey& other) const {
-        return leftType == other.leftType && rightType == other.rightType && op == other.op;
-    }
-};
-
-namespace std {
-    template<>
-    struct hash<OperationKey> {
-        size_t operator()(const OperationKey& k) const {
-            return hash<string>{}(k.leftType + k.rightType + k.op);
-        }
-    };
-}
+#include "Types.h"
 
 class SemanticCube {
-private:
-    std::unordered_map<OperationKey, std::string> cube;
-
 public:
     SemanticCube();
-    std::string getType(const std::string& leftType, const std::string& rightType, const std::string& op);
+    Type getResultType(Type type1, Type type2, const std::string &op);
+    Type getTypeFromString(const std::string &type);
+    std::string getStringFromType(const Type &type);
+    Type getTypeFromConstant(const std::string &constant);
+
+private:
+    std::unordered_map<std::string, Type> cube;
+    void initializeCube();
 };
 
-#endif
+#endif // SEMANTIC_CUBE_H

@@ -2,181 +2,134 @@
 
 #include "../../include/memory/VirtualMemory.h"
 #include <iostream>
-#include <sstream>
 
-int VirtualMemory::getAddress(const std::string& varType, const std::string& scope) {
-    MemorySegment* segment = nullptr;
-    
-    if (scope == "global") {
-        if (varType == "int") segment = &globalInt;
-        else if (varType == "float") segment = &globalFloat;
-        else if (varType == "bool") segment = &globalBool;
-    } else {
-        if (varType == "int") segment = &localInt;
-        else if (varType == "float") segment = &localFloat;
-        else if (varType == "bool") segment = &localBool;
+// Allocate memory for global integers
+int VirtualMemory::allocateGlobalInt() {
+    if (globalIntPointer == globalFloatBase) {
+        std::cerr << "Out of memory for global integers." << std::endl;
+        return -1;
     }
-
-    if (!segment) {
-        throw std::runtime_error("Invalid type or scope in getAddress");
-    }
-
-    int address = segment->current++;
-    segment->memory[address] = std::variant<int, float, bool, std::string>();
-    return address;
+    return globalIntPointer++;
 }
 
-int VirtualMemory::getTempAddress(const std::string& varType) {
-    MemorySegment* segment = nullptr;
-    
-    if (varType == "int") segment = &tempInt;
-    else if (varType == "float") segment = &tempFloat;
-    else if (varType == "bool") segment = &tempBool;
-    
-    if (!segment) {
-        throw std::runtime_error("Invalid type in getTempAddress");
+// Allocate memory for global floats
+int VirtualMemory::allocateGlobalFloat() {
+    if (globalFloatPointer == localIntBase) {
+        std::cerr << "Out of memory for global floats." << std::endl;
+        return -1;
     }
-
-    int address = segment->current++;
-    if (varType == "int") {
-        segment->memory[address] = 0;
-    } else if (varType == "float") {
-        segment->memory[address] = 0.0f;
-    } else if (varType == "bool") {
-        segment->memory[address] = false;
-    }
-    return address;
+    return globalFloatPointer++;
 }
 
-int VirtualMemory::getConstantAddress(const std::string& value, const std::string& type) {
-    std::variant<int, float, bool, std::string> constantValue;
-    
-    // Assign constantValue based on type
-    if (type == "int") {
-        constantValue = std::stoi(value);
-    } else if (type == "float") {
-        constantValue = std::stof(value);
-    } else if (type == "string") {
-        constantValue = value;
-    } else if (type == "bool") {
-        constantValue = (value == "true");
-    } else {
-        throw std::runtime_error("Invalid constant type");
+// Allocate memory for local integers
+int VirtualMemory::allocateLocalInt() {
+    if (localIntPointer == localFloatBase) {
+        std::cerr << "Out of memory for local integers." << std::endl;
+        return -2;
     }
-
-    // If the constant already exists, return its address
-    if (constantsTable.find(constantValue) != constantsTable.end()) {
-        return constantsTable[constantValue];
-    }
-
-    // Add the constant to the appropriate memory segment
-    MemorySegment* segment = nullptr;
-    if (type == "int") {
-        segment = &constantInt;
-    } else if (type == "float") {
-        segment = &constantFloat;
-    } else if (type == "string") {
-        segment = &constantString;
-    } else if (type == "bool") {
-        segment = &constantBool;
-    }
-
-    if (!segment) {
-        throw std::runtime_error("Invalid type in getConstantAddress");
-    }
-
-    // Add to memory and constants table
-    int address = segment->current++;
-    segment->memory[address] = constantValue;
-    constantsTable[constantValue] = address;
-
-    return address;
+    return localIntPointer++;
 }
 
-void VirtualMemory::setValue(int address, const std::variant<int, float, bool, std::string>& value) {
-    auto& segment = getSegment(address);
-    segment.memory[address] = value;
+// Allocate memory for local floats
+int VirtualMemory::allocateLocalFloat() {
+    if (localFloatPointer == tempIntBase) {
+        std::cerr << "Out of memory for local floats." << std::endl;
+        return -2;
+    }
+    return localFloatPointer++;
 }
 
-std::variant<int, float, bool, std::string> VirtualMemory::getValue(int address) {
-    auto& segment = getSegment(address);
-    auto it = segment.memory.find(address);
-    if (it == segment.memory.end()) {
-        throw std::runtime_error("Address not found: " + std::to_string(address));
+// Allocate memory for temporary integers
+int VirtualMemory::allocateTempInt() {
+    if (tempIntPointer == tempFloatBase) {
+        std::cerr << "Out of memory for temporary integers." << std::endl;
+        return -1;
     }
-    
-    auto value = it->second;
-    if (std::holds_alternative<std::string>(value)) {
-        std::string strVal = std::get<std::string>(value);
-        // Try to convert string to number if possible
-        try {
-            if (strVal.find('.') != std::string::npos) {
-                return std::stof(strVal);
-            }
-            return std::stoi(strVal);
-        } catch (...) {
-            return value;
+    return tempIntPointer++;
+}
+
+// Allocate memory for temporary floats
+int VirtualMemory::allocateTempFloat() {
+    if (tempFloatPointer == constIntBase) {
+        std::cerr << "Out of memory for temporary floats." << std::endl;
+        return -1;
+    }
+    return tempFloatPointer++;
+}
+
+// Find constant integer, float or string address
+int VirtualMemory::findConstant(Type type, std::string value) {
+    if (type == INT) {
+        int intValue = std::stoi(value);
+        if (intConstants.find(intValue) != intConstants.end()) {
+            return intConstants[intValue];
+        }
+    } else if (type == FLOAT) {
+        float floatValue = std::stof(value);
+        if (floatConstants.find(floatValue) != floatConstants.end()) {
+            return floatConstants[floatValue];
+        }
+    } else if (type == STRING) {
+        if (stringConstants.find(value) != stringConstants.end()) {
+            return stringConstants[value];
         }
     }
-    return value;
+    return -1;
 }
 
-MemorySegment& VirtualMemory::getSegment(int address) {
-    if (address >= 1000 && address < 2000) return globalInt;
-    if (address >= 2000 && address < 3000) return globalFloat;
-    if (address >= 3000 && address < 4000) return globalBool;
-    if (address >= 4000 && address < 5000) return localInt;
-    if (address >= 5000 && address < 6000) return localFloat;
-    if (address >= 6000 && address < 7000) return localBool;
-    if (address >= 7000 && address < 8000) return tempInt;
-    if (address >= 8000 && address < 9000) return tempFloat;
-    if (address >= 9000 && address < 10000) return tempBool;
-    if (address >= 10000 && address < 11000) return constantInt;
-    if (address >= 11000 && address < 12000) return constantFloat;
-    if (address >= 12000 && address < 13000) return constantString;
-    if (address >= 13000 && address < 14000) return constantBool;
-    
-    throw std::runtime_error("Invalid memory address: " + std::to_string(address));
+// Get or create a constant integer, float or string address
+int VirtualMemory::getOrCreateConstant(Type type, std::string value) {
+    if (type == INT) {
+        int intValue = std::stoi(value);
+        if (intConstants.find(intValue) == intConstants.end()) {
+            if (constIntPointer == constFloatBase) {
+                return -3;
+            }
+            intConstants[intValue] = constIntPointer++;
+        }
+        return intConstants[intValue];
+    } else if (type == FLOAT) {
+        float floatValue = std::stof(value);
+        if (floatConstants.find(floatValue) == floatConstants.end()) {
+            if (constFloatPointer == constStringBase) {
+                return -4;
+            }
+            floatConstants[floatValue] = constFloatPointer++;
+        }
+        return floatConstants[floatValue];
+    } else if (type == STRING) {
+        if (stringConstants.find(value) == stringConstants.end()) {
+            if (constStringPointer == 10000) {
+                return -5;
+            }
+            stringConstants[value] = constStringPointer++;
+        }
+        return stringConstants[value];
+    }
+    return -1;
 }
 
-void VirtualMemory::printMemory() const {
-    std::cout << "\n===== Global Memory =====\n";
-    for (const auto& [addr, val] : globalInt.memory) {
-        std::cout << "Address " << addr << ": ";
-        printVariant(val);
-        std::cout << "\n";
-    }
-    
-    std::cout << "\n===== Local Memory =====\n";
-    for (const auto& [addr, val] : localInt.memory) {
-        std::cout << "Address " << addr << ": ";
-        printVariant(val);
-        std::cout << "\n";
-    }
-    
-    std::cout << "\n===== Temporary Memory =====\n";
-    for (const auto& [addr, val] : tempInt.memory) {
-        std::cout << "Address " << addr << ": ";
-        printVariant(val);
-        std::cout << "\n";
-    }
-    
-    std::cout << "\n===== Constants Memory =====\n";
-    for (const auto& [addr, val] : constantInt.memory) {
-        std::cout << "Address " << addr << ": ";
-        printVariant(val);
-        std::cout << "\n";
-    }
+// Reset locals for a new function scope
+void VirtualMemory::resetLocals() {
+    localIntPointer = localIntBase;
+    localFloatPointer = localFloatBase;
 }
 
-void VirtualMemory::printVariant(const std::variant<int, float, bool, std::string>& val) const {
-    if (std::holds_alternative<int>(val)) {
-        std::cout << std::get<int>(val);
-    } else if (std::holds_alternative<float>(val)) {
-        std::cout << std::get<float>(val);
-    } else if (std::holds_alternative<bool>(val)) {
-        std::cout << (std::get<bool>(val) ? "true" : "false");
-    } else if (std::holds_alternative<std::string>(val)) {
-        std::cout << std::get<std::string>(val);
-    }
+// Reset temporaries for a new function or expression
+void VirtualMemory::resetTemporaries() {
+    tempIntPointer = tempIntBase;
+    tempFloatPointer = tempFloatBase;
+}
+
+// Get the constants map
+std::unordered_map<int, int> VirtualMemory::getIntConstants() {
+    return intConstants;
+}
+
+std::unordered_map<float, int> VirtualMemory::getFloatConstants() {
+    return floatConstants;
+}
+
+std::unordered_map<std::string, int> VirtualMemory::getStringConstants() {
+    return stringConstants;
 }

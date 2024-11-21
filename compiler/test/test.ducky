@@ -1,0 +1,23 @@
+program test;
+
+var a, b: int;
+var c: float;
+
+function factorial(n: int) {
+    var result: int;
+    result = 1;
+    while (n > 1) {
+        result = result * n;
+        n = n - 1;
+    };
+};
+
+main {
+    a = 5;
+    b = 7;
+    c = 3.14;
+    factorial(a);
+    print(b);
+    print(c);
+}
+end

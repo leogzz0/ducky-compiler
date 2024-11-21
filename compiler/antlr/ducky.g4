@@ -51,7 +51,7 @@ COMMENT
 
 /* Parser Rules */
 program
-    : MAIN_FUNC ID SEMI var_declarations? func_declarations MAIN_BLOCK LPAREN RPAREN block END_BLOCK
+    : MAIN_FUNC ID SEMI var_declarations? func_declarations MAIN_BLOCK LBRACE body RBRACE END_BLOCK
     ;
 
 var_declarations
@@ -76,11 +76,7 @@ func_declarations
     ;
 
 func_decl
-    : FUNCTION ID LPAREN param_list RPAREN func_block
-    ;
-
-func_block
-    : LBRACE var_declarations? statements RBRACE
+    : FUNCTION ID LPAREN param_list RPAREN LBRACE var_declarations? body RBRACE SEMI
     ;
 
 param_list
@@ -92,20 +88,16 @@ param
     : ID COLON data_type
     ;
 
-block
-    : LBRACE statements RBRACE
-    ;
-
-statements
-    : statement+
+body
+    : statement*
     ;
 
 statement
     : assignment
-    | print
-    | loop
     | condition
+    | loop
     | function_call
+    | print
     ;
 
 assignment
@@ -126,16 +118,11 @@ print_item
     ;
 
 loop
-    : WHILE LPAREN expression RPAREN block
+    : WHILE LPAREN expression RPAREN LBRACE body RBRACE SEMI
     ;
 
 condition
-    : IF LPAREN expression RPAREN block else_block
-    ;
-
-else_block
-    : ELSE block
-    |   /* empty */
+    : IF LPAREN expression RPAREN LBRACE body RBRACE (ELSE LBRACE body RBRACE)? SEMI
     ;
 
 function_call

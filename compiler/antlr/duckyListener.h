@@ -35,20 +35,14 @@ public:
   virtual void enterFunc_decl(duckyParser::Func_declContext *ctx) = 0;
   virtual void exitFunc_decl(duckyParser::Func_declContext *ctx) = 0;
 
-  virtual void enterFunc_block(duckyParser::Func_blockContext *ctx) = 0;
-  virtual void exitFunc_block(duckyParser::Func_blockContext *ctx) = 0;
-
   virtual void enterParam_list(duckyParser::Param_listContext *ctx) = 0;
   virtual void exitParam_list(duckyParser::Param_listContext *ctx) = 0;
 
   virtual void enterParam(duckyParser::ParamContext *ctx) = 0;
   virtual void exitParam(duckyParser::ParamContext *ctx) = 0;
 
-  virtual void enterBlock(duckyParser::BlockContext *ctx) = 0;
-  virtual void exitBlock(duckyParser::BlockContext *ctx) = 0;
-
-  virtual void enterStatements(duckyParser::StatementsContext *ctx) = 0;
-  virtual void exitStatements(duckyParser::StatementsContext *ctx) = 0;
+  virtual void enterBody(duckyParser::BodyContext *ctx) = 0;
+  virtual void exitBody(duckyParser::BodyContext *ctx) = 0;
 
   virtual void enterStatement(duckyParser::StatementContext *ctx) = 0;
   virtual void exitStatement(duckyParser::StatementContext *ctx) = 0;
@@ -70,9 +64,6 @@ public:
 
   virtual void enterCondition(duckyParser::ConditionContext *ctx) = 0;
   virtual void exitCondition(duckyParser::ConditionContext *ctx) = 0;
-
-  virtual void enterElse_block(duckyParser::Else_blockContext *ctx) = 0;
-  virtual void exitElse_block(duckyParser::Else_blockContext *ctx) = 0;
 
   virtual void enterFunction_call(duckyParser::Function_callContext *ctx) = 0;
   virtual void exitFunction_call(duckyParser::Function_callContext *ctx) = 0;

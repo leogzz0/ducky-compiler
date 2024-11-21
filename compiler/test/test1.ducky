@@ -1,0 +1,10 @@
+program test1;
+var a: int;
+var b: float;
+main {
+    a = 10;
+    b = 3.14;
+    print(a);
+    print(b);
+}
+end;
