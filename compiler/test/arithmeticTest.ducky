@@ -1,0 +1,15 @@
+program arithmeticTest;
+
+var x, y, z: int;
+
+main {
+    x = 10;
+    y = 5;
+    z = x + y;
+    print(z);
+    z = x * y;
+    print(z);
+    z = x - y;
+    print(z);
+}
+end

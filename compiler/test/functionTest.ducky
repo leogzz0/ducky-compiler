@@ -1,0 +1,10 @@
+program functionTest;
+
+function square(x: int) {
+    print(x * x);
+};
+
+main {
+    square(7);
+}
+end

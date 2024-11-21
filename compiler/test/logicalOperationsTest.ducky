@@ -1,0 +1,14 @@
+program logicalOperationsTest;
+
+var x, y: int;
+
+main {
+    x = 10;
+    y = 5;
+    if (x > y) {
+        print(x);
+    } else {
+        print(y);
+    };
+}
+end
