@@ -26,7 +26,7 @@ struct Quadruple {
     QuadrupleValue result;
 };
 
-// Custom visitor to process parse tree nodes (override methods as needed)
+// custom visitor to process parse tree nodes (override methods as needed)
 class DuckyCustomVisitor : public duckyBaseVisitor {
 public:
     SemanticCube semanticCube;

@@ -226,7 +226,7 @@ public:
                     memoryStack.popFrame();
                 }
             }
-            else if (op == "HALT") {
+            else if (op == "END") {
                 break;
             }
 

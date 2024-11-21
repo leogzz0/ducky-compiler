@@ -19,39 +19,39 @@ struct FunctionInfo {
 
 class FunctionDirectory {
 public:
-    // Register a new function in the directory
+    // register a new function in the directory
     bool registerFunction(const std::string &name, Type returnType);
 
-    // Fetch function information by name
+    // fetch function information by name
     FunctionInfo *fetchFunctionInfo(const std::string &name);
 
-    // Access the entire function directory
+    // access the entire function directory
     std::unordered_map<std::string, FunctionInfo> *accessAllFunctions();
 
-    // Get or set the current function context
+    // get or set the current function context
     FunctionInfo *getActiveFunction();
     void setActiveFunction(FunctionInfo *function);
 
-    // Main function management
+    // main function management
     void assignMainFunction(FunctionInfo *function);
     FunctionInfo *retrieveMainFunction();
 
-    // Modify the current function
+    // modify the current function
     void assignStartAddressToActiveFunction(int startAddress);
     bool addParameterToActiveFunction(const std::string &name, Type type, int memoryAddress);
     bool addLocalVariableToActiveFunction(const std::string &name, Type type, int memoryAddress);
 
-    // Variable scope management
+    // variable scope management
     VariableInfo *lookupVariableInFunctionScope(const std::string &name);
     VariableInfo *lookupVariableInAnyScope(const std::string &name);
 
-    // Check if the current scope is global
+    // check if the current scope is global
     bool checkIfGlobalScope();
 
 private:
-    FunctionInfo *mainFunction = nullptr;        // Pointer to the main function
-    FunctionInfo *currentFunction = nullptr;     // Pointer to the currently active function
-    std::unordered_map<std::string, FunctionInfo> directory; // Map of all functions
+    FunctionInfo *mainFunction = nullptr;        // pointer to the main function
+    FunctionInfo *currentFunction = nullptr;     // pointer to the currently active function
+    std::unordered_map<std::string, FunctionInfo> directory; // map of all functions
 };
 
 #endif // FUNCTION_DIRECTORY_H

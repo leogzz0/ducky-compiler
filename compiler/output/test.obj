@@ -30,4 +30,4 @@ QUADRUPLES
 15: GOSUB factorial -1 1
 16: PRINT -1 -1 5001
 17: PRINT -1 -1 6000
-18: HALT -1 -1 -1
+18: END -1 -1 -1

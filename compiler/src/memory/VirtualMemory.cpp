@@ -3,7 +3,7 @@
 #include "../../include/memory/VirtualMemory.h"
 #include <iostream>
 
-// Allocate memory for global integers
+// allocate memory for global integers
 int VirtualMemory::allocateGlobalInt() {
     if (globalIntPointer == globalFloatBase) {
         std::cerr << "Out of memory for global integers." << std::endl;
@@ -12,7 +12,7 @@ int VirtualMemory::allocateGlobalInt() {
     return globalIntPointer++;
 }
 
-// Allocate memory for global floats
+// allocate memory for global floats
 int VirtualMemory::allocateGlobalFloat() {
     if (globalFloatPointer == localIntBase) {
         std::cerr << "Out of memory for global floats." << std::endl;
@@ -21,7 +21,7 @@ int VirtualMemory::allocateGlobalFloat() {
     return globalFloatPointer++;
 }
 
-// Allocate memory for local integers
+// allocate memory for local integers
 int VirtualMemory::allocateLocalInt() {
     if (localIntPointer == localFloatBase) {
         std::cerr << "Out of memory for local integers." << std::endl;
@@ -30,7 +30,7 @@ int VirtualMemory::allocateLocalInt() {
     return localIntPointer++;
 }
 
-// Allocate memory for local floats
+// allocate memory for local floats
 int VirtualMemory::allocateLocalFloat() {
     if (localFloatPointer == tempIntBase) {
         std::cerr << "Out of memory for local floats." << std::endl;
@@ -39,7 +39,7 @@ int VirtualMemory::allocateLocalFloat() {
     return localFloatPointer++;
 }
 
-// Allocate memory for temporary integers
+// allocate memory for temporary integers
 int VirtualMemory::allocateTempInt() {
     if (tempIntPointer == tempFloatBase) {
         std::cerr << "Out of memory for temporary integers." << std::endl;
@@ -48,7 +48,7 @@ int VirtualMemory::allocateTempInt() {
     return tempIntPointer++;
 }
 
-// Allocate memory for temporary floats
+// allocate memory for temporary floats
 int VirtualMemory::allocateTempFloat() {
     if (tempFloatPointer == constIntBase) {
         std::cerr << "Out of memory for temporary floats." << std::endl;
@@ -57,7 +57,7 @@ int VirtualMemory::allocateTempFloat() {
     return tempFloatPointer++;
 }
 
-// Find constant integer, float or string address
+// find constant integer, float or string address
 int VirtualMemory::findConstant(Type type, std::string value) {
     if (type == INT) {
         int intValue = std::stoi(value);
@@ -77,7 +77,7 @@ int VirtualMemory::findConstant(Type type, std::string value) {
     return -1;
 }
 
-// Get or create a constant integer, float or string address
+// get or create a constant integer, float or string address
 int VirtualMemory::getOrCreateConstant(Type type, std::string value) {
     if (type == INT) {
         int intValue = std::stoi(value);
@@ -109,19 +109,19 @@ int VirtualMemory::getOrCreateConstant(Type type, std::string value) {
     return -1;
 }
 
-// Reset locals for a new function scope
+// reset locals for a new function scope
 void VirtualMemory::resetLocals() {
     localIntPointer = localIntBase;
     localFloatPointer = localFloatBase;
 }
 
-// Reset temporaries for a new function or expression
+// reset temporaries for a new function or expression
 void VirtualMemory::resetTemporaries() {
     tempIntPointer = tempIntBase;
     tempFloatPointer = tempFloatBase;
 }
 
-// Get the constants map
+// get the constants map
 std::unordered_map<int, int> VirtualMemory::getIntConstants() {
     return intConstants;
 }
