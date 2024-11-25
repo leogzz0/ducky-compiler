@@ -1,10 +1,18 @@
 program functionTest;
 
+var x : int;
+
+function pelos(y : int) {
+    print(y * 2);
+};
+
 function square(x: int) {
+    pelos(x);
     print(x * x);
 };
 
 main {
-    square(7);
+    x = 2;
+    square(x + 7);
 }
 end

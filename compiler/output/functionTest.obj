@@ -1,19 +1,29 @@
 # Constant Table
 CONSTANTS
-20000 7
+20000 2
+20001 7
 
 # Function Directory
 FUNCTIONS
-square function 1 3000 4000 2 1
-functionTest function 4 1000 2000 0 0
+square function 4 3000 4000 2 1
+pelos function 1 3000 4000 2 1
+functionTest function 10 1000 2000 2 0
 
 # Quadruples
 QUADRUPLES
-0: GOTO -1 -1 4
-1: * 9000 9000 9001
+0: GOTO -1 -1 10
+1: * 9000 20000 9001
 2: PRINT -1 -1 9001
 3: ENDFUNC -1 -1 -1
-4: ERA square -1 -1
-5: PARAM 20000 -1 9000
-6: GOSUB square -1 1
-7: END -1 -1 -1
+4: ERA pelos -1 -1
+5: PARAM 9000 -1 9000
+6: GOSUB pelos -1 1
+7: * 9000 9000 9001
+8: PRINT -1 -1 9001
+9: ENDFUNC -1 -1 -1
+10: = 20000 -1 5000
+11: ERA square -1 -1
+12: + 5000 20001 5001
+13: PARAM 5001 -1 9000
+14: GOSUB square -1 4
+15: END -1 -1 -1
